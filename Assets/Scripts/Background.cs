@@ -31,7 +31,14 @@ public class Background : MonoBehaviour
         ClearStars();
 
         Vector3 startingPosition = new Vector3(-width / 2, -height / 2, 0);
-        Random random = new Random(seed);
+        Random random;
+        if (seed != 0) {
+            Debug.Log(seed);
+            random = new Random(seed);
+        }
+        else {
+            random = new Random((uint)UnityEngine.Random.Range(1, int.MaxValue));
+        }
 
         for (int i = 0; i < numberOfStars; i++) {
             GameObject star = GameObject.Instantiate(starPrefab, transform, true);
