@@ -3,8 +3,6 @@ using Random = Unity.Mathematics.Random;
 
 public class Background : MonoBehaviour
 {
-    public Camera mainCamera;
-
     [SerializeField]
     private GameObject starPrefab;
 
@@ -18,8 +16,6 @@ public class Background : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        // stars = new()
-
         GenerateStars();
     }
 
