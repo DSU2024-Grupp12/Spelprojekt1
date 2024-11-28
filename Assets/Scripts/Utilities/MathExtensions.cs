@@ -1,6 +1,6 @@
 public static class MathExtensions
 {
-    public static bool Between(this float f, float min, float max, BetweenMode mode = BetweenMode.ExclusiveExclusive) {
+    public static bool Between(this float f, float min, float max, BetweenMode mode = BetweenMode.InclusiveInclusive) {
         switch (mode) {
             case BetweenMode.ExclusiveExclusive:
                 return f > min && f < max;
@@ -21,5 +21,4 @@ public static class MathExtensions
         InclusiveExclusive,
         InclusiveInclusive
     }
-    
 }
