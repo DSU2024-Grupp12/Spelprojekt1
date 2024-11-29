@@ -26,7 +26,9 @@ public class Ship : MonoBehaviour
         dampeningTime;
 
     [SerializeField, Range(0, 1)]
-    private float adjustmentFactor, handlingFactor;
+    private float
+        adjustmentFactor,
+        handlingFactor;
 
     [SerializeField, Range(0, 2)]
     private float handlingCutoff;
@@ -64,7 +66,7 @@ public class Ship : MonoBehaviour
     private Vector2 velocityDirection {
         get {
             if (body.velocity.magnitude < 0.001f) {
-                return GetDirectionVector(transform.eulerAngles.z);
+                return transform.eulerAngles.z.DegreesToVector2();
             }
             return body.velocity.normalized;
         }
@@ -94,7 +96,7 @@ public class Ship : MonoBehaviour
         // deaccelerate in traveling direction if it is very different from acceleration direction
         float handlingAdjustment = 1;
         if (currentThrust != 0 && !stopping) {
-            Vector2 accelerationDirection = GetDirectionVector(transform.eulerAngles.z) * Mathf.Sign(currentThrust);
+            Vector2 accelerationDirection = transform.eulerAngles.z.DegreesToVector2() * Mathf.Sign(currentThrust);
             float difference = (velocityDirection - accelerationDirection).magnitude;
             if (difference > handlingCutoff) {
                 float handlingCoeffecient = handlingFactor * body.mass * difference / dampeningTime;
@@ -110,8 +112,7 @@ public class Ship : MonoBehaviour
 
         // accelerate the ship forwards or backwards
         body.AddForce(
-            GetDirectionVector(transform.eulerAngles.z) *
-            (currentThrust * handlingAdjustment * Time.fixedDeltaTime)
+            transform.eulerAngles.z.DegreesToVector2() * (currentThrust * handlingAdjustment * Time.fixedDeltaTime)
         );
 
         // strafe in the starboard or port direction
@@ -120,7 +121,7 @@ public class Ship : MonoBehaviour
         if (strafingPort) strafeDirection += 90;
 
         if (strafingStarBoard || strafingPort) {
-            body.AddForce(GetDirectionVector(strafeDirection) * (sideThrust * Time.fixedDeltaTime));
+            body.AddForce(strafeDirection.DegreesToVector2() * (sideThrust * Time.fixedDeltaTime));
         }
 
         body.AddTorque(currentTorque * Time.fixedDeltaTime);
@@ -183,10 +184,5 @@ public class Ship : MonoBehaviour
 
         if (strafingPort) rightSideThrusters.Play();
         else rightSideThrusters.Stop();
-    }
-
-    private Vector2 GetDirectionVector(float eulerAngleZ) {
-        float theta = (eulerAngleZ % 360) * Mathf.Deg2Rad;
-        return new Vector2(-Mathf.Sin(theta), Mathf.Cos(theta));
     }
 }
