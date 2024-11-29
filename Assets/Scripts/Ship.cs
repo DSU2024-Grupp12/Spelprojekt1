@@ -98,7 +98,6 @@ public class Ship : MonoBehaviour
             float difference = (velocityDirection - accelerationDirection).magnitude;
             if (difference > handlingCutoff) {
                 float handlingCoeffecient = handlingFactor * body.mass * difference / dampeningTime;
-                ConsoleUtility.OneLineLog(handlingCoeffecient);
                 Vector2 handlingForce = -handlingCoeffecient * body.velocity;
                 handlingAdjustment += handlingCoeffecient * 0.2f;
                 body.AddForce(handlingForce);
@@ -126,8 +125,6 @@ public class Ship : MonoBehaviour
 
         body.AddTorque(currentTorque * Time.fixedDeltaTime);
 
-        ConsoleUtility.ClearLog();
-
         // prevent ship from exceeding maxVelocity
         float adjustedMaxVelocity = maxVelocity * adjustmentFactor;
         if (body.velocity.magnitude < adjustedMaxVelocity) adjustedMaxVelocityActive = true;
@@ -148,7 +145,7 @@ public class Ship : MonoBehaviour
                 body.angularVelocity = Mathf.Sign(body.angularVelocity) * adjustedMaxAngularVelocity;
             }
         }
-        else if (body.angularVelocity > maxAngularVelocity) {
+        else if (Mathf.Abs(body.angularVelocity) > maxAngularVelocity) {
             body.angularVelocity = Mathf.Sign(body.angularVelocity) * maxAngularVelocity;
         }
 
