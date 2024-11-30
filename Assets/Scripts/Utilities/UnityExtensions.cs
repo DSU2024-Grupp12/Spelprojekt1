@@ -9,7 +9,7 @@ public static class UnityExtensions
     public static bool Contains(this LayerMask mask, int layer) {
         return mask == (mask | (1 << layer));
     }
-    
+
     /// <summary>
     /// Converts a 0-360 degree value to a normalized vector2
     /// </summary>
