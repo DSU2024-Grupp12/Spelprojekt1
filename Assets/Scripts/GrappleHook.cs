@@ -15,13 +15,21 @@ public class GrappleHook : MonoBehaviour
     private Vector3 offsetFromHook;
     private Vector3 offsetFromCollided;
 
+    [SerializeField]
+    private float maxVelocity;
+
     // Start is called before the first frame update
     void Start() {
         body = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update() { }
+    void FixedUpdate() {
+        if (body.velocity.magnitude > maxVelocity) {
+            body.velocity = body.velocity.normalized * maxVelocity;
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (!mask.Contains(other.gameObject.layer)) return;
@@ -43,6 +51,7 @@ public class GrappleHook : MonoBehaviour
             collidedCollider.transform.localScale = collidedObject.localScale;
             collidedCollider.radius = collidedObject.GetComponent<CircleCollider2D>().radius;
             OnHookCollision?.Invoke(other);
+            body.GetComponent<CircleCollider2D>();
         }
     }
 

@@ -38,6 +38,7 @@ public class GrappleHookCannon : MonoBehaviour
         cableSpeed,
         maxCableLength,
         maxCableTwist,
+        maxCableTurn,
         marginBeforeBreak,
         reelingSpeed,
         stiffness,
@@ -77,9 +78,16 @@ public class GrappleHookCannon : MonoBehaviour
 
             float stretch = cable.transform.localScale.y / activeMaxCableLength;
             float twist = Vector2.SignedAngle(currentGrappleHook.transform.up, transform.up) / maxCableTwist;
-            float turn = Vector2.SignedAngle(cable.transform.up, ship.transform.up) / cannonTurnRange;
+            float turn = Vector2.SignedAngle(cable.transform.up, ship.transform.up) / maxCableTurn;
 
-            // break cable if it is too long
+            ConsoleUtility.OneLineLog(stretch);
+
+            if (!hook.hooked && stretch > 1) {
+                ReturnHook(true);
+                return;
+            }
+
+            // break cable if it is too long or too turned
             // TODO recalculate break force with stress on cable
             // if (stretch > 1 + marginBeforeBreak) {
             //     ReturnHook(true);
@@ -89,58 +97,60 @@ public class GrappleHookCannon : MonoBehaviour
             float massRatioHookShip = currentHookBody.mass / ship.GetComponent<Rigidbody2D>().mass;
             if (stretch > 1) {
                 Vector2 hookToCannon = (transform.position - currentGrappleHook.transform.position).normalized;
+                Vector2 draggingVelocity = Vector3.Project(currentHookBody.velocity, hookToCannon);
+                Vector2 pullingVelocity = Vector3.Project(shipBody.velocity, hookToCannon);
 
-                // only pull when ship is moving away from grappleHook
-                if (Vector2.Angle(shipBody.velocity, hookToCannon) < 90f) {
-                    // only pull when the grapple hook is moving slower than the ship in the pulling direction
-                    Vector2 draggingVelocity = Vector3.Project(currentHookBody.velocity, hookToCannon);
-                    Vector2 pullingVelocity = Vector3.Project(shipBody.velocity, hookToCannon);
-                    if (draggingVelocity.magnitude < pullingVelocity.magnitude) {
-                        Vector2 stretchingForces =
-                            hookToCannon *
-                            (pullingVelocity.magnitude * stretch * Time.fixedDeltaTime);
-                        currentHookBody.velocity += stretchingForces / massRatioHookShip;
-                        shipBody.velocity -= stretchingForces * massRatioHookShip;
-                    }
+                if (Vector2.Dot(draggingVelocity, hookToCannon) < Vector2.Dot(pullingVelocity, hookToCannon)) {
+                    currentHookBody.velocity += pullingVelocity * (Time.fixedDeltaTime / massRatioHookShip);
                 }
-                if (reeling) {
-                    Vector2 speedTowardsCannon = Vector3.Project(currentHookBody.velocity, hookToCannon);
-                    if (speedTowardsCannon.magnitude < reelingSpeed) {
-                        currentHookBody.velocity += hookToCannon * (reelingSpeed * Time.fixedDeltaTime);
-                    }
+
+                Vector2 pullingForces = Vector3.Project(ship.GetComponent<Ship>().totalForces, hookToCannon);
+
+                Vector2 forceUnit = pullingForces / (massRatioHookShip + 1);
+                currentHookBody.AddForce(forceUnit * (massRatioHookShip * stretch));
+                shipBody.AddForce(-pullingForces);
+                shipBody.AddForce(forceUnit / stretch);
+            }
+
+            if (reeling) {
+                Vector2 hookToCannon = (transform.position - currentGrappleHook.transform.position).normalized;
+                Vector2 speedTowardsCannon = Vector3.Project(currentHookBody.velocity, hookToCannon);
+                if (speedTowardsCannon.magnitude < reelingSpeed) {
+                    currentHookBody.velocity += hookToCannon * (reelingSpeed * Time.fixedDeltaTime);
                 }
             }
-            // if (stretch < 1) {
-            //     Vector2 hookToCannon = (transform.position - currentGrappleHook.transform.position).normalized;
-            //     currentHookBody.AddForce(-hookToCannon * (stretch * stiffness));
-            // }
 
-            // TODO: apply tangent force when angle between cable and ship is too high
-            // if (turn > 1) {
-            //     Debug.Log("turn");
-            //     Vector2 perpendicular = Vector2.Perpendicular(transform.up);
-            //     Vector2 awayVelocity = Vector3.Project(currentHookBody.velocity, ship.transform.up);
-            //     // Debug.Log(awayVelocity);
-            //
-            //     float tangentVelocity = shipBody.angularVelocity * Mathf.Deg2Rad * activeMaxCableLength;
-            //     if (Vector3.Project(currentHookBody.velocity, perpendicular).magnitude < tangentVelocity) {
-            //         currentHookBody.velocity += perpendicular * (stiffness * Time.fixedDeltaTime);
-            //     }
-            //     // if (stretch > 1) {
-            //     //     Vector2 hookToCannon = (transform.position - currentGrappleHook.transform.position).normalized;
-            //     //     currentHookBody
-            //     // }
-            //     // currentHookBody.AddForce(perpendicular * stiffness);
-            //     // currentHookBody.velocity += awayVelocity * stiffness;
-            // }
+            if (hook.hooked) {
+                //apply tangent force when angle between cable and ship is too high
+                if (Mathf.Abs(turn) > 1) {
+                    Vector2 perp = Vector2.Perpendicular(transform.up);
+                    currentHookBody.AddForce(perp * (turn * 50));
+                    if (Vector2.Angle(transform.up, ship.transform.up) > cannonTurnRange) {
+                        shipBody.angularVelocity *= (Mathf.Pow(0.5f, Time.fixedDeltaTime) / massRatioHookShip);
+                    }
+                }
+                else {
+                    Vector2 perp = Vector2.Perpendicular(ship.transform.up);
+                    Vector2 perpVelocity = Vector3.Project(currentHookBody.velocity, perp);
+                    if (perpVelocity.magnitude > 0.2f) {
+                        currentHookBody.AddForce(-perpVelocity * turn);
+                    }
+                }
+                Vector2 centrifugalDirection =
+                    (currentHookBody.worldCenterOfMass - (Vector2)transform.position).normalized;
+                Vector2 awayForces = Vector3.Project(currentHookBody.totalForce, centrifugalDirection);
+                if (Vector2.Dot(awayForces, centrifugalDirection) > 0) {
+                    // currentHookBody.velocity += -awayVelocity * (stretch * 30);
+                    currentHookBody.AddForce(-awayForces * (currentHookBody.mass * stretch));
+                }
 
-            if (Mathf.Abs(twist) > 1) {
-                currentHookBody.AddTorque(twist * bendiness);
-                currentHookBody.angularDrag = 0;
-            }
-            if (Mathf.Abs(twist) < 1) {
-                currentHookBody.AddTorque(-twist * 1 / bendiness);
-                currentHookBody.angularDrag = 0.1f;
+                if (Mathf.Abs(twist) > 1) {
+                    currentHookBody.AddTorque(twist * bendiness);
+                    currentHookBody.angularDrag = 0;
+                }
+                if (Mathf.Abs(twist) < 1) {
+                    currentHookBody.angularVelocity *= 0.8f;
+                }
             }
         }
     }
