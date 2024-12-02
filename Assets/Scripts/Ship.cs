@@ -57,6 +57,8 @@ public class Ship : MonoBehaviour
         }
     }
 
+    public Vector2 totalForces { get; private set; }
+
     private bool
         _stopping,
         adjustedMaxVelocityActive,
@@ -152,6 +154,8 @@ public class Ship : MonoBehaviour
 
         currentThrust = 0;
         currentTorque = 0;
+
+        totalForces = body.totalForce;
 
         UpdateThrusterParticles();
     }

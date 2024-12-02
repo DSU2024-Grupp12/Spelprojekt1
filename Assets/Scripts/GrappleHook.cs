@@ -29,8 +29,9 @@ public class GrappleHook : MonoBehaviour
         if (!collidedObject) {
             collidedObject = other.transform;
             collidedObject.SetParent(transform);
+
             body.angularVelocity = 0;
-            body.velocity *= 0.2f;
+            body.velocity *= 0f;
 
             Rigidbody2D collidedBody = collidedObject.GetComponent<Rigidbody2D>();
             collidedBody.simulated = false;
@@ -45,14 +46,16 @@ public class GrappleHook : MonoBehaviour
         }
     }
 
-    public void Detach() {
+    public void Detach(bool inheritVelcity) {
         if (collidedObject) {
             Rigidbody2D collidedBody = collidedObject.GetComponent<Rigidbody2D>();
             body.mass -= collidedBody.mass;
             collidedBody.simulated = true;
             collidedObject.transform.SetParent(null);
             Destroy(transform.GetChild(2).GetComponent<PolygonCollider2D>());
-            collidedBody.velocity = body.velocity;
+
+            if (inheritVelcity) collidedBody.velocity = body.velocity;
+            else collidedBody.velocity = body.velocity * 0.2f;
         }
     }
 }

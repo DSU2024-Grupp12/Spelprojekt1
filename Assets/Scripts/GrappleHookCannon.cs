@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class GrappleHookCannon : MonoBehaviour
 {
     [SerializeField]
-    private GameObject grappleHook, cable;
+    private GameObject ship, grappleHook, cable;
 
     private GameObject currentGrappleHook;
     private Rigidbody2D _currentHookBody;
@@ -20,15 +20,26 @@ public class GrappleHookCannon : MonoBehaviour
         }
     }
 
+    private GrappleHook hook {
+        get {
+            if (currentGrappleHook) {
+                return currentGrappleHook.GetComponent<GrappleHook>();
+            }
+            else return null;
+        }
+    }
+
+    private Rigidbody2D shipBody;
+
     [SerializeField]
     private float
         cannonTurnRange,
         cannonPower,
         cableSpeed,
         maxCableLength,
+        maxCableTwist,
         marginBeforeBreak,
         reelingSpeed,
-        maxCableTwist,
         stiffness,
         bendiness;
 
@@ -45,6 +56,7 @@ public class GrappleHookCannon : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         mainCamera = FindFirstObjectByType<Camera>();
+        shipBody = ship.GetComponent<Rigidbody2D>();
         SetCableLength(1);
     }
 
@@ -58,20 +70,45 @@ public class GrappleHookCannon : MonoBehaviour
 
     private void FixedUpdate() {
         if (currentGrappleHook) {
-            float stretch = cable.transform.localScale.y / activeMaxCableLength;
-            float twist = Vector2.SignedAngle(currentGrappleHook.transform.up, transform.up) / maxCableTwist;
-
-            // break cable if it is too long
-            // TODO recalculate break force with stress on cable
-            if (stretch > 1 + marginBeforeBreak) {
-                ReturnHook();
+            if (hook.hooked && GetDistanceToGrappleHook() < 0.3f) {
+                ReturnHook(false);
                 return;
             }
 
-            // TODO: apply pulling force depending on relative mass
+            float stretch = cable.transform.localScale.y / activeMaxCableLength;
+            float twist = Vector2.SignedAngle(currentGrappleHook.transform.up, transform.up) / maxCableTwist;
+            float turn = Vector2.SignedAngle(cable.transform.up, ship.transform.up) / cannonTurnRange;
+
+            // break cable if it is too long
+            // TODO recalculate break force with stress on cable
+            // if (stretch > 1 + marginBeforeBreak) {
+            //     ReturnHook(true);
+            //     return;
+            // }
+
+            float massRatioHookShip = currentHookBody.mass / ship.GetComponent<Rigidbody2D>().mass;
             if (stretch > 1) {
                 Vector2 hookToCannon = (transform.position - currentGrappleHook.transform.position).normalized;
-                currentHookBody.AddForce(hookToCannon * (stretch * stretch * stiffness));
+
+                // only pull when ship is moving away from grappleHook
+                if (Vector2.Angle(shipBody.velocity, hookToCannon) < 90f) {
+                    // only pull when the grapple hook is moving slower than the ship in the pulling direction
+                    Vector2 draggingVelocity = Vector3.Project(currentHookBody.velocity, hookToCannon);
+                    Vector2 pullingVelocity = Vector3.Project(shipBody.velocity, hookToCannon);
+                    if (draggingVelocity.magnitude < pullingVelocity.magnitude) {
+                        Vector2 stretchingForces =
+                            hookToCannon *
+                            (pullingVelocity.magnitude * stretch * Time.fixedDeltaTime);
+                        currentHookBody.velocity += stretchingForces / massRatioHookShip;
+                        shipBody.velocity -= stretchingForces * massRatioHookShip;
+                    }
+                }
+                if (reeling) {
+                    Vector2 speedTowardsCannon = Vector3.Project(currentHookBody.velocity, hookToCannon);
+                    if (speedTowardsCannon.magnitude < reelingSpeed) {
+                        currentHookBody.velocity += hookToCannon * (reelingSpeed * Time.fixedDeltaTime);
+                    }
+                }
             }
             // if (stretch < 1) {
             //     Vector2 hookToCannon = (transform.position - currentGrappleHook.transform.position).normalized;
@@ -79,11 +116,31 @@ public class GrappleHookCannon : MonoBehaviour
             // }
 
             // TODO: apply tangent force when angle between cable and ship is too high
+            // if (turn > 1) {
+            //     Debug.Log("turn");
+            //     Vector2 perpendicular = Vector2.Perpendicular(transform.up);
+            //     Vector2 awayVelocity = Vector3.Project(currentHookBody.velocity, ship.transform.up);
+            //     // Debug.Log(awayVelocity);
+            //
+            //     float tangentVelocity = shipBody.angularVelocity * Mathf.Deg2Rad * activeMaxCableLength;
+            //     if (Vector3.Project(currentHookBody.velocity, perpendicular).magnitude < tangentVelocity) {
+            //         currentHookBody.velocity += perpendicular * (stiffness * Time.fixedDeltaTime);
+            //     }
+            //     // if (stretch > 1) {
+            //     //     Vector2 hookToCannon = (transform.position - currentGrappleHook.transform.position).normalized;
+            //     //     currentHookBody
+            //     // }
+            //     // currentHookBody.AddForce(perpendicular * stiffness);
+            //     // currentHookBody.velocity += awayVelocity * stiffness;
+            // }
+
             if (Mathf.Abs(twist) > 1) {
                 currentHookBody.AddTorque(twist * bendiness);
+                currentHookBody.angularDrag = 0;
             }
-            if (twist < 1) {
-                currentHookBody.angularVelocity *= 1 - (1 / bendiness);
+            if (Mathf.Abs(twist) < 1) {
+                currentHookBody.AddTorque(-twist * 1 / bendiness);
+                currentHookBody.angularDrag = 0.1f;
             }
         }
     }
@@ -96,27 +153,38 @@ public class GrappleHookCannon : MonoBehaviour
                 currentGrappleHook.transform.position = transform.position;
                 currentGrappleHook.transform.rotation = transform.rotation;
                 currentGrappleHook.transform.localScale = transform.localScale;
+                currentHookBody.velocity = shipBody.velocity;
                 currentHookBody.AddForce(transform.up * cannonPower);
-                currentGrappleHook.GetComponent<GrappleHook>().OnHookCollision += _ => {
-                    activeMaxCableLength = cable.transform.localScale.y;
-                };
+                // hook.OnHookCollision += _ => {
+                //     activeMaxCableLength = cable.transform.localScale.y;
+                // };
             }
             else {
-                if (!currentGrappleHook.GetComponent<GrappleHook>().hooked) {
-                    ReturnHook();
+                if (!hook.hooked) {
+                    ReturnHook(true);
+                }
+                else {
+                    activeMaxCableLength = cable.transform.localScale.y;
+                }
+            }
+        }
+        if (context.canceled) {
+            if (currentGrappleHook) {
+                if (hook.hooked) {
+                    activeMaxCableLength = maxCableLength;
                 }
             }
         }
     }
 
-    private void DetachHook() {
+    private void DetachHook(bool inheritVelocity) {
         if (currentGrappleHook) {
-            currentGrappleHook.GetComponent<GrappleHook>().Detach();
+            hook.Detach(inheritVelocity);
         }
     }
 
-    private void ReturnHook() {
-        DetachHook();
+    private void ReturnHook(bool inheritVelocity) {
+        DetachHook(inheritVelocity);
         Destroy(currentGrappleHook);
         currentGrappleHook = null;
     }
@@ -132,7 +200,7 @@ public class GrappleHookCannon : MonoBehaviour
 
     public void ReturnHook(InputAction.CallbackContext context) {
         if (context.performed) {
-            ReturnHook();
+            ReturnHook(true);
         }
     }
 
@@ -142,7 +210,7 @@ public class GrappleHookCannon : MonoBehaviour
             Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector3 difference = mousePosition - transform.position;
             Vector2 direction = new Vector2(difference.x, difference.y).normalized;
-            float angle = Vector2.SignedAngle(transform.parent.transform.up, direction);
+            float angle = Vector2.SignedAngle(ship.transform.up, direction);
             Vector3 euler = transform.localEulerAngles;
             euler.z = Mathf.Clamp(angle, -cannonTurnRange, cannonTurnRange);
             transform.localEulerAngles = euler;
@@ -179,6 +247,6 @@ public class GrappleHookCannon : MonoBehaviour
     private float AngleBetweenShipAndHook() {
         Vector3 difference = currentGrappleHook.transform.position - transform.position;
         Vector2 direction = new Vector2(difference.x, difference.y).normalized;
-        return Vector2.SignedAngle(transform.parent.transform.up, direction);
+        return Vector2.SignedAngle(ship.transform.up, direction);
     }
 }

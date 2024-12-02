@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 896
 --- !u!50 &8612366625047886901
 Rigidbody2D:
   serializedVersion: 4
