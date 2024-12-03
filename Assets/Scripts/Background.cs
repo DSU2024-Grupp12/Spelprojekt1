@@ -29,7 +29,6 @@ public class Background : MonoBehaviour
         Vector3 startingPosition = new Vector3(-width / 2, -height / 2, 0);
         Random random;
         if (seed != 0) {
-            Debug.Log(seed);
             random = new Random(seed);
         }
         else {

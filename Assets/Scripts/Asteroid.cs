@@ -16,4 +16,8 @@ public class Asteroid : MonoBehaviour
         body.AddForce(initialDirection * magnitude);
         body.AddTorque(torque);
     }
+
+    public void Explode() {
+        Debug.Log($"Exploded: {gameObject.GetInstanceID()}");
+    }
 }

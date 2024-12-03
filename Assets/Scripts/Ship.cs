@@ -4,15 +4,9 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
     [SerializeField]
-    private ThrusterGroup
-        backThrusters,
-        frontThrusters,
-        clockwiseThrusters,
-        counterClockwiseThrusters,
-        rightSideThrusters,
-        leftSideThrusters;
+    private Thrusters thrusters;
 
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float
         forwardThrust,
         backwardThrust,
@@ -23,13 +17,16 @@ public class Ship : MonoBehaviour
         boostFactor,
         stoppingThrust,
         stoppingTorque,
-        dampeningTime;
+        handlingFactor;
 
     [SerializeField, Range(0, 1)]
-    private float adjustmentFactor, handlingFactor;
+    private float adjustmentFactor;
 
     // [SerializeField, Range(-1, 1)]
     // private float handlingCutoff;
+
+    [SerializeField]
+    private Explosion explosionPrefab;
 
     private float
         currentThrust,
@@ -111,8 +108,6 @@ public class Ship : MonoBehaviour
 
         body.AddTorque(currentTorque * Time.fixedDeltaTime);
 
-        ConsoleUtility.ClearLog();
-
         // prevent ship from exceeding maxVelocity
         float adjustedMaxVelocity = maxVelocity * adjustmentFactor;
         if (body.velocity.magnitude < adjustedMaxVelocity) adjustedMaxVelocityActive = true;
@@ -138,17 +133,16 @@ public class Ship : MonoBehaviour
         }
 
         // deaccelerate in traveling direction if it is very different from acceleration direction
-        if (currentThrust != 0 && !stopping) {
+        if (currentThrust > 0 && !stopping) {
             Vector2 accelerationDirection = transform.up;
             float differenceFactor = -(Vector2.Dot(accelerationDirection, velocityDirection) - 1f) / 2f;
 
-            ConsoleUtility.ClearLog();
-            Debug.Log($"dot: {differenceFactor}");
-
-            if (differenceFactor > 0) {
-                float spaceFriction = 1 - handlingFactor * differenceFactor;
-                body.velocity *= Mathf.Pow(spaceFriction, Time.fixedDeltaTime);
-                body.AddForce(body.totalForce / Mathf.Pow(spaceFriction, Time.fixedDeltaTime / 2));
+            if (differenceFactor > 0.3f) {
+                float handlingModifier = handlingFactor * differenceFactor * body.mass * Time.fixedDeltaTime;
+                // body.velocity -= body.velocity.normalized * handlingModifier;
+                body.AddForce(-body.velocity.normalized * handlingModifier);
+                body.AddForce(accelerationDirection * handlingModifier);
+                // body.AddForce(body.totalForce / Mathf.Pow(spaceFriction, Time.fixedDeltaTime / 2));
             }
         }
 
@@ -158,38 +152,67 @@ public class Ship : MonoBehaviour
         UpdateThrusterParticles();
     }
 
+    public void Explode() {
+        if (explosionPrefab) {
+            Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y, -3);
+            Instantiate(explosionPrefab, explosionPosition, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+
+    public void StopAllThrusters() {
+        accelerating = false;
+        deaccelerating = false;
+        turningClockwise = false;
+        turningCounterClockwise = false;
+        strafingPort = false;
+        strafingStarBoard = false;
+    }
+
     private void UpdateThrusterParticles() {
         if (stopping) {
-            backThrusters.Stop();
-            frontThrusters.Stop();
-            clockwiseThrusters.Stop();
-            counterClockwiseThrusters.Stop();
-            rightSideThrusters.Stop();
-            leftSideThrusters.Stop();
+            thrusters.back.Stop();
+            thrusters.front.Stop();
+            thrusters.clockwise.Stop();
+            thrusters.counterClockwise.Stop();
+            thrusters.rightSide.Stop();
+            thrusters.leftSide.Stop();
             return;
         }
 
-        if (accelerating || boosting) backThrusters.Play();
-        else backThrusters.Stop();
+        if (accelerating || boosting) thrusters.back.Play();
+        else thrusters.back.Stop();
 
-        if (deaccelerating) frontThrusters.Play();
-        else frontThrusters.Stop();
+        if (deaccelerating) thrusters.front.Play();
+        else thrusters.front.Stop();
 
-        if (turningClockwise) clockwiseThrusters.Play();
-        else clockwiseThrusters.Stop();
+        if (turningClockwise) thrusters.clockwise.Play();
+        else thrusters.clockwise.Stop();
 
-        if (turningCounterClockwise) counterClockwiseThrusters.Play();
-        else counterClockwiseThrusters.Stop();
+        if (turningCounterClockwise) thrusters.counterClockwise.Play();
+        else thrusters.counterClockwise.Stop();
 
-        if (strafingStarBoard) leftSideThrusters.Play();
-        else leftSideThrusters.Stop();
+        if (strafingStarBoard) thrusters.leftSide.Play();
+        else thrusters.leftSide.Stop();
 
-        if (strafingPort) rightSideThrusters.Play();
-        else rightSideThrusters.Stop();
+        if (strafingPort) thrusters.rightSide.Play();
+        else thrusters.rightSide.Stop();
     }
 
     private Vector2 GetDirectionVector(float eulerAngleZ) {
         float theta = (eulerAngleZ % 360) * Mathf.Deg2Rad;
         return new Vector2(-Mathf.Sin(theta), Mathf.Cos(theta));
     }
+}
+
+[System.Serializable]
+public struct Thrusters
+{
+    public ThrusterGroup
+        back,
+        front,
+        clockwise,
+        counterClockwise,
+        rightSide,
+        leftSide;
 }
