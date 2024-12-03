@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7230724118739305716}
   - component: {fileID: 1541321408574624366}
   - component: {fileID: 268199408204863639}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ClockwiseThruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4840,7 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4689551274265998903}
   - component: {fileID: 7359276745662186150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4925,7 +4925,7 @@ GameObject:
   - component: {fileID: 7450322446308667729}
   - component: {fileID: 5137666741572011324}
   - component: {fileID: 1188388783204182122}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CounterClockwiseThruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9755,7 +9755,7 @@ GameObject:
   - component: {fileID: 8698562984747500720}
   - component: {fileID: 1965541691283683548}
   - component: {fileID: 6402882523348372756}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Backthruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14587,7 +14587,7 @@ GameObject:
   - component: {fileID: 211535661126868925}
   - component: {fileID: 6419078622766373621}
   - component: {fileID: 1868654690609154493}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
