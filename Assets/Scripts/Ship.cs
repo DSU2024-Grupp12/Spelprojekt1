@@ -12,7 +12,7 @@ public class Ship : MonoBehaviour, IExplodable
         rightSideThrusters,
         leftSideThrusters;
 
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float
         forwardThrust,
         backwardThrust,
@@ -22,10 +22,11 @@ public class Ship : MonoBehaviour, IExplodable
         maxAngularVelocity,
         boostFactor,
         stoppingThrust,
-        stoppingTorque;
+        stoppingTorque,
+        handlingFactor;
 
     [SerializeField, Range(0, 1)]
-    private float adjustmentFactor, handlingFactor;
+    private float adjustmentFactor;
 
     // [SerializeField, Range(-1, 1)]
     // private float handlingCutoff;
@@ -140,9 +141,11 @@ public class Ship : MonoBehaviour, IExplodable
             float differenceFactor = -(Vector2.Dot(accelerationDirection, velocityDirection) - 1f) / 2f;
 
             if (differenceFactor > 0) {
-                float spaceFriction = 1 - handlingFactor * differenceFactor;
-                body.velocity *= Mathf.Pow(spaceFriction, Time.fixedDeltaTime);
-                body.AddForce(body.totalForce / Mathf.Pow(spaceFriction, Time.fixedDeltaTime / 2));
+                float handlingModifier = handlingFactor * differenceFactor * body.mass * Time.fixedDeltaTime;
+                // body.velocity -= body.velocity.normalized * handlingModifier;
+                body.AddForce(-body.velocity.normalized * handlingModifier);
+                body.AddForce(accelerationDirection * handlingModifier);
+                // body.AddForce(body.totalForce / Mathf.Pow(spaceFriction, Time.fixedDeltaTime / 2));
             }
         }
 
