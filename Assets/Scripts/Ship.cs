@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Ship : MonoBehaviour, IExplodable
+public class Ship : MonoBehaviour
 {
     [SerializeField]
     private Thrusters thrusters;
@@ -24,6 +24,9 @@ public class Ship : MonoBehaviour, IExplodable
 
     // [SerializeField, Range(-1, 1)]
     // private float handlingCutoff;
+
+    [SerializeField]
+    private Explosion explosionPrefab;
 
     private float
         currentThrust,
@@ -150,7 +153,20 @@ public class Ship : MonoBehaviour, IExplodable
     }
 
     public void Explode() {
-        Debug.Log($"Explode: {gameObject.GetInstanceID()}");
+        if (explosionPrefab) {
+            Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y, -3);
+            Instantiate(explosionPrefab, explosionPosition, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+
+    public void StopAllThrusters() {
+        accelerating = false;
+        deaccelerating = false;
+        turningClockwise = false;
+        turningCounterClockwise = false;
+        strafingPort = false;
+        strafingStarBoard = false;
     }
 
     private void UpdateThrusterParticles() {
@@ -192,7 +208,7 @@ public class Ship : MonoBehaviour, IExplodable
 [System.Serializable]
 public struct Thrusters
 {
-    public ThrusterGroup 
+    public ThrusterGroup
         back,
         front,
         clockwise,

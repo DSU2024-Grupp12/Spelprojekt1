@@ -4969,6 +4969,8 @@ MonoBehaviour:
   inertTime: 0.7
   lifeTime: 10
   turningSpeed: 10
+  explosionRadius: 1
+  explosionPower: 50
   explosionPrefab: {fileID: 4447268756455853188, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   willExplodeOn:
     serializedVersion: 2
@@ -5010,6 +5012,7 @@ MonoBehaviour:
   stoppingTorque: 0
   handlingFactor: 0
   adjustmentFactor: 1
+  explosionPrefab: {fileID: 4447268756455853188, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   accelerating: 0
   deaccelerating: 0
   strafingStarBoard: 0

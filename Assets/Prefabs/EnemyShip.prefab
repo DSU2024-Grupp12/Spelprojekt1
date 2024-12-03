@@ -14646,8 +14646,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2526593811693024685}
   - component: {fileID: 2700994019818976380}
-  - component: {fileID: 211535661126868925}
+  - component: {fileID: 3981858272896800190}
   - component: {fileID: 6419078622766373621}
+  - component: {fileID: 211535661126868925}
   - component: {fileID: 1868654690609154493}
   m_Layer: 8
   m_Name: EnemyShip
@@ -14696,33 +14697,39 @@ MonoBehaviour:
   - {fileID: 3177187308967164024}
   minDistance: 5
   fireRate: 4
---- !u!50 &211535661126868925
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &3981858272896800190
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8329250972712105302}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 30
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 75680ee9bb479e84d8039a60ff51f335, type: 2}
-  m_IncludeLayers:
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d4f72383220da41b3e7fd31e564c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 500
+  threshold: 50
+  dampener: 0
+  collideWith:
     serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+    m_Bits: 960
+  HullDestroyed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6419078622766373621}
+        m_TargetAssemblyTypeName: Ship, Assembly-CSharp
+        m_MethodName: Explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6419078622766373621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14762,6 +14769,7 @@ MonoBehaviour:
   stoppingTorque: 500
   handlingFactor: 0.305
   adjustmentFactor: 0.804
+  explosionPrefab: {fileID: 4447268756455853188, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   accelerating: 0
   deaccelerating: 0
   strafingStarBoard: 0
@@ -14769,6 +14777,33 @@ MonoBehaviour:
   turningClockwise: 0
   turningCounterClockwise: 0
   boosting: 0
+--- !u!50 &211535661126868925
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329250972712105302}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 30
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 75680ee9bb479e84d8039a60ff51f335, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!60 &1868654690609154493
 PolygonCollider2D:
   m_ObjectHideFlags: 0

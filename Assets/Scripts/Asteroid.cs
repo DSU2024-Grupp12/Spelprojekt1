@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour, IExplodable
+public class Asteroid : MonoBehaviour
 {
     private Rigidbody2D body;
 

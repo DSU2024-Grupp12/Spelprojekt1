@@ -1,15 +1,20 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Ship))]
-public class Missile : MonoBehaviour, IExplodable
+public class Missile : MonoBehaviour
 {
     public Transform target;
     public bool homing;
     [HideInInspector]
     public int createdByLayer;
 
-    [SerializeField]
-    private float inertTime, lifeTime, turningSpeed;
+    [SerializeField, Min(0)]
+    private float
+        inertTime,
+        lifeTime,
+        turningSpeed,
+        explosionRadius,
+        explosionPower;
 
     [SerializeField]
     private Explosion explosionPrefab;
@@ -55,6 +60,7 @@ public class Missile : MonoBehaviour, IExplodable
     }
 
     private void FixedUpdate() {
+        if (!target) return;
         Vector2 missileToTarget = target.transform.position - transform.position;
         Vector2 directionToTarget = missileToTarget.normalized;
         float angleToTarget = Vector2.SignedAngle(transform.up, directionToTarget);
@@ -91,11 +97,15 @@ public class Missile : MonoBehaviour, IExplodable
     }
 
     public void Explode() {
-        if (explosionPrefab) {
-            Debug.Log("Explode");
-            Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y, -3);
-            Instantiate(explosionPrefab, explosionPosition, transform.rotation);
-            Destroy(gameObject);
+        // find all hulls within explosion radius
+        foreach (Hull hull in FindObjectsOfType<Hull>()) {
+            float distance = (hull.transform.position - transform.position).magnitude;
+            if (distance <= explosionRadius) {
+                float dropOff = 1 - (distance / explosionRadius);
+                hull.TakeDamage(explosionPower * dropOff);
+            }
         }
+
+        missile.Explode();
     }
 }

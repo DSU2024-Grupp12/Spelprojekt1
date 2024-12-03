@@ -35,6 +35,12 @@ public class EnemyPilot : MonoBehaviour
     }
 
     void FixedUpdate() {
+        if (!target) {
+            ship.StopAllThrusters();
+            ship.stopping = true;
+            fireRate = 0;
+            return;
+        }
         Vector2 shipToTarget = target.transform.position - transform.position;
         float distanceToTarget = shipToTarget.magnitude;
         Vector2 directionToTarget = shipToTarget.normalized;

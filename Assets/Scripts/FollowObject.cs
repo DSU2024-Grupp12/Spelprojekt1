@@ -12,11 +12,13 @@ public class FollowObject : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        Vector3 followPosition = new Vector3(
-            ignoreXPosition ? transform.position.x : leader.transform.position.x,
-            ignoreYPosition ? transform.position.y : leader.transform.position.y,
-            ignoreZPosition ? transform.position.z : leader.transform.position.z
-        );
-        transform.position = followPosition;
+        if (leader) {
+            Vector3 followPosition = new Vector3(
+                ignoreXPosition ? transform.position.x : leader.transform.position.x,
+                ignoreYPosition ? transform.position.y : leader.transform.position.y,
+                ignoreZPosition ? transform.position.z : leader.transform.position.z
+            );
+            transform.position = followPosition;
+        }
     }
 }
