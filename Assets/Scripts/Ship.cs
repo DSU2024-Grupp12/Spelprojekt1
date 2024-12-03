@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Ship : MonoBehaviour
+public class Ship : MonoBehaviour, IExplodable
 {
     [SerializeField]
     private ThrusterGroup
@@ -22,8 +22,7 @@ public class Ship : MonoBehaviour
         maxAngularVelocity,
         boostFactor,
         stoppingThrust,
-        stoppingTorque,
-        dampeningTime;
+        stoppingTorque;
 
     [SerializeField, Range(0, 1)]
     private float adjustmentFactor, handlingFactor;
@@ -111,8 +110,6 @@ public class Ship : MonoBehaviour
 
         body.AddTorque(currentTorque * Time.fixedDeltaTime);
 
-        ConsoleUtility.ClearLog();
-
         // prevent ship from exceeding maxVelocity
         float adjustedMaxVelocity = maxVelocity * adjustmentFactor;
         if (body.velocity.magnitude < adjustedMaxVelocity) adjustedMaxVelocityActive = true;
@@ -142,9 +139,6 @@ public class Ship : MonoBehaviour
             Vector2 accelerationDirection = transform.up;
             float differenceFactor = -(Vector2.Dot(accelerationDirection, velocityDirection) - 1f) / 2f;
 
-            ConsoleUtility.ClearLog();
-            Debug.Log($"dot: {differenceFactor}");
-
             if (differenceFactor > 0) {
                 float spaceFriction = 1 - handlingFactor * differenceFactor;
                 body.velocity *= Mathf.Pow(spaceFriction, Time.fixedDeltaTime);
@@ -156,6 +150,10 @@ public class Ship : MonoBehaviour
         currentTorque = 0;
 
         UpdateThrusterParticles();
+    }
+
+    public void Explode() {
+        Debug.Log($"Explode: {gameObject.GetInstanceID()}");
     }
 
     private void UpdateThrusterParticles() {

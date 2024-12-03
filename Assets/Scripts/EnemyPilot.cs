@@ -3,21 +3,37 @@ using UnityEngine;
 [RequireComponent(typeof(Ship))]
 public class EnemyPilot : MonoBehaviour
 {
+    public Transform target;
+
     private Ship ship;
     private Rigidbody2D shipBody;
 
-    public Transform target;
+    [SerializeField]
+    private Missile missile;
 
     [SerializeField]
-    private float minDistance;
+    private Transform[] cannons;
+
+    private int cannonIndex;
+
+    [SerializeField, Min(0)]
+    private float minDistance, fireRate;
+
+    private float nextFireTime;
 
     // Start is called before the first frame update
     void Start() {
         ship = GetComponent<Ship>();
         shipBody = ship.GetComponent<Rigidbody2D>();
+        if (fireRate > 0) {
+            nextFireTime = Time.time + fireRate;
+        }
     }
 
-    // Update is called once per frame
+    void Update() {
+        FireMissile();
+    }
+
     void FixedUpdate() {
         Vector2 shipToTarget = target.transform.position - transform.position;
         float distanceToTarget = shipToTarget.magnitude;
@@ -38,7 +54,7 @@ public class EnemyPilot : MonoBehaviour
             }
         }
         else if (Mathf.Abs(shipBody.angularVelocity) > 0.1f) { // stablize when looking at player
-            shipBody.angularVelocity *= 0.8f;
+            shipBody.angularVelocity *= 0.93f;
         }
         else {
             ship.turningClockwise = false;
@@ -53,6 +69,26 @@ public class EnemyPilot : MonoBehaviour
         else {
             ship.accelerating = false;
             ship.stopping = true;
+        }
+
+        if (shipBody.velocity.magnitude < 0.1f) {
+            ship.stopping = false;
+        }
+    }
+
+    private void FireMissile() {
+        if (fireRate <= 0) return;
+        if (Time.time > nextFireTime) {
+            nextFireTime = Time.time + fireRate;
+
+            Vector3 missilePosition = cannons[cannonIndex].position;
+            Quaternion missileRotation = cannons[cannonIndex].rotation;
+            Missile _missile = Instantiate(missile, missilePosition, missileRotation);
+            _missile.createdByLayer = gameObject.layer;
+            _missile.target = target;
+            _missile.GetComponent<Rigidbody2D>().velocity = shipBody.velocity;
+            cannonIndex++;
+            cannonIndex %= cannons.Length;
         }
     }
 }

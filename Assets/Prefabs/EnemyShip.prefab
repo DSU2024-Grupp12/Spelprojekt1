@@ -4914,6 +4914,68 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3010932650528579138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3177187308967164024}
+  m_Layer: 0
+  m_Name: MissileCannon2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3177187308967164024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3010932650528579138}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.29393196, w: 0.95582634}
+  m_LocalPosition: {x: 0.36, y: 0.13, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2526593811693024685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -34.187}
+--- !u!1 &5189379220917841527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4889722281703575201}
+  m_Layer: 0
+  m_Name: MissileCannon1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4889722281703575201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189379220917841527}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.29392964, w: 0.95582706}
+  m_LocalPosition: {x: -0.36, y: 0.13, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2526593811693024685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.187}
 --- !u!1 &6633867361255852601
 GameObject:
   m_ObjectHideFlags: 0
@@ -14611,6 +14673,8 @@ Transform:
   - {fileID: 8698562984747500720}
   - {fileID: 7230724118739305716}
   - {fileID: 7450322446308667729}
+  - {fileID: 4889722281703575201}
+  - {fileID: 3177187308967164024}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2700994019818976380
@@ -14626,7 +14690,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  missile: {fileID: 8025614387576658668, guid: 8ce5c636d031f364d890e42505526d35, type: 3}
+  cannons:
+  - {fileID: 4889722281703575201}
+  - {fileID: 3177187308967164024}
   minDistance: 5
+  fireRate: 4
 --- !u!50 &211535661126868925
 Rigidbody2D:
   serializedVersion: 4
@@ -14690,7 +14759,6 @@ MonoBehaviour:
   boostFactor: 1
   stoppingThrust: 2000
   stoppingTorque: 500
-  dampeningTime: 1
   adjustmentFactor: 0.804
   handlingFactor: 0.305
   accelerating: 0
