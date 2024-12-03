@@ -4985,19 +4985,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d836febb8f17448a3826af8c0e5a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backThrusters:
-    thrusters:
-    - {fileID: 5603953316388003418}
-  frontThrusters:
-    thrusters: []
-  clockwiseThrusters:
-    thrusters: []
-  counterClockwiseThrusters:
-    thrusters: []
-  rightSideThrusters:
-    thrusters: []
-  leftSideThrusters:
-    thrusters: []
+  thrusters:
+    back:
+      thrusters:
+      - {fileID: 5603953316388003418}
+    front:
+      thrusters: []
+    clockwise:
+      thrusters: []
+    counterClockwise:
+      thrusters: []
+    rightSide:
+      thrusters: []
+    leftSide:
+      thrusters: []
   forwardThrust: 70
   backwardThrust: 0
   sideThrust: 0

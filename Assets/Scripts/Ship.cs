@@ -4,13 +4,7 @@ using UnityEngine;
 public class Ship : MonoBehaviour, IExplodable
 {
     [SerializeField]
-    private ThrusterGroup
-        backThrusters,
-        frontThrusters,
-        clockwiseThrusters,
-        counterClockwiseThrusters,
-        rightSideThrusters,
-        leftSideThrusters;
+    private Thrusters thrusters;
 
     [SerializeField, Min(0)]
     private float
@@ -161,36 +155,48 @@ public class Ship : MonoBehaviour, IExplodable
 
     private void UpdateThrusterParticles() {
         if (stopping) {
-            backThrusters.Stop();
-            frontThrusters.Stop();
-            clockwiseThrusters.Stop();
-            counterClockwiseThrusters.Stop();
-            rightSideThrusters.Stop();
-            leftSideThrusters.Stop();
+            thrusters.back.Stop();
+            thrusters.front.Stop();
+            thrusters.clockwise.Stop();
+            thrusters.counterClockwise.Stop();
+            thrusters.rightSide.Stop();
+            thrusters.leftSide.Stop();
             return;
         }
 
-        if (accelerating || boosting) backThrusters.Play();
-        else backThrusters.Stop();
+        if (accelerating || boosting) thrusters.back.Play();
+        else thrusters.back.Stop();
 
-        if (deaccelerating) frontThrusters.Play();
-        else frontThrusters.Stop();
+        if (deaccelerating) thrusters.front.Play();
+        else thrusters.front.Stop();
 
-        if (turningClockwise) clockwiseThrusters.Play();
-        else clockwiseThrusters.Stop();
+        if (turningClockwise) thrusters.clockwise.Play();
+        else thrusters.clockwise.Stop();
 
-        if (turningCounterClockwise) counterClockwiseThrusters.Play();
-        else counterClockwiseThrusters.Stop();
+        if (turningCounterClockwise) thrusters.counterClockwise.Play();
+        else thrusters.counterClockwise.Stop();
 
-        if (strafingStarBoard) leftSideThrusters.Play();
-        else leftSideThrusters.Stop();
+        if (strafingStarBoard) thrusters.leftSide.Play();
+        else thrusters.leftSide.Stop();
 
-        if (strafingPort) rightSideThrusters.Play();
-        else rightSideThrusters.Stop();
+        if (strafingPort) thrusters.rightSide.Play();
+        else thrusters.rightSide.Stop();
     }
 
     private Vector2 GetDirectionVector(float eulerAngleZ) {
         float theta = (eulerAngleZ % 360) * Mathf.Deg2Rad;
         return new Vector2(-Mathf.Sin(theta), Mathf.Cos(theta));
     }
+}
+
+[System.Serializable]
+public struct Thrusters
+{
+    public ThrusterGroup 
+        back,
+        front,
+        clockwise,
+        counterClockwise,
+        rightSide,
+        leftSide;
 }
