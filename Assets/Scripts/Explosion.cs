@@ -11,6 +11,6 @@ public class Explosion : MonoBehaviour
     }
 
     void Update() {
-        if (!explosion.IsAlive()) Destroy(this);
+        if (!explosion.IsAlive()) Destroy(gameObject);
     }
 }

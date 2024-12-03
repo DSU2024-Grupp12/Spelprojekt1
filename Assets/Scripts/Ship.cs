@@ -136,11 +136,11 @@ public class Ship : MonoBehaviour, IExplodable
         }
 
         // deaccelerate in traveling direction if it is very different from acceleration direction
-        if (currentThrust != 0 && !stopping) {
+        if (currentThrust > 0 && !stopping) {
             Vector2 accelerationDirection = transform.up;
             float differenceFactor = -(Vector2.Dot(accelerationDirection, velocityDirection) - 1f) / 2f;
 
-            if (differenceFactor > 0) {
+            if (differenceFactor > 0.3f) {
                 float handlingModifier = handlingFactor * differenceFactor * body.mass * Time.fixedDeltaTime;
                 // body.velocity -= body.velocity.normalized * handlingModifier;
                 body.AddForce(-body.velocity.normalized * handlingModifier);

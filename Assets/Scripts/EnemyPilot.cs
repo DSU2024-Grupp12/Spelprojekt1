@@ -86,7 +86,8 @@ public class EnemyPilot : MonoBehaviour
             Missile _missile = Instantiate(missile, missilePosition, missileRotation);
             _missile.createdByLayer = gameObject.layer;
             _missile.target = target;
-            _missile.GetComponent<Rigidbody2D>().velocity = shipBody.velocity;
+            _missile.GetComponent<Rigidbody2D>().velocity = cannons[cannonIndex].up * shipBody.velocity.magnitude;
+            _missile.GetComponent<Rigidbody2D>().AddForce(cannons[cannonIndex].up * 100);
             cannonIndex++;
             cannonIndex %= cannons.Length;
         }

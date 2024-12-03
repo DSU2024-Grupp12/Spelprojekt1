@@ -4938,13 +4938,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3010932650528579138}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.29393196, w: 0.95582634}
-  m_LocalPosition: {x: 0.36, y: 0.13, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.701, y: 0.14, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2526593811693024685}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -34.187}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5189379220917841527
 GameObject:
   m_ObjectHideFlags: 0
@@ -4969,13 +4969,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5189379220917841527}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.29392964, w: 0.95582706}
-  m_LocalPosition: {x: -0.36, y: 0.13, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.701, y: 0.14, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2526593811693024685}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.187}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6633867361255852601
 GameObject:
   m_ObjectHideFlags: 0
@@ -14759,8 +14759,8 @@ MonoBehaviour:
   boostFactor: 1
   stoppingThrust: 2000
   stoppingTorque: 500
-  adjustmentFactor: 0.804
   handlingFactor: 0.305
+  adjustmentFactor: 0.804
   accelerating: 0
   deaccelerating: 0
   strafingStarBoard: 0

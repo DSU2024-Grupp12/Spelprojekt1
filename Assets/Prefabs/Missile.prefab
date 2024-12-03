@@ -4964,10 +4964,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  homing: 0
   createdByLayer: 0
-  inertTime: 1.5
+  inertTime: 0.7
   lifeTime: 10
-  turningSpeed: 50
+  turningSpeed: 10
   explosionPrefab: {fileID: 4447268756455853188, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   willExplodeOn:
     serializedVersion: 2
@@ -5006,8 +5007,8 @@ MonoBehaviour:
   boostFactor: 0
   stoppingThrust: 0
   stoppingTorque: 0
-  adjustmentFactor: 1
   handlingFactor: 0
+  adjustmentFactor: 1
   accelerating: 0
   deaccelerating: 0
   strafingStarBoard: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Missile : MonoBehaviour, IExplodable
 {
     public Transform target;
+    public bool homing;
     [HideInInspector]
     public int createdByLayer;
 
@@ -72,6 +73,13 @@ public class Missile : MonoBehaviour, IExplodable
         else {
             missile.turningClockwise = false;
             missile.turningCounterClockwise = false;
+        }
+
+        if (homing) {
+            Rigidbody2D body = missile.GetComponent<Rigidbody2D>();
+            float magnitude = body.velocity.magnitude;
+            body.velocity = Vector2.zero;
+            body.velocity = transform.up * magnitude;
         }
     }
 
