@@ -14695,7 +14695,8 @@ MonoBehaviour:
   cannons:
   - {fileID: 4889722281703575201}
   - {fileID: 3177187308967164024}
-  minDistance: 5
+  stopDistance: 5
+  minFireDistance: 12
   fireRate: 4
 --- !u!114 &3981858272896800190
 MonoBehaviour:

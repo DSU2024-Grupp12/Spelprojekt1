@@ -17,7 +17,7 @@ public class EnemyPilot : MonoBehaviour
     private int cannonIndex;
 
     [SerializeField, Min(0)]
-    private float minDistance, fireRate;
+    private float stopDistance, minFireDistance, fireRate;
 
     private float nextFireTime;
 
@@ -31,7 +31,9 @@ public class EnemyPilot : MonoBehaviour
     }
 
     void Update() {
-        FireMissile();
+        if (target) {
+            FireMissile();
+        }
     }
 
     void FixedUpdate() {
@@ -68,7 +70,7 @@ public class EnemyPilot : MonoBehaviour
         }
 
         // accelerate if target is too far away
-        if (distanceToTarget > minDistance) {
+        if (distanceToTarget > stopDistance) {
             ship.accelerating = true;
             ship.stopping = false;
         }
@@ -83,7 +85,11 @@ public class EnemyPilot : MonoBehaviour
     }
 
     private void FireMissile() {
+        Vector2 shipToTarget = target.transform.position - transform.position;
+        float distanceToTarget = shipToTarget.magnitude;
         if (fireRate <= 0) return;
+        if (distanceToTarget > minFireDistance) return;
+
         if (Time.time > nextFireTime) {
             nextFireTime = Time.time + fireRate;
 
