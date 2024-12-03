@@ -28,8 +28,8 @@ public class Ship : MonoBehaviour
     [SerializeField, Range(0, 1)]
     private float adjustmentFactor, handlingFactor;
 
-    [SerializeField, Range(0, 2)]
-    private float handlingCutoff;
+    // [SerializeField, Range(-1, 1)]
+    // private float handlingCutoff;
 
     private float
         currentThrust,
@@ -64,7 +64,7 @@ public class Ship : MonoBehaviour
     private Vector2 velocityDirection {
         get {
             if (body.velocity.magnitude < 0.001f) {
-                return GetDirectionVector(transform.eulerAngles.z);
+                return transform.up;
             }
             return body.velocity.normalized;
         }
@@ -91,28 +91,13 @@ public class Ship : MonoBehaviour
         currentTorque += turningClockwise ? -turningForce : 0;
         currentTorque += turningCounterClockwise ? turningForce : 0;
 
-        // deaccelerate in traveling direction if it is very different from acceleration direction
-        float handlingAdjustment = 1;
-        if (currentThrust != 0 && !stopping) {
-            Vector2 accelerationDirection = GetDirectionVector(transform.eulerAngles.z) * Mathf.Sign(currentThrust);
-            float difference = (velocityDirection - accelerationDirection).magnitude;
-            if (difference > handlingCutoff) {
-                float handlingCoeffecient = handlingFactor * body.mass * difference / dampeningTime;
-                ConsoleUtility.OneLineLog(handlingCoeffecient);
-                Vector2 handlingForce = -handlingCoeffecient * body.velocity;
-                handlingAdjustment += handlingCoeffecient * 0.2f;
-                body.AddForce(handlingForce);
-            }
-        }
-
         // adjust angular drag
         if (currentThrust != 0 && currentTorque == 0) body.angularDrag = 1f;
         else body.angularDrag = 0;
 
         // accelerate the ship forwards or backwards
         body.AddForce(
-            GetDirectionVector(transform.eulerAngles.z) *
-            (currentThrust * handlingAdjustment * Time.fixedDeltaTime)
+            transform.up * (currentThrust * Time.fixedDeltaTime)
         );
 
         // strafe in the starboard or port direction
@@ -150,6 +135,21 @@ public class Ship : MonoBehaviour
         }
         else if (body.angularVelocity > maxAngularVelocity) {
             body.angularVelocity = Mathf.Sign(body.angularVelocity) * maxAngularVelocity;
+        }
+
+        // deaccelerate in traveling direction if it is very different from acceleration direction
+        if (currentThrust != 0 && !stopping) {
+            Vector2 accelerationDirection = transform.up;
+            float differenceFactor = -(Vector2.Dot(accelerationDirection, velocityDirection) - 1f) / 2f;
+
+            ConsoleUtility.ClearLog();
+            Debug.Log($"dot: {differenceFactor}");
+
+            if (differenceFactor > 0) {
+                float spaceFriction = 1 - handlingFactor * differenceFactor;
+                body.velocity *= Mathf.Pow(spaceFriction, Time.fixedDeltaTime);
+                body.AddForce(body.totalForce / Mathf.Pow(spaceFriction, Time.fixedDeltaTime / 2));
+            }
         }
 
         currentThrust = 0;
