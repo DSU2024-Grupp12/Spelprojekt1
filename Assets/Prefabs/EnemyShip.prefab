@@ -14759,11 +14759,11 @@ MonoBehaviour:
       thrusters: []
     leftSide:
       thrusters: []
-  forwardThrust: 700
-  backwardThrust: 200
-  sideThrust: 500
-  turningForce: 500
-  maxVelocity: 2
+  forwardThrust: 900
+  backwardThrust: 300
+  sideThrust: 650
+  turningForce: 650
+  maxVelocity: 3.5
   maxAngularVelocity: 90
   boostFactor: 1
   stoppingThrust: 2000
