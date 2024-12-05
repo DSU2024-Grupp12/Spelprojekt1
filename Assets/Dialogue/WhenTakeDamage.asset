@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4ab502aba62c747bb0a177c14eb8f8, type: 3}
   m_Name: WhenTakeDamage
   m_EditorClassIdentifier: 
+  speedSettings:
+    typewriterSpeed: 0.05
+    timeBetweenSentences: 1
+    timeBetweenLines: 1
+    timeBetweenQueuedDialogue: 1
   priority: 0
   queueable: 1
   probability: 1
