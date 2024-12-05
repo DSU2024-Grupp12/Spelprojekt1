@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public void StartDialogue(Dialogue dialogue) {
+    public void QueueDialogue(Dialogue dialogue) {
         FindObjectOfType<DialogueManager>().QueueDialogue(dialogue);
     }
 

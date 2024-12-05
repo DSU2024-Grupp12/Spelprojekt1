@@ -18,7 +18,7 @@ MonoBehaviour:
     timeBetweenLines: 1
     timeBetweenQueuedDialogue: 1
   priority: 0
-  queueable: 1
+  queueable: 0
   probability: 1
   conversationVariations:
   - lines:
