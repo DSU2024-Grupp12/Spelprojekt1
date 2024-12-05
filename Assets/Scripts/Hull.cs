@@ -21,6 +21,7 @@ public class Hull : MonoBehaviour
 
     public LayerMask collideWith;
     public UnityEvent HullDestroyed;
+    public UnityEvent OnTakeDamage;
 
     void Start() {
         endOfInvincibility = Time.time;
@@ -46,7 +47,9 @@ public class Hull : MonoBehaviour
         if (currentStrength <= 0 && !hullDestroyed) {
             hullDestroyed = true;
             HullDestroyed.Invoke();
+            return;
         }
+        OnTakeDamage?.Invoke();
     }
 
     public void RepairHull(float repairAmount) {
