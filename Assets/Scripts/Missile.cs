@@ -17,9 +17,6 @@ public class Missile : MonoBehaviour
         explosionPower;
 
     [SerializeField]
-    private Explosion explosionPrefab;
-
-    [SerializeField]
     private LayerMask willExplodeOn;
 
     private float deathTime, activationTime;
