@@ -7,7 +7,7 @@ public class GravityGun : Tool
         holdDistance,
         massLimit,
         range,
-        marginBeforeLosingContact,
+        snappingSpeed,
         power;
 
     public LayerMask beamableLayers;
@@ -39,8 +39,9 @@ public class GravityGun : Tool
     private void FixedUpdate() {
         if (pickedUpBody) {
             Vector2 holdPosition = mount.position + mount.up * holdDistance;
-            // Vector2 diff = pickedUpBody.
-            pickedUpBody.transform.position = holdPosition; // maybe change velocity instead?
+            Vector2 diff = holdPosition - (Vector2)pickedUpBody.transform.position;
+            pickedUpBody.velocity = diff / snappingSpeed;
+
             pickedUpBody.transform.eulerAngles = mount.eulerAngles;
         }
     }
@@ -50,13 +51,11 @@ public class GravityGun : Tool
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, range, beamableLayers);
             if (hit.collider) {
                 if (hit.collider.GetComponent<Rigidbody2D>().mass >= massLimit) return;
-                IBeamable beamable = hit.collider.GetComponent<IBeamable>();
-                if (beamable != null) {
-                    beamable.PickUp();
-                    pickedUpBody = hit.collider.GetComponent<Rigidbody2D>();
-                    pickedUpBody.bodyType = RigidbodyType2D.Kinematic;
-                }
+                PickUp(hit.collider.GetComponent<Rigidbody2D>());
             }
+        }
+        else {
+            Detach();
         }
     }
 
@@ -66,9 +65,23 @@ public class GravityGun : Tool
         }
     }
 
+    private void PickUp(Rigidbody2D body) {
+        IBeamable beamable = body.GetComponent<IBeamable>();
+        if (beamable != null) {
+            beamable.PickUp();
+            pickedUpBody = body;
+            pickedUpBody.bodyType = RigidbodyType2D.Kinematic;
+        }
+    }
+
     private void Blast() {
         pickedUpBody.bodyType = RigidbodyType2D.Dynamic;
         pickedUpBody.AddForce(mount.up * power);
+        pickedUpBody = null;
+    }
+
+    private void Detach() {
+        pickedUpBody.bodyType = RigidbodyType2D.Dynamic;
         pickedUpBody = null;
     }
 

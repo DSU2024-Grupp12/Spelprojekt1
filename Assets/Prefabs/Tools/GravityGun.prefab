@@ -4879,8 +4879,8 @@ MonoBehaviour:
   holdDistance: 1
   massLimit: 80
   range: 3
-  marginBeforeLosingContact: 0
-  power: 20000
+  snappingSpeed: 0.05
+  power: 13000
   beamableLayers:
     serializedVersion: 2
     m_Bits: 128
