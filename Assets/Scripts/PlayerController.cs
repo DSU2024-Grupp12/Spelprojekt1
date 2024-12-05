@@ -6,8 +6,19 @@ public class PlayerController : MonoBehaviour
 {
     private Ship playerShip;
 
+    [SerializeField]
+    private Tool defaultEquippedTool;
+
+    private Tool equippedTool;
+
+    [SerializeField]
+    private Transform toolMount;
+
     void Start() {
         playerShip = GetComponent<Ship>();
+        if (!transform.GetComponentInChildren<Tool>()) {
+            equippedTool = Instantiate(defaultEquippedTool, toolMount, false);
+        }
     }
 
     public void Accelerate(InputAction.CallbackContext context) {
@@ -40,5 +51,17 @@ public class PlayerController : MonoBehaviour
 
     public void Stop(InputAction.CallbackContext context) {
         playerShip.stopping = context.ReadValueAsButton();
+    }
+
+    public void PrimaryActivateTool(InputAction.CallbackContext context) {
+        if (context.performed) {
+            equippedTool.PrimaryActivation();
+        }
+    }
+
+    public void SecondaryActivateTool(InputAction.CallbackContext context) {
+        if (context.performed) {
+            equippedTool.SecondaryActivation();
+        }
     }
 }

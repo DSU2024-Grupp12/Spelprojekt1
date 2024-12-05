@@ -41,11 +41,11 @@ public class AsteriodSpawner : MonoBehaviour
 
         for (int i = 0; i < numberOfAsteroids; i++) {
             GameObject asteroid = Instantiate(asteroidPrefab, transform, true);
-            
+
             // randomize position
             float randomX = randomPosition.NextFloat() * width;
             float randomY = randomPosition.NextFloat() * height;
-            asteroid.transform.position = startingPosition + new Vector3(randomX, randomY, 900);
+            asteroid.transform.position = startingPosition + new Vector3(randomX, randomY, 0);
 
             // randomize rotation
             asteroid.transform.eulerAngles = new Vector3(0, 0, randomPosition.NextFloat() * 360);
