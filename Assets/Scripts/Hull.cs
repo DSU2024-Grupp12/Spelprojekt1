@@ -22,6 +22,9 @@ public class Hull : MonoBehaviour
     public LayerMask collideWith;
     public UnityEvent HullDestroyed;
     public UnityEvent OnTakeDamage;
+    [Range(0, 1)]
+    public float significantDamageThreshold;
+    public UnityEvent OnTakeDamageSignificant;
 
     void Start() {
         endOfInvincibility = Time.time;
@@ -49,7 +52,8 @@ public class Hull : MonoBehaviour
             HullDestroyed.Invoke();
             return;
         }
-        OnTakeDamage?.Invoke();
+        if (damage >= significantDamageThreshold * strength) OnTakeDamageSignificant?.Invoke();
+        else OnTakeDamage?.Invoke();
     }
 
     public void RepairHull(float repairAmount) {
