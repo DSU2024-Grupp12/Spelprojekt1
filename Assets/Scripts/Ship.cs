@@ -128,7 +128,7 @@ public class Ship : MonoBehaviour
                 body.angularVelocity = Mathf.Sign(body.angularVelocity) * adjustedMaxAngularVelocity;
             }
         }
-        else if (body.angularVelocity > maxAngularVelocity) {
+        else if (Mathf.Abs(body.angularVelocity) > maxAngularVelocity) {
             body.angularVelocity = Mathf.Sign(body.angularVelocity) * maxAngularVelocity;
         }
 
