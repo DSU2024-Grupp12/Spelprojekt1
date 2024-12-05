@@ -14770,7 +14770,7 @@ MonoBehaviour:
   stoppingTorque: 500
   handlingFactor: 0.305
   adjustmentFactor: 0.804
-  explosionPrefab: {fileID: 4447268756455853188, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
+  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   accelerating: 0
   deaccelerating: 0
   strafingStarBoard: 0

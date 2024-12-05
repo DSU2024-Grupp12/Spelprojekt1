@@ -26,7 +26,7 @@ public class Ship : MonoBehaviour
     // private float handlingCutoff;
 
     [SerializeField]
-    private Explosion explosionPrefab;
+    private ParticleSystem explosionPrefab;
 
     private float
         currentThrust,

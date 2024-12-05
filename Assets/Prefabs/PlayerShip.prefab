@@ -4830,6 +4830,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &2878981579923228815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7209564089554924315}
+  m_Layer: 6
+  m_Name: Mount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7209564089554924315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2878981579923228815}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2241363487494897364}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2977748105022777842
 GameObject:
   m_ObjectHideFlags: 0
@@ -4867,6 +4898,7 @@ Transform:
   m_Children:
   - {fileID: 344062051866629734}
   - {fileID: 3282044072871415122}
+  - {fileID: 7209564089554924315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5042903144001891012
@@ -5062,6 +5094,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5605e0f8-94ba-4a8b-bc0d-922bb0f32f28
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3377094416118959403}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PrimaryActivateTool
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a77cf2f3-a847-4f91-8ecc-254f2254ba23
+    m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3377094416118959403}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SecondaryActivateTool
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3cf9fb45-84c9-42dc-9464-f648c9575c61
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -5079,6 +5143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9ddb8d429113c479c13f81dca3ea87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultEquippedTool: {fileID: 0}
+  toolMount: {fileID: 7209564089554924315}
 --- !u!114 &1132009141852493737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5156,7 +5222,7 @@ MonoBehaviour:
   stoppingTorque: 360
   handlingFactor: 196.4
   adjustmentFactor: 0.2
-  explosionPrefab: {fileID: 4447268756455853188, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
+  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   accelerating: 0
   deaccelerating: 0
   strafingStarBoard: 0
