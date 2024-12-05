@@ -5239,17 +5239,17 @@ MonoBehaviour:
     leftSide:
       thrusters:
       - {fileID: 24352828868438799}
-  forwardThrust: 1000
-  backwardThrust: 500
-  sideThrust: 700
-  turningForce: 1000
-  maxVelocity: 5
+  forwardThrust: 1400
+  backwardThrust: 700
+  sideThrust: 900
+  turningForce: 1500
+  maxVelocity: 7
   maxAngularVelocity: 120
-  boostFactor: 2
-  stoppingThrust: 1000
+  boostFactor: 3.5
+  stoppingThrust: 3000
   stoppingTorque: 360
   handlingFactor: 196.4
-  adjustmentFactor: 0.2
+  adjustmentFactor: 0.12
   explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   accelerating: 0
   deaccelerating: 0
