@@ -11,62 +11,76 @@ public class GravityGun : Tool
         power;
 
     public LayerMask beamableLayers;
-
-    private Transform beam;
     private Rigidbody2D pickedUpBody;
 
-    private bool performed;
+    private ParticleSystem container;
 
     void Start() {
-        beam = transform.GetChild(0);
         SetBeamLength(0);
+        container = GetComponentInChildren<ParticleSystem>();
     }
 
     void Update() {
-        Debug.Log(performed);
         if (pickedUpBody) {
-            Debug.Log("picked up");
-            Vector3 toPickedUpObject = pickedUpBody.transform.position - transform.position;
+            Vector2 toPickedUpObject = pickedUpBody.transform.position - transform.position;
             float distance = toPickedUpObject.magnitude;
             SetBeamLength(distance);
-            float angle = Vector2.SignedAngle(transform.up, toPickedUpObject.normalized);
+            float angle = Vector2.SignedAngle(mount.up, toPickedUpObject.normalized);
             SetBeamRotation(angle);
+            container.Play();
         }
         else {
             SetBeamLength(0);
+            container.Stop();
+            container.Clear();
         }
     }
 
-    public override void PrimaryActivation(InputAction.CallbackContext context) {
-        if (context.performed && !pickedUpBody) {
-            performed = true;
+    private void FixedUpdate() {
+        if (pickedUpBody) {
+            Vector2 holdPosition = mount.position + mount.up * holdDistance;
+            // Vector2 diff = pickedUpBody.
+            pickedUpBody.transform.position = holdPosition; // maybe change velocity instead?
+            pickedUpBody.transform.eulerAngles = mount.eulerAngles;
+        }
+    }
+
+    public override void PrimaryActivation() {
+        if (!pickedUpBody) {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, range, beamableLayers);
             if (hit.collider) {
+                if (hit.collider.GetComponent<Rigidbody2D>().mass >= massLimit) return;
                 IBeamable beamable = hit.collider.GetComponent<IBeamable>();
                 if (beamable != null) {
                     beamable.PickUp();
                     pickedUpBody = hit.collider.GetComponent<Rigidbody2D>();
                     pickedUpBody.bodyType = RigidbodyType2D.Kinematic;
-                    Debug.Log(pickedUpBody.mass);
                 }
             }
         }
-        Debug.Log(performed);
     }
 
-    public override void SecondaryActivation(InputAction.CallbackContext context) {
-        if (context.performed) { }
+    public override void SecondaryActivation() {
+        if (pickedUpBody) {
+            Blast();
+        }
+    }
+
+    private void Blast() {
+        pickedUpBody.bodyType = RigidbodyType2D.Dynamic;
+        pickedUpBody.AddForce(mount.up * power);
+        pickedUpBody = null;
     }
 
     private void SetBeamLength(float length) {
-        Vector3 scale = beam.transform.localScale;
+        Vector3 scale = transform.localScale;
         scale.y = length;
-        beam.transform.localScale = scale;
+        transform.localScale = scale;
     }
 
     private void SetBeamRotation(float degrees) {
-        Vector3 rotation = beam.transform.localEulerAngles;
+        Vector3 rotation = transform.localEulerAngles;
         rotation.z = degrees;
-        beam.transform.localEulerAngles = rotation;
+        transform.localEulerAngles = rotation;
     }
 }

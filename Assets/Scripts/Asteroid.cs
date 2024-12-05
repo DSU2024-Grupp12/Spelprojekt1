@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour
+public class Asteroid : MonoBehaviour, IBeamable
 {
     private Rigidbody2D body;
 
@@ -20,4 +20,12 @@ public class Asteroid : MonoBehaviour
     public void Explode() {
         Debug.Log($"Exploded: {gameObject.GetInstanceID()}");
     }
+    /// <inheritdoc />
+    public bool PickUp() {
+        body.angularVelocity = 0;
+        body.velocity = Vector2.zero;
+        return true;
+    }
+    /// <inheritdoc />
+    public void Dropped() { }
 }
