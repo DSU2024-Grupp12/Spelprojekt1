@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
@@ -22,12 +21,14 @@ public class AudioPlayer : MonoBehaviour
     }
 
     private void Update() {
+        if (sourcePool == null) return;
         foreach (AudioSource source in sourcePool.Values) {
             if (!source.isPlaying) source.enabled = false;
         }
     }
 
     public void Play(string assetName) {
+        if (sourcePool == null) return;
         AudioAsset asset = AssetByName(assetName);
         if (!sourcePool[asset].enabled) sourcePool[asset].enabled = true;
         if (asset.loop && sourcePool[asset].isPlaying) return;
@@ -35,6 +36,7 @@ public class AudioPlayer : MonoBehaviour
     }
 
     public void PlayOneShot(string assetName) {
+        if (sourcePool == null) return;
         AudioAsset asset = AssetByName(assetName);
         if (!sourcePool[asset].enabled) sourcePool[asset].enabled = true;
         if (asset.loop) {
@@ -45,6 +47,7 @@ public class AudioPlayer : MonoBehaviour
     }
 
     public void Stop(string assetName) {
+        if (sourcePool == null) return;
         AudioAsset asset = AssetByName(assetName);
         asset.Stop(sourcePool[asset]);
         sourcePool[asset].enabled = false;

@@ -7,7 +7,9 @@ public class Hull : MonoBehaviour
     [SerializeField, Tooltip("The total amount of kinetic energy the hull can absorb before breaking.")]
     private float strength;
 
-    private float currentStrength;
+    public float fullStrength => strength;
+
+    public float currentStrength { get; private set; }
     public bool hullDestroyed { get; private set; }
 
     private float invincibilityWindow = 0.2f;

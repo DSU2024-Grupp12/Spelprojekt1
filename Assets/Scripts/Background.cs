@@ -7,20 +7,28 @@ public class Background : MonoBehaviour
     private GameObject starPrefab;
 
     [SerializeField]
+    private Sprite[] stars;
+
+    [SerializeField]
     private uint seed, numberOfStars;
 
     [SerializeField]
     private float width, height;
 
-    // private List<GameObject> stars;
+    [SerializeField, Range(0f, 1f)]
+    private float parallaxFactor;
+
+    private Camera mainCamera;
 
     // Start is called before the first frame update
     void Start() {
         GenerateStars();
+        mainCamera = Camera.main;
     }
 
-    private void Update() {
-        // implement paralax
+    private void LateUpdate() {
+        Vector2 parallaxPosition = mainCamera.transform.position * parallaxFactor;
+        transform.position = parallaxPosition;
     }
 
     public void GenerateStars() {
@@ -37,6 +45,7 @@ public class Background : MonoBehaviour
 
         for (int i = 0; i < numberOfStars; i++) {
             GameObject star = GameObject.Instantiate(starPrefab, transform, true);
+            star.GetComponent<SpriteRenderer>().sprite = stars[random.NextInt(stars.Length)];
             float randomX = random.NextFloat() * width;
             float randomY = random.NextFloat() * height;
             star.transform.position = startingPosition + new Vector3(randomX, randomY, 900);

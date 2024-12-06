@@ -4870,6 +4870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2241363487494897364}
+  - component: {fileID: 4047870880761550480}
   - component: {fileID: 5042903144001891012}
   - component: {fileID: 3377094416118959403}
   - component: {fileID: 1132009141852493737}
@@ -4903,6 +4904,18 @@ Transform:
   - {fileID: 7209564089554924315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4047870880761550480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc1f06ac1553e647b5deb250c9810cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5042903144001891012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5160,8 +5173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 1000
-  threshold: 50
-  dampener: 0
+  threshold: 100
+  dampener: 0.5
   collideWith:
     serializedVersion: 2
     m_Bits: 896
@@ -5178,6 +5191,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4047870880761550480}
+        m_TargetAssemblyTypeName: ApplicationHandler, Assembly-CSharp
+        m_MethodName: ChangeSceneDelayed
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 5:main_menu
           m_BoolArgument: 0
         m_CallState: 2
   OnTakeDamage:
@@ -5206,6 +5231,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Stor Krock
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3315100848030350885}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: QueueDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 8f6fca223b5a44048b3a2b90a2c1e968, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Stor Krock

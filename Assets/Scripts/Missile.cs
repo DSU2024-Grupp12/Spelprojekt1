@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Ship))]
-public class Missile : MonoBehaviour
+public class Missile : MonoBehaviour, IBeamable
 {
     public Transform target;
     public bool homing;
@@ -105,4 +105,12 @@ public class Missile : MonoBehaviour
 
         missile.Explode();
     }
+
+    /// <inheritdoc />
+    public bool PickUp() {
+        target = null;
+        return true;
+    }
+    /// <inheritdoc />
+    public void Dropped() { }
 }
