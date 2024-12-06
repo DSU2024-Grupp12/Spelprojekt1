@@ -4903,7 +4903,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 985600398, guid: e125e2aa85ba0f547a03c537feae5c6b, type: 3}
+  m_Sprite: {fileID: 506559646, guid: e125e2aa85ba0f547a03c537feae5c6b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4969,9 +4969,8 @@ MonoBehaviour:
   inertTime: 0.7
   lifeTime: 10
   turningSpeed: 10
-  explosionRadius: 1
+  explosionRadius: 2
   explosionPower: 50
-  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   willExplodeOn:
     serializedVersion: 2
     m_Bits: 960
@@ -4988,6 +4987,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrusters:
+    thrusterSounds: {fileID: 0}
+    largeThrusterAudioAssetName: 
+    smallThrusterAudioAssetName: 
     back:
       thrusters:
       - {fileID: 5603953316388003418}
