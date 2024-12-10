@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GravityGun : Tool
@@ -6,22 +8,25 @@ public class GravityGun : Tool
         holdDistance,
         massLimit,
         range,
+        width,
         snappingSpeed,
         firingVelocity;
 
     public LayerMask beamableLayers;
     private Rigidbody2D pickedUpBody;
 
-    private ParticleSystem container;
-    private ParticleSystem indicator;
+    [SerializeField]
+    private ParticleSystem container, indicator, invalidIndicator;
 
+    [SerializeField]
     private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private BoxCollider2D inRangeCollider;
 
     void Start() {
         SetBeamLength(0);
-        container = transform.GetChild(0).GetComponent<ParticleSystem>();
-        indicator = transform.GetChild(1).GetComponent<ParticleSystem>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        SetColliderDimensions();
     }
 
     void Update() {
@@ -29,22 +34,35 @@ public class GravityGun : Tool
             spriteRenderer.enabled = true;
             ConnectBeamToPoint(pickedUpBody.transform.position);
             container.Play();
+            invalidIndicator.Stop();
+            invalidIndicator.Clear();
             indicator.Stop();
             indicator.Clear();
         }
         else {
             spriteRenderer.enabled = false;
-            SetBeamLength(0);
             container.Stop();
             container.Clear();
 
-            if (ValidBodyInRange(out Rigidbody2D inRange)) {
+            bool valid = ValidBodyInRange(out Rigidbody2D inRange);
+            if (inRange) {
                 ConnectBeamToPoint(inRange.transform.position);
-                indicator.Play();
+                if (valid) {
+                    invalidIndicator.Stop();
+                    invalidIndicator.Clear();
+                    indicator.Play();
+                }
+                else {
+                    indicator.Stop();
+                    indicator.Clear();
+                    invalidIndicator.Play();
+                }
             }
             else {
                 indicator.Stop();
                 indicator.Clear();
+                invalidIndicator.Stop();
+                invalidIndicator.Clear();
             }
         }
     }
@@ -59,19 +77,13 @@ public class GravityGun : Tool
         }
     }
 
-    public override void PrimaryActivation() {
+    public override void ActivateTool() {
         if (!pickedUpBody) {
             if (ValidBodyInRange(out Rigidbody2D toPickUp)) {
                 PickUp(toPickUp);
             }
         }
         else {
-            Detach();
-        }
-    }
-
-    public override void SecondaryActivation() {
-        if (pickedUpBody) {
             Blast();
         }
     }
@@ -83,15 +95,15 @@ public class GravityGun : Tool
                 if (!beamable.PickUp()) return;
             }
             pickedUpBody = body;
+            container.transform.localScale = pickedUpBody.transform.localScale;
             pickedUpBody.bodyType = RigidbodyType2D.Kinematic;
             pickedUpBody.useFullKinematicContacts = true;
         }
     }
 
     private void Blast() {
-        pickedUpBody.bodyType = RigidbodyType2D.Dynamic;
         pickedUpBody.velocity = (Vector2)mount.up * firingVelocity;
-        pickedUpBody = null;
+        Detach();
     }
 
     private void Detach() {
@@ -103,16 +115,21 @@ public class GravityGun : Tool
         pickedUpBody = null;
     }
 
+    private void SetColliderDimensions() {
+        inRangeCollider.size = new Vector2(width, range);
+        inRangeCollider.offset = new Vector2(0, ((range + 0.23f) / 2));
+    }
+
     private void SetBeamLength(float length) {
-        Vector3 scale = transform.localScale;
+        Vector3 scale = spriteRenderer.transform.localScale;
         scale.y = length;
-        transform.localScale = scale;
+        spriteRenderer.transform.localScale = scale;
     }
 
     private void SetBeamRotation(float degrees) {
-        Vector3 rotation = transform.localEulerAngles;
+        Vector3 rotation = spriteRenderer.transform.localEulerAngles;
         rotation.z = degrees;
-        transform.localEulerAngles = rotation;
+        spriteRenderer.transform.localEulerAngles = rotation;
     }
 
     private void ConnectBeamToPoint(Vector3 point) {
@@ -124,13 +141,26 @@ public class GravityGun : Tool
     }
 
     private bool ValidBodyInRange(out Rigidbody2D bodyInRange) {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, mount.up, range, beamableLayers);
+        List<Collider2D> colldersInRange = new();
+        inRangeCollider.GetContacts(colldersInRange);
+        List<Rigidbody2D> bodiesInRange = colldersInRange
+                                          .Where(col => col.GetComponent<IBeamable>() != null)
+                                          .Select(col => col.attachedRigidbody)
+                                          .ToList();
         bodyInRange = null;
-        if (hit.collider) {
-            bodyInRange = hit.collider.GetComponent<Rigidbody2D>();
-            if (bodyInRange.mass >= massLimit) return false;
-            return true;
-        }
-        return false;
+        if (bodiesInRange.Count == 0) return false;
+
+        bodiesInRange.Sort(CompareDistance);
+        bodyInRange = bodiesInRange.First();
+
+        if (bodyInRange.mass >= massLimit) return false;
+        return true;
+    }
+
+    // https://gamedev.stackexchange.com/questions/166811/sorting-a-list-of-objects-by-distance
+    private int CompareDistance(Rigidbody2D r1, Rigidbody2D r2) {
+        float squaredRangeA = (r1.transform.position - transform.position).sqrMagnitude;
+        float squaredRangeB = (r2.transform.position - transform.position).sqrMagnitude;
+        return squaredRangeA.CompareTo(squaredRangeB);
     }
 }
