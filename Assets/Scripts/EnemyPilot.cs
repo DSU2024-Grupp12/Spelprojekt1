@@ -17,7 +17,12 @@ public class EnemyPilot : MonoBehaviour
     private int cannonIndex;
 
     [SerializeField, Min(0)]
-    private float stopDistance, minFireDistance, fireRate;
+    private float
+        stopDistance,
+        maxFireDistance,
+        fireRate;
+
+    private float actualFireRate;
 
     private float nextFireTime;
 
@@ -25,7 +30,8 @@ public class EnemyPilot : MonoBehaviour
     void Start() {
         ship = GetComponent<Ship>();
         shipBody = ship.GetComponent<Rigidbody2D>();
-        if (fireRate > 0) {
+        actualFireRate = fireRate;
+        if (actualFireRate > 0) {
             nextFireTime = Time.time + fireRate;
         }
     }
@@ -40,15 +46,19 @@ public class EnemyPilot : MonoBehaviour
         if (!target) {
             ship.StopAllThrusters();
             ship.stopping = true;
-            fireRate = 0;
+            actualFireRate = 0;
             return;
         }
+        else {
+            ship.stopping = false;
+            actualFireRate = fireRate;
+        }
+        
         Vector2 shipToTarget = target.transform.position - transform.position;
         float distanceToTarget = shipToTarget.magnitude;
         Vector2 directionToTarget = shipToTarget.normalized;
         float angleToTarget = Vector2.SignedAngle(transform.up, directionToTarget);
 
-        // turn towards player
         if (Mathf.Abs(angleToTarget) > 4) {
             switch (Mathf.Sign(angleToTarget)) {
                 case > 0:
@@ -87,11 +97,11 @@ public class EnemyPilot : MonoBehaviour
     private void FireMissile() {
         Vector2 shipToTarget = target.transform.position - transform.position;
         float distanceToTarget = shipToTarget.magnitude;
-        if (fireRate <= 0) return;
-        if (distanceToTarget > minFireDistance) return;
+        if (actualFireRate <= 0) return;
+        if (distanceToTarget > maxFireDistance) return;
 
         if (Time.time > nextFireTime) {
-            nextFireTime = Time.time + fireRate;
+            nextFireTime = Time.time + actualFireRate;
 
             Vector3 missilePosition = cannons[cannonIndex].position;
             Quaternion missileRotation = cannons[cannonIndex].rotation;

@@ -1,21 +1,19 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 public class AsteriodSpawner : MonoBehaviour
 {
-
     [SerializeField, HideInInspector]
     private uint numberOfClusters;
 
     [SerializeField, HideInInspector]
-    private float 
-        minClusterRadius, 
+    private float
+        minClusterRadius,
         maxClusterRadius;
 
     [SerializeField, HideInInspector]
-    private int 
-        minClusterChildren, 
+    private int
+        minClusterChildren,
         maxClusterChildren;
 
     [SerializeField]
@@ -25,7 +23,7 @@ public class AsteriodSpawner : MonoBehaviour
     private uint seed, numberOfAsteroids;
 
     [SerializeField, HideInInspector]
-    private float radius;
+    public float radius;
 
     [SerializeField, HideInInspector]
     private MassDistribution distributionFunction;
@@ -33,24 +31,13 @@ public class AsteriodSpawner : MonoBehaviour
     [SerializeField, HideInInspector, Min(0)]
     private float mean, standardDeviation, minMass, maxMass;
 
-    [HideInInspector]
-    public List<Vector3> clusterPositions;
-
     void Start() {
         CreateAsteroids();
     }
 
-    public void CreateClusters(ref Random random) {
-        clusterPositions = new();
-        for (int i = 0; i < numberOfClusters; i++) {
-            Vector3 origin = GetRandomPositionInRadius(ref random, radius, Vector3.zero);
-            clusterPositions.Add(origin);
-            float clusterRadius = minClusterRadius + (maxClusterRadius - minClusterRadius) * random.NextFloat();
-            int number = random.NextInt(minClusterChildren, maxClusterChildren);
-            for (int j = 0; j < number; j++) {
-                Vector3 position = GetRandomPolarCoordinate(ref random, 1f, clusterRadius, origin);
-                CreateAsteroid(ref random, position);
-            }
+    public void ClearAsteroids() {
+        for (int i = transform.childCount - 1; i >= 0; i--) {
+            DestroyImmediate(transform.GetChild(0).gameObject);
         }
     }
 
@@ -69,14 +56,20 @@ public class AsteriodSpawner : MonoBehaviour
         CreateClusters(ref random);
 
         for (int i = 0; i < numberOfAsteroids; i++) {
-            Vector3 position = GetRandomPositionInRadius(ref random, radius, Vector3.zero);
+            Vector3 position = random.GetNextPositionInRadius(radius, Vector3.zero);
             CreateAsteroid(ref random, position);
         }
     }
 
-    public void ClearAsteroids() {
-        for (int i = transform.childCount - 1; i >= 0; i--) {
-            DestroyImmediate(transform.GetChild(0).gameObject);
+    public void CreateClusters(ref Random random) {
+        for (int i = 0; i < numberOfClusters; i++) {
+            Vector3 origin = random.GetNextPositionInRadius(radius, Vector3.zero);
+            float clusterRadius = minClusterRadius + (maxClusterRadius - minClusterRadius) * random.NextFloat();
+            int number = random.NextInt(minClusterChildren, maxClusterChildren);
+            for (int j = 0; j < number; j++) {
+                Vector3 position = random.GetNextPolarCoordinate(1f, clusterRadius, origin);
+                CreateAsteroid(ref random, position);
+            }
         }
     }
 
@@ -95,7 +88,7 @@ public class AsteriodSpawner : MonoBehaviour
                 body.mass = minMass + random.NextFloat() * (maxMass - minMass);
                 break;
             case MassDistribution.Normal:
-                body.mass = NextGaussian(ref random, mean, standardDeviation);
+                body.mass = random.NextGaussian(mean, standardDeviation);
                 body.mass = Mathf.Clamp(body.mass, minMass, maxMass);
                 break;
         }
@@ -106,47 +99,12 @@ public class AsteriodSpawner : MonoBehaviour
         asteroid.transform.localScale = new Vector3(cubeSquareScale, cubeSquareScale, 1);
 
         // randomize angular velocity
-        body.angularVelocity = random.NextFloat() * 10f;
-    }
-
-    private Vector3 GetRandomPositionInRadius(ref Random random, float r, Vector3 origin) {
-        Vector3 startingPosition = new Vector3(-r + origin.x, -r + origin.y, 0);
-
-        Vector3 position;
-        do {
-            float randomX = random.NextFloat() * radius * 2;
-            float randomY = random.NextFloat() * radius * 2;
-            position = startingPosition + new Vector3(randomX, randomY, 0);
-        } while ((position - origin).magnitude > r);
-
-        return position;
-    }
-
-    private Vector3 GetRandomPolarCoordinate(ref Random random,
-                                             float minMagnitude,
-                                             float maxMagnitude,
-                                             Vector2 origin) {
-        float angle = 2 * Mathf.PI * random.NextFloat();
-        float magnitude = minMagnitude + (maxMagnitude - minMagnitude) * random.NextFloat();
-        Vector2 coord = new Vector2(magnitude * Mathf.Cos(angle), magnitude * Mathf.Sin(angle));
-        return origin + coord;
+        body.angularVelocity = -10 + random.NextFloat() * 20f;
     }
 
     public enum MassDistribution
     {
         Linear,
         Normal
-    }
-
-    //https://stackoverflow.com/questions/218060/random-gaussian-variables
-    private float NextGaussian(ref Random rand, float _mean, float stdDev) {
-        // Random rand = new Random(); //reuse this if you are generating many
-        double u1 = 1.0 - rand.NextDouble(); //uniform(0,1] random doubles
-        double u2 = 1.0 - rand.NextDouble();
-        double randStdNormal = System.Math.Sqrt(-2.0 * System.Math.Log(u1)) *
-                               System.Math.Sin(2.0 * System.Math.PI * u2); //random normal(0,1)
-        double randNormal =
-            _mean + stdDev * randStdNormal; //random normal(mean,stdDev^2)
-        return (float)randNormal;
     }
 }
