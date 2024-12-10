@@ -47,14 +47,18 @@ public class Hull : MonoBehaviour
         float modifiedDamage = Mathf.Max((damage - threshold) * (1 - dampener), 0);
         if (modifiedDamage == 0) return;
 
-        currentStrength -= modifiedDamage;
+        TakeRawDamage(modifiedDamage);
+    }
+
+    public void TakeRawDamage(float rawDamage) {
+        currentStrength -= rawDamage;
 
         if (currentStrength <= 0 && !hullDestroyed) {
             hullDestroyed = true;
             HullDestroyed.Invoke();
             return;
         }
-        if (damage >= significantDamageThreshold * strength) OnTakeDamageSignificant?.Invoke();
+        if (rawDamage >= significantDamageThreshold * strength) OnTakeDamageSignificant?.Invoke();
         else OnTakeDamage?.Invoke();
     }
 
