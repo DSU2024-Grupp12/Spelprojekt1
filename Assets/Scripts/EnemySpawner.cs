@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
@@ -23,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
 
     private float halfDiagonal = 15f;
     private Unity.Mathematics.Random random;
+
+    public EnemySpawnEvents enemySpawnEvents;
 
     // Start is called before the first frame update
     void Start() {
@@ -50,22 +53,30 @@ public class EnemySpawner : MonoBehaviour
         inWave = true;
 
         EnemyWave[] validWaves = waves.Where(w => w.dontSpawnUntilTimeHasPassed < Time.time - startOfScene).ToArray();
-        EnemyWave randomWave = validWaves[Random.Range(0, validWaves.Length)];
-        foreach (EnemyGroup group in randomWave.enemyGroups) {
-            for (int i = 0; i < group.number; i++) {
-                while (FindObjectsOfType<EnemyPilot>().Length >= randomWave.maxEnemiesAtOnce) {
-                    yield return null;
+        if (validWaves.Length > 0) {
+            enemySpawnEvents.OnWaveStarted?.Invoke();
+
+            EnemyWave randomWave = validWaves[Random.Range(0, validWaves.Length)];
+            foreach (EnemyGroup group in randomWave.enemyGroups) {
+                for (int i = 0; i < group.number; i++) {
+                    while (FindObjectsOfType<EnemyPilot>().Length >= randomWave.maxEnemiesAtOnce) {
+                        yield return null;
+                    }
+                    SpawnEnemy(group.enemyType);
+                    yield return new WaitForSeconds(1f);
                 }
-                SpawnEnemy(group.enemyType);
-                yield return new WaitForSeconds(1f);
             }
-        }
 
-        while (FindObjectsOfType<EnemyPilot>().Length > 0) {
-            yield return null;
-        }
+            while (FindObjectsOfType<EnemyPilot>().Length > 0) {
+                yield return null;
+            }
+            timeUntilNextWave = Time.time + randomWave.recoveryTime + timeBetweenWaves;
 
-        timeUntilNextWave = Time.time + randomWave.recoveryTime + timeBetweenWaves;
+            enemySpawnEvents.OnWaveFinished?.Invoke();
+        }
+        else {
+            timeUntilNextWave = Time.time + timeBetweenWaves;
+        }
         inWave = false;
     }
 
@@ -99,4 +110,12 @@ public class EnemyGroup
     public EnemyPilot enemyType;
     [Min(0)]
     public int number;
+}
+
+[System.Serializable]
+public class EnemySpawnEvents
+{
+    public UnityEvent
+        OnWaveStarted,
+        OnWaveFinished;
 }
