@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour
     private Ship playerShip;
 
     [SerializeField]
-    private Tool defaultEquippedTool;
+    private Tool defaultPrimaryTool;
 
-    private Tool equippedTool;
+    private Tool primaryTool;
+    private Tool secondaryTool;
 
     [SerializeField]
     private Transform toolMount;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start() {
         playerShip = GetComponent<Ship>();
         if (!transform.GetComponentInChildren<Tool>()) {
-            equippedTool = Instantiate(defaultEquippedTool, toolMount, false);
+            primaryTool = Instantiate(defaultPrimaryTool, toolMount, false);
         }
     }
 
@@ -55,13 +56,13 @@ public class PlayerController : MonoBehaviour
 
     public void PrimaryActivateTool(InputAction.CallbackContext context) {
         if (context.performed) {
-            equippedTool.PrimaryActivation();
+            primaryTool.ActivateTool();
         }
     }
 
     public void SecondaryActivateTool(InputAction.CallbackContext context) {
         if (context.performed) {
-            equippedTool.SecondaryActivation();
+            if (secondaryTool) secondaryTool.ActivateTool();
         }
     }
 }

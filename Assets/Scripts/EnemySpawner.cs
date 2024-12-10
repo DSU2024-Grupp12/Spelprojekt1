@@ -47,8 +47,6 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public IEnumerator ProcessWave() {
-        Debug.Log("start wave");
-
         inWave = true;
 
         EnemyWave[] validWaves = waves.Where(w => w.dontSpawnUntilTimeHasPassed < Time.time - startOfScene).ToArray();
@@ -58,7 +56,6 @@ public class EnemySpawner : MonoBehaviour
                 while (FindObjectsOfType<EnemyPilot>().Length >= randomWave.maxEnemiesAtOnce) {
                     yield return null;
                 }
-                Debug.Log("spawn enemy");
                 SpawnEnemy(group.enemyType);
                 yield return new WaitForSeconds(1f);
             }
@@ -70,8 +67,6 @@ public class EnemySpawner : MonoBehaviour
 
         timeUntilNextWave = Time.time + randomWave.recoveryTime + timeBetweenWaves;
         inWave = false;
-
-        Debug.Log("end wave");
     }
 
     public void SpawnEnemy(EnemyPilot enemyType) {
