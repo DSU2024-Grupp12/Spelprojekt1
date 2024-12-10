@@ -23,10 +23,7 @@ public class Hull : MonoBehaviour
 
     public LayerMask collideWith;
     public UnityEvent HullDestroyed;
-    public UnityEvent OnTakeDamage;
-    [Range(0, 1)]
-    public float significantDamageThreshold;
-    public UnityEvent OnTakeDamageSignificant;
+    public TakeDamageEvents takeDamageEvents;
 
     void Start() {
         endOfInvincibility = Time.time;
@@ -40,17 +37,17 @@ public class Hull : MonoBehaviour
         endOfInvincibility = Time.time + invincibilityWindow;
 
         float kineticEnergy = 0.5f * other.otherRigidbody.mass * Mathf.Pow(other.relativeVelocity.magnitude, 2);
-        TakeDamage(kineticEnergy);
+        TakeDamage(kineticEnergy, other.gameObject.layer);
     }
 
-    public void TakeDamage(float damage) {
+    public void TakeDamage(float damage, int incurringLayer = 0) {
         float modifiedDamage = Mathf.Max((damage - threshold) * (1 - dampener), 0);
-        if (modifiedDamage == 0) return;
 
-        TakeRawDamage(modifiedDamage);
+        TakeRawDamage(modifiedDamage, incurringLayer);
     }
 
-    public void TakeRawDamage(float rawDamage) {
+    public void TakeRawDamage(float rawDamage, int incurringLayer = 0) {
+        if (rawDamage <= 0) return;
         currentStrength -= rawDamage;
 
         if (currentStrength <= 0 && !hullDestroyed) {
@@ -58,11 +55,57 @@ public class Hull : MonoBehaviour
             HullDestroyed.Invoke();
             return;
         }
-        if (rawDamage >= significantDamageThreshold * strength) OnTakeDamageSignificant?.Invoke();
-        else OnTakeDamage?.Invoke();
+
+        if (rawDamage >= takeDamageEvents.significantDamageThreshold * strength) {
+            if (takeDamageEvents.enemyLayers.Contains(incurringLayer))
+                takeDamageEvents.OnTakeDamageEnemySignificant?.Invoke();
+            else if (takeDamageEvents.debrisLayers.Contains(incurringLayer))
+                takeDamageEvents.OnTakeDamageDebrisSignificant?.Invoke();
+            else
+                takeDamageEvents.OnTakeDamageSignificant?.Invoke();
+        }
+        else {
+            if (takeDamageEvents.enemyLayers.Contains(incurringLayer))
+                takeDamageEvents.OnTakeDamageEnemy?.Invoke();
+            else if (takeDamageEvents.debrisLayers.Contains(incurringLayer))
+                takeDamageEvents.OnTakeDamageDebris?.Invoke();
+            else takeDamageEvents.OnTakeDamage?.Invoke();
+        }
+
+        if (currentStrength <= strength * takeDamageEvents.lowHullStrengthThreshold) {
+            if (!takeDamageEvents.lowHullStrengthReached) {
+                takeDamageEvents.OnReachLowHullStrength?.Invoke();
+                takeDamageEvents.lowHullStrengthReached = true;
+            }
+        }
     }
 
     public void RepairHull(float repairAmount) {
         currentStrength = Mathf.Min(strength, currentStrength + repairAmount);
+        if (currentStrength > strength * takeDamageEvents.lowHullStrengthThreshold) {
+            takeDamageEvents.lowHullStrengthReached = false;
+        }
     }
+}
+
+[System.Serializable]
+public class TakeDamageEvents
+{
+    [Range(0, 1)]
+    public float
+        significantDamageThreshold,
+        lowHullStrengthThreshold;
+    [HideInInspector]
+    public bool lowHullStrengthReached;
+
+    public LayerMask enemyLayers;
+    public LayerMask debrisLayers;
+    public UnityEvent
+        OnTakeDamage,
+        OnTakeDamageEnemy,
+        OnTakeDamageDebris,
+        OnTakeDamageSignificant,
+        OnTakeDamageEnemySignificant,
+        OnTakeDamageDebrisSignificant,
+        OnReachLowHullStrength;
 }
