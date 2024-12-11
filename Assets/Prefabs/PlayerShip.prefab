@@ -4870,10 +4870,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2241363487494897364}
+  - component: {fileID: 4047870880761550480}
   - component: {fileID: 5042903144001891012}
   - component: {fileID: 3377094416118959403}
   - component: {fileID: 1132009141852493737}
   - component: {fileID: 3315100848030350885}
+  - component: {fileID: 7085579952060942491}
   - component: {fileID: 6830495024464102766}
   - component: {fileID: 2843089317992928371}
   - component: {fileID: 6284524845637344113}
@@ -4902,6 +4904,18 @@ Transform:
   - {fileID: 7209564089554924315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4047870880761550480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc1f06ac1553e647b5deb250c9810cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5042903144001891012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5144,7 +5158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9ddb8d429113c479c13f81dca3ea87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultEquippedTool: {fileID: 0}
+  defaultPrimaryTool: {fileID: 0}
   toolMount: {fileID: 7209564089554924315}
 --- !u!114 &1132009141852493737
 MonoBehaviour:
@@ -5159,8 +5173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 1000
-  threshold: 50
-  dampener: 0
+  threshold: 100
+  dampener: 0.5
   collideWith:
     serializedVersion: 2
     m_Bits: 896
@@ -5179,21 +5193,49 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnTakeDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3315100848030350885}
-        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
-        m_MethodName: QueueDialogue
-        m_Mode: 2
+      - m_Target: {fileID: 4047870880761550480}
+        m_TargetAssemblyTypeName: ApplicationHandler, Assembly-CSharp
+        m_MethodName: ChangeSceneDelayed
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 8f6fca223b5a44048b3a2b90a2c1e968, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 5:main_menu
           m_BoolArgument: 0
         m_CallState: 2
+  takeDamageEvents:
+    significantDamageThreshold: 0.2
+    lowHullStrengthThreshold: 0.5
+    lowHullStrengthReached: 0
+    enemyLayers:
+      serializedVersion: 2
+      m_Bits: 768
+    debrisLayers:
+      serializedVersion: 2
+      m_Bits: 128
+    OnTakeDamage:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageEnemy:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageDebris:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageSignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageEnemySignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageDebrisSignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnReachLowHullStrength:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &3315100848030350885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5206,6 +5248,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8535e0aae10dd2645b87a08667066136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7085579952060942491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b223f038e44f2cbaed22d4647e3f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assets:
+  - {fileID: 11400000, guid: ff52526c21ba1fc4ebccd9e5e2594c35, type: 2}
+  - {fileID: 11400000, guid: 6b130d3c131a7df4baf5d41dca278706, type: 2}
+  - {fileID: 11400000, guid: e151ed0eab7f02c4398974fb11c714d0, type: 2}
+  - {fileID: 11400000, guid: ce12752d0059229428b6ec2102a3d7c8, type: 2}
 --- !u!114 &6830495024464102766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5219,6 +5278,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrusters:
+    thrusterSounds: {fileID: 7085579952060942491}
+    largeThrusterAudioAssetName: LargeThruster
+    smallThrusterAudioAssetName: SmallThruster
     back:
       thrusters:
       - {fileID: 8432661799650720054}

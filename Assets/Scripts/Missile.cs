@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Ship))]
-public class Missile : MonoBehaviour
+public class Missile : MonoBehaviour, IBeamable
 {
     public Transform target;
     public bool homing;
@@ -99,10 +99,18 @@ public class Missile : MonoBehaviour
             float distance = (hull.transform.position - transform.position).magnitude;
             if (distance <= explosionRadius) {
                 float dropOff = 1 - (distance / explosionRadius);
-                hull.TakeDamage(explosionPower * dropOff);
+                hull.TakeDamage(explosionPower * dropOff, gameObject.layer);
             }
         }
 
         missile.Explode();
     }
+
+    /// <inheritdoc />
+    public bool PickUp() {
+        target = null;
+        return true;
+    }
+    /// <inheritdoc />
+    public void Dropped() { }
 }

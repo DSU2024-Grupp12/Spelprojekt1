@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
     private bool processingDialogue;
 
     private void Start() {
-        queuedDialogues = new();
+        queuedDialogues = new SortedList<int, Dialogue>();
     }
 
     private void Update() {
@@ -38,8 +38,8 @@ public class DialogueManager : MonoBehaviour
     public void QueueDialogue(Dialogue dialogue) {
         if (queuedDialogues.Count == maxConversationsInQueue) return;
         // queue queueable dialogue or if there are no dialogues in queue, queue unqueueable dialogue
-        if (dialogue.queueable || queuedDialogues.Count == 0) {
-            if (new System.Random().NextDouble() < dialogue.probability) {
+        if (dialogue.queueable || (queuedDialogues.Count == 0 && !processingDialogue)) {
+            if (new System.Random().NextDouble() <= dialogue.probability) {
                 queuedDialogues.Add(dialogue.priority, dialogue);
             }
         }

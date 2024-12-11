@@ -4,17 +4,28 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
     [SerializeField]
+    private ParticleSystem explosionPrefab;
+    [SerializeField]
     private Thrusters thrusters;
 
+    [Header("Thruster Power")]
+    [SerializeField, Min(0)]
+    private float forwardThrust;
     [SerializeField, Min(0)]
     private float
-        forwardThrust,
         backwardThrust,
         sideThrust,
-        turningForce,
-        maxVelocity,
-        maxAngularVelocity,
-        boostFactor,
+        turningForce;
+
+    [SerializeField, Min(0), Header("Maximums")]
+    private float maxVelocity;
+    [SerializeField, Min(0)]
+    private float maxAngularVelocity;
+
+    [SerializeField, Min(0), Header("Handling")]
+    private float boostFactor;
+    [SerializeField, Min(0)]
+    private float
         stoppingThrust,
         stoppingTorque,
         handlingFactor;
@@ -24,9 +35,6 @@ public class Ship : MonoBehaviour
 
     // [SerializeField, Range(-1, 1)]
     // private float handlingCutoff;
-
-    [SerializeField]
-    private ParticleSystem explosionPrefab;
 
     private float
         currentThrust,
@@ -149,7 +157,7 @@ public class Ship : MonoBehaviour
         currentThrust = 0;
         currentTorque = 0;
 
-        UpdateThrusterParticles();
+        UpdateThrusters();
     }
 
     public void Explode() {
@@ -169,7 +177,7 @@ public class Ship : MonoBehaviour
         strafingStarBoard = false;
     }
 
-    private void UpdateThrusterParticles() {
+    private void UpdateThrusters() {
         if (stopping) {
             thrusters.back.Stop();
             thrusters.front.Stop();
@@ -197,6 +205,12 @@ public class Ship : MonoBehaviour
 
         if (strafingPort) thrusters.rightSide.Play();
         else thrusters.rightSide.Stop();
+
+        if (accelerating || turningClockwise || turningCounterClockwise) thrusters.PlayLargeThrusterSound();
+        else thrusters.StopLargeThrusterSound();
+
+        if (deaccelerating || strafingPort || strafingStarBoard) thrusters.PlaySmallThrusterSound();
+        else thrusters.StopSmallThrusterSound();
     }
 
     private Vector2 GetDirectionVector(float eulerAngleZ) {
@@ -206,8 +220,15 @@ public class Ship : MonoBehaviour
 }
 
 [System.Serializable]
-public struct Thrusters
+public class Thrusters
 {
+    [SerializeField]
+    private AudioPlayer thrusterSounds;
+    [SerializeField]
+    private string
+        largeThrusterAudioAssetName,
+        smallThrusterAudioAssetName;
+
     public ThrusterGroup
         back,
         front,
@@ -215,4 +236,24 @@ public struct Thrusters
         counterClockwise,
         rightSide,
         leftSide;
+
+    public void PlaySmallThrusterSound() {
+        if (smallThrusterAudioAssetName == "") return;
+        thrusterSounds.Play(smallThrusterAudioAssetName);
+    }
+
+    public void StopSmallThrusterSound() {
+        if (smallThrusterAudioAssetName == "") return;
+        thrusterSounds.Stop(smallThrusterAudioAssetName);
+    }
+
+    public void PlayLargeThrusterSound() {
+        if (largeThrusterAudioAssetName == "") return;
+        thrusterSounds.Play(largeThrusterAudioAssetName);
+    }
+
+    public void StopLargeThrusterSound() {
+        if (largeThrusterAudioAssetName == "") return;
+        thrusterSounds.Stop(largeThrusterAudioAssetName);
+    }
 }
