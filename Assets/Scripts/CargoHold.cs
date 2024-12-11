@@ -20,7 +20,14 @@ public class CargoHold : MonoBehaviour
         if (!cargo.TryAdd(color, value)) {
             cargo[color] += value;
         }
+    }
 
-        Debug.Log($"Color: {color.ToString()}, value: {cargo[color]}");
+    public int GetCargoContent(Resource.Color color) {
+        if (cargo.TryGetValue(color, out int value)) {
+            return value;
+        }
+        else {
+            return 0;
+        }
     }
 }

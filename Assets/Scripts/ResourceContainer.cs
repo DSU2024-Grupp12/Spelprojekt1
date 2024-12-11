@@ -19,8 +19,6 @@ public class ResourceContainer : MonoBehaviour
             int high = (int)Mathf.Ceil(resource.maxDroppedPer10UnitMass * tenthOfMass);
             int number = Mathf.Clamp(Random.Range(low, high), resource.minNumber, resource.maxNumber);
 
-            Debug.Log($"low: {low}, high: {high}, number: {number}");
-
             for (int i = 0; i < number; i++) {
                 Vector2 position = MathExtensions.GetRandomPolarCoordinate(0.3f, 0.5f, transform.position);
                 Resource r = Instantiate(resource.resource, position, Quaternion.identity);
@@ -29,8 +27,6 @@ public class ResourceContainer : MonoBehaviour
                 int rLow = (int)Mathf.Floor(resource.maxValuePer10UnitMass * tenthOfMass);
                 int rHigh = (int)Mathf.Ceil(resource.maxValuePer10UnitMass * tenthOfMass);
                 int value = Random.Range(rLow, rHigh);
-
-                Debug.Log($"rlow: {rLow}, rhigh: {rHigh}, value: {value}");
 
                 r.value = Mathf.Clamp(value, resource.minValue, resource.maxValue);
             }
@@ -48,9 +44,12 @@ public class ContainedResource
     [Min(0)]
     public float minValuePer10UnitMass, maxValuePer10UnitMass;
 
-    public int
-        minNumber,
-        maxNumber,
-        minValue,
-        maxValue;
+    [Tooltip("The number of units dropped will never be lower than this value no matter how small the body is")]
+    public int minNumber;
+    [Tooltip("The number of units dropped will never exceed this value no matter how large the body is")]
+    public int maxNumber;
+    [Tooltip("The value of the units dropped will never be lower than this no matter how small the body is")]
+    public int minValue;
+    [Tooltip("The value of the units dropped will never exceed this value no matter how large the body is")]
+    public int maxValue;
 }
