@@ -31,7 +31,7 @@ public class AsteriodSpawner : MonoBehaviour
     [SerializeField, HideInInspector, Min(0)]
     private float mean, standardDeviation, minMass, maxMass;
 
-    void Start() {
+    void Awake() {
         CreateAsteroids();
     }
 
@@ -82,6 +82,7 @@ public class AsteriodSpawner : MonoBehaviour
 
         // randomize mass
         Rigidbody2D body = asteroid.GetComponent<Rigidbody2D>();
+        Hull hull = asteroid.GetComponent<Hull>();
 
         switch (distributionFunction) {
             case MassDistribution.Linear:
@@ -92,6 +93,9 @@ public class AsteriodSpawner : MonoBehaviour
                 body.mass = Mathf.Clamp(body.mass, minMass, maxMass);
                 break;
         }
+
+        // adjust hull strength according to mass
+        hull.SetHullStrength(body.mass * asteroid.hullStrengthFactor);
 
         // adjust scale according to mass
         float massAtScale1 = asteroidPrefab.GetComponent<Rigidbody2D>().mass;

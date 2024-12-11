@@ -25,9 +25,15 @@ public class Hull : MonoBehaviour
     public UnityEvent HullDestroyed;
     public TakeDamageEvents takeDamageEvents;
 
+    private bool hullInitialized;
+
     void Start() {
         endOfInvincibility = Time.time;
         currentStrength = strength;
+    }
+
+    private void Update() {
+        hullInitialized = true;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -36,8 +42,8 @@ public class Hull : MonoBehaviour
 
         endOfInvincibility = Time.time + invincibilityWindow;
 
-        float kineticEnergy = 0.5f * other.otherRigidbody.mass * Mathf.Pow(other.relativeVelocity.magnitude, 2);
-        TakeDamage(kineticEnergy, other.gameObject.layer);
+        float pseudoKineticEnergy = 0.5f * other.otherRigidbody.mass * other.relativeVelocity.magnitude;
+        TakeDamage(pseudoKineticEnergy, other.gameObject.layer);
     }
 
     public void TakeDamage(float damage, int incurringLayer = 0) {
@@ -84,6 +90,13 @@ public class Hull : MonoBehaviour
         currentStrength = Mathf.Min(strength, currentStrength + repairAmount);
         if (currentStrength > strength * takeDamageEvents.lowHullStrengthThreshold) {
             takeDamageEvents.lowHullStrengthReached = false;
+        }
+    }
+
+    public void SetHullStrength(float newStrength) {
+        if (!hullInitialized) {
+            strength = newStrength;
+            currentStrength = newStrength;
         }
     }
 }

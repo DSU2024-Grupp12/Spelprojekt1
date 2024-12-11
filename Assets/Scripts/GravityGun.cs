@@ -88,6 +88,12 @@ public class GravityGun : Tool
         }
     }
 
+    public override void Cancel() {
+        if (pickedUpBody) {
+            Detach();
+        }
+    }
+
     private void PickUp(Rigidbody2D body) {
         IBeamable[] beamables = body.GetComponents<IBeamable>();
         if (beamables != null) {

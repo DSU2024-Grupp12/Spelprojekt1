@@ -38,7 +38,7 @@ public static class MathExtensions
         return position;
     }
 
-    public static Vector3 GetNextPolarCoordinate(ref this Random random,
+    public static Vector2 GetNextPolarCoordinate(ref this Random random,
                                                  float minMagnitude,
                                                  float maxMagnitude,
                                                  Vector2 origin) {
@@ -46,6 +46,11 @@ public static class MathExtensions
         float magnitude = minMagnitude + (maxMagnitude - minMagnitude) * random.NextFloat();
         Vector2 coord = new Vector2(magnitude * Mathf.Cos(angle), magnitude * Mathf.Sin(angle));
         return origin + coord;
+    }
+
+    public static Vector2 GetRandomPolarCoordinate(float minMagintude, float maxMagnitude, Vector2 origin) {
+        Random random = new((uint)UnityEngine.Random.Range(0, int.MaxValue));
+        return GetNextPolarCoordinate(ref random, minMagintude, maxMagnitude, origin);
     }
 
     //https://stackoverflow.com/questions/218060/random-gaussian-variables

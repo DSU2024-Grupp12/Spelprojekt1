@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour, IBeamable
 {
+    public ParticleSystem explosionPrefab;
+    [Tooltip("The hull strength of the asteroid will be equal to its mass multiplied by this factor")]
+    public float hullStrengthFactor;
+
     private Rigidbody2D body;
 
     private void Start() {
@@ -16,7 +20,12 @@ public class Asteroid : MonoBehaviour, IBeamable
     }
 
     public void Explode() {
-        Debug.Log($"Exploded: {gameObject.GetInstanceID()}");
+        if (explosionPrefab) {
+            Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y, -3);
+            ParticleSystem explosion = Instantiate(explosionPrefab, explosionPosition, transform.rotation);
+            explosion.transform.localScale = transform.localScale;
+            Destroy(gameObject);
+        }
     }
     /// <inheritdoc />
     public bool PickUp() {

@@ -65,4 +65,11 @@ public class PlayerController : MonoBehaviour
             if (secondaryTool) secondaryTool.ActivateTool();
         }
     }
+
+    public void CancelTool(InputAction.CallbackContext context) {
+        if (context.performed) {
+            if (primaryTool) primaryTool.Cancel();
+            if (secondaryTool) secondaryTool.Cancel();
+        }
+    }
 }
