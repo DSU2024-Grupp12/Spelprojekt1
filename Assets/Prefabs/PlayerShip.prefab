@@ -4873,12 +4873,14 @@ GameObject:
   - component: {fileID: 4047870880761550480}
   - component: {fileID: 5042903144001891012}
   - component: {fileID: 3377094416118959403}
+  - component: {fileID: 6830495024464102766}
   - component: {fileID: 1132009141852493737}
+  - component: {fileID: 417615014983797967}
   - component: {fileID: 3315100848030350885}
   - component: {fileID: 7085579952060942491}
-  - component: {fileID: 6830495024464102766}
   - component: {fileID: 2843089317992928371}
   - component: {fileID: 6284524845637344113}
+  - component: {fileID: 8397248826966447585}
   m_Layer: 6
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -5160,6 +5162,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultPrimaryTool: {fileID: 0}
   toolMount: {fileID: 7209564089554924315}
+--- !u!114 &6830495024464102766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d836febb8f17448a3826af8c0e5a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
+  thrusters:
+    thrusterSounds: {fileID: 7085579952060942491}
+    largeThrusterAudioAssetName: LargeThruster
+    smallThrusterAudioAssetName: SmallThruster
+    back:
+      thrusters:
+      - {fileID: 8432661799650720054}
+      - {fileID: 8768642952646617853}
+    front:
+      thrusters:
+      - {fileID: 5966139558000721285}
+      - {fileID: 4826305219900734396}
+    clockwise:
+      thrusters:
+      - {fileID: 8288878402490018825}
+    counterClockwise:
+      thrusters:
+      - {fileID: 7516629516683850430}
+    rightSide:
+      thrusters:
+      - {fileID: 6056826844423349094}
+    leftSide:
+      thrusters:
+      - {fileID: 24352828868438799}
+  forwardThrust: 1400
+  backwardThrust: 700
+  sideThrust: 900
+  turningForce: 1500
+  maxVelocity: 7
+  maxAngularVelocity: 120
+  boostFactor: 3.5
+  stoppingThrust: 3000
+  stoppingTorque: 360
+  handlingFactor: 196.4
+  adjustmentFactor: 0.12
+  accelerating: 0
+  deaccelerating: 0
+  strafingStarBoard: 0
+  strafingPort: 0
+  turningClockwise: 0
+  turningCounterClockwise: 0
+  boosting: 0
 --- !u!114 &1132009141852493737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5236,6 +5293,18 @@ MonoBehaviour:
     OnReachLowHullStrength:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &417615014983797967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d087861a653ba428862f5a7b901b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3315100848030350885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5265,61 +5334,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b130d3c131a7df4baf5d41dca278706, type: 2}
   - {fileID: 11400000, guid: e151ed0eab7f02c4398974fb11c714d0, type: 2}
   - {fileID: 11400000, guid: ce12752d0059229428b6ec2102a3d7c8, type: 2}
---- !u!114 &6830495024464102766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2977748105022777842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d836febb8f17448a3826af8c0e5a8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrusters:
-    thrusterSounds: {fileID: 7085579952060942491}
-    largeThrusterAudioAssetName: LargeThruster
-    smallThrusterAudioAssetName: SmallThruster
-    back:
-      thrusters:
-      - {fileID: 8432661799650720054}
-      - {fileID: 8768642952646617853}
-    front:
-      thrusters:
-      - {fileID: 5966139558000721285}
-      - {fileID: 4826305219900734396}
-    clockwise:
-      thrusters:
-      - {fileID: 8288878402490018825}
-    counterClockwise:
-      thrusters:
-      - {fileID: 7516629516683850430}
-    rightSide:
-      thrusters:
-      - {fileID: 6056826844423349094}
-    leftSide:
-      thrusters:
-      - {fileID: 24352828868438799}
-  forwardThrust: 1400
-  backwardThrust: 700
-  sideThrust: 900
-  turningForce: 1500
-  maxVelocity: 7
-  maxAngularVelocity: 120
-  boostFactor: 3.5
-  stoppingThrust: 3000
-  stoppingTorque: 360
-  handlingFactor: 196.4
-  adjustmentFactor: 0.12
-  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
-  accelerating: 0
-  deaccelerating: 0
-  strafingStarBoard: 0
-  strafingPort: 0
-  turningClockwise: 0
-  turningCounterClockwise: 0
-  boosting: 0
 --- !u!50 &2843089317992928371
 Rigidbody2D:
   serializedVersion: 4
@@ -5426,6 +5440,41 @@ PolygonCollider2D:
       - {x: 0.5396063, y: 0.030245125}
       - {x: 0.68944883, y: 0.03209001}
   m_UseDelaunayMesh: 0
+--- !u!58 &8397248826966447585
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.67
 --- !u!1 &3683418663752188193
 GameObject:
   m_ObjectHideFlags: 0

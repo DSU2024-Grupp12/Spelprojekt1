@@ -492,18 +492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d4f72383220da41b3e7fd31e564c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1413183182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413183163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d92f9d5e5218c4283868af706fbda9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1423196696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,178 +1106,6 @@ PrefabInstance:
       propertyPath: HullDestroyed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1326644398}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemy.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebris.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnReachLowHullStrength.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageSignificant.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebris.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemySignificant.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebrisSignificant.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1413183182}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebris.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1413183182}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnReachLowHullStrength.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebris.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Debug
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnReachLowHullStrength.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1413183182}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebris.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Debug
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1413183182}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnReachLowHullStrength.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnReachLowHullStrength.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Debug
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemySignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebrisSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemySignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1413183182}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebrisSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1413183182}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemySignificant.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebrisSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemySignificant.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Debug
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebrisSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Debug
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventDebugger, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebris.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventDebugger, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnReachLowHullStrength.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventDebugger, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebris.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: debris
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnReachLowHullStrength.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: low health
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemySignificant.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventDebugger, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebrisSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventDebugger, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemySignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebrisSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: debris
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebris.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnReachLowHullStrength.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageEnemySignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1132009141852493737, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      propertyPath: takeDamageEvents.OnTakeDamageDebrisSignificant.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 2241363487494897364, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.01
@@ -1342,13 +1158,14 @@ PrefabInstance:
       propertyPath: defaultEquippedTool
       value: 
       objectReference: {fileID: 6434183182749257291, guid: 7b6b1eb77c0cb7046a879373897686c1, type: 3}
+    - target: {fileID: 8397248826966447585, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
+      propertyPath: m_Radius
+      value: 2.34
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2977748105022777842, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 1413183182}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 311a0ada0c17e8140b1deb8c01244a2f, type: 3}
 --- !u!1001 &8711664166096230340
 PrefabInstance:
