@@ -52,7 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 392244509131473519, guid: 5b179a84b0756494bb489c9713ed77f1, type: 3}
   hullStrengthFactor: 10
-  hull: {fileID: 755096606577708467}
 --- !u!114 &755096606577708467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,10 +142,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resources:
   - resource: {fileID: 1916773367551793732, guid: ae7fd41e39231fa4ab8f8cf3d5d34834, type: 3}
-    minDroppedNumber: 0
-    maxDroppedNumber: 2
+    minDroppedPer10UnitMass: 0.2
+    maxDroppedPer10UnitMass: 0.5
+    minValuePer10UnitMass: 0.2
+    maxValuePer10UnitMass: 0.5
+    minNumber: 0
+    maxNumber: 3
     minValue: 1
-    maxValue: 4
+    maxValue: 3
 --- !u!58 &813445013602032997
 CircleCollider2D:
   m_ObjectHideFlags: 0
