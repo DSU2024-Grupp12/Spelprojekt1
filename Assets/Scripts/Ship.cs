@@ -4,17 +4,28 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
     [SerializeField]
+    private ParticleSystem explosionPrefab;
+    [SerializeField]
     private Thrusters thrusters;
 
+    [Header("Thruster Power")]
+    [SerializeField, Min(0)]
+    private float forwardThrust;
     [SerializeField, Min(0)]
     private float
-        forwardThrust,
         backwardThrust,
         sideThrust,
-        turningForce,
-        maxVelocity,
-        maxAngularVelocity,
-        boostFactor,
+        turningForce;
+
+    [SerializeField, Min(0), Header("Maximums")]
+    private float maxVelocity;
+    [SerializeField, Min(0)]
+    private float maxAngularVelocity;
+
+    [SerializeField, Min(0), Header("Handling")]
+    private float boostFactor;
+    [SerializeField, Min(0)]
+    private float
         stoppingThrust,
         stoppingTorque,
         handlingFactor;
@@ -24,9 +35,6 @@ public class Ship : MonoBehaviour
 
     // [SerializeField, Range(-1, 1)]
     // private float handlingCutoff;
-
-    [SerializeField]
-    private ParticleSystem explosionPrefab;
 
     private float
         currentThrust,

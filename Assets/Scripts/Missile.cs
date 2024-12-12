@@ -99,7 +99,7 @@ public class Missile : MonoBehaviour, IBeamable
             float distance = (hull.transform.position - transform.position).magnitude;
             if (distance <= explosionRadius) {
                 float dropOff = 1 - (distance / explosionRadius);
-                hull.TakeDamage(explosionPower * dropOff);
+                hull.TakeDamage(explosionPower * dropOff, gameObject.layer);
             }
         }
 
