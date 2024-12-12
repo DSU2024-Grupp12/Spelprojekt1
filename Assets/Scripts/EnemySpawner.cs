@@ -1,72 +1,121 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
     private Camera mainCamera;
 
     [SerializeField]
-    private EnemyPilot[] enemies;
-
-    [SerializeField]
     private Transform defaultTarget;
 
     [SerializeField]
-    private float spawnRate;
-    private float nextSpawnTime;
+    private EnemyWave[] waves;
 
     [SerializeField]
-    private int maximumEnemies;
+    private float timeBetweenWaves;
 
-    [SerializeField]
-    private Rect bounds;
+    private float startOfScene;
 
-    private bool boundsTooSmall;
+    private float timeUntilNextWave;
+    private bool inWave;
+
+    private float halfDiagonal = 15f;
+    private Unity.Mathematics.Random random;
+
+    public EnemySpawnEvents enemySpawnEvents;
 
     // Start is called before the first frame update
     void Start() {
         mainCamera = Camera.main;
-        nextSpawnTime = Time.time + spawnRate;
+        timeUntilNextWave = Time.time + timeBetweenWaves;
+        startOfScene = Time.time;
+
+        random = new((uint)Random.Range(0, int.MaxValue));
+
+        if (mainCamera) {
+            float camHalfHeight = mainCamera.orthographicSize;
+            float camHalfWidth = camHalfHeight * mainCamera.aspect;
+            halfDiagonal = Mathf.Sqrt(Mathf.Pow(camHalfHeight, 2) + Mathf.Pow(camHalfWidth, 2));
+        }
     }
 
     // Update is called once per frame
     void Update() {
-        float cameraArea = (mainCamera.orthographicSize * 2) * (mainCamera.orthographicSize * 2 * mainCamera.aspect);
-        float spawnBoundsArea = bounds.height * bounds.width;
-        if (spawnBoundsArea / cameraArea < 1f) {
-            Debug.LogError("Spawn bounds smaller than camera, no enemies will spawn");
-        }
-        else if (spawnBoundsArea / cameraArea < 2f) {
-            Debug.LogWarning("Enemy spawn bounds too small");
-        }
-
-        if (Time.time >= nextSpawnTime) {
-            nextSpawnTime = Time.time + spawnRate;
-            SpawnEnemy();
+        if (!inWave && Time.time >= timeUntilNextWave) {
+            StartCoroutine(ProcessWave());
         }
     }
 
-    public void SpawnEnemy() {
-        if (boundsTooSmall) return;
-        if (FindObjectsOfType<EnemyPilot>().Length >= maximumEnemies) return;
+    public IEnumerator ProcessWave() {
+        inWave = true;
 
-        bool validPosition = false;
-        Vector2 position = new Vector2();
-        for (int i = 0; !validPosition; i++) {
-            if (i > 10) break;
+        EnemyWave[] validWaves = waves.Where(w => w.dontSpawnUntilTimeHasPassed < Time.time - startOfScene).ToArray();
+        if (validWaves.Length > 0) {
+            enemySpawnEvents.OnWaveStarted?.Invoke();
 
-            position = new Vector2(
-                bounds.x + Random.Range(0f, bounds.width),
-                bounds.y - Random.Range(0f, bounds.height)
-            );
-            Vector2 screenPoint = mainCamera.WorldToScreenPoint(position);
-            validPosition = (screenPoint.x < 0 || screenPoint.x > mainCamera.pixelWidth)
-                            &&
-                            (screenPoint.y < 0 || screenPoint.y > mainCamera.pixelHeight);
+            EnemyWave randomWave = validWaves[Random.Range(0, validWaves.Length)];
+            foreach (EnemyGroup group in randomWave.enemyGroups) {
+                for (int i = 0; i < group.number; i++) {
+                    while (FindObjectsOfType<EnemyPilot>().Length >= randomWave.maxEnemiesAtOnce) {
+                        yield return null;
+                    }
+                    SpawnEnemy(group.enemyType);
+                    yield return new WaitForSeconds(1f);
+                }
+            }
+
+            while (FindObjectsOfType<EnemyPilot>().Length > 0) {
+                yield return null;
+            }
+            timeUntilNextWave = Time.time + randomWave.recoveryTime + timeBetweenWaves;
+
+            enemySpawnEvents.OnWaveFinished?.Invoke();
         }
-        int randomIndex = Random.Range(0, enemies.Length);
-        if (validPosition) {
-            EnemyPilot enemyPilot = Instantiate(enemies[randomIndex], position, Quaternion.identity);
-            enemyPilot.target = defaultTarget;
+        else {
+            timeUntilNextWave = Time.time + timeBetweenWaves;
         }
+        inWave = false;
     }
+
+    public void SpawnEnemy(EnemyPilot enemyType) {
+        Vector2 position = random.GetNextPolarCoordinate(
+            halfDiagonal + 10,
+            halfDiagonal + 30,
+            mainCamera.transform.position
+        );
+
+        EnemyPilot enemyPilot = Instantiate(enemyType, position, Quaternion.identity);
+        enemyPilot.target = defaultTarget;
+    }
+}
+
+[System.Serializable]
+public class EnemyWave
+{
+    public float dontSpawnUntilTimeHasPassed;
+    public int maxEnemiesAtOnce;
+    [Tooltip(
+        "The amount of time that will pass after this wave is over before the default wave timer starts counting down. " +
+        "That is, the total time until the next wave is equal to recovery time + time between waves")]
+    public float recoveryTime;
+    public EnemyGroup[] enemyGroups;
+}
+
+[System.Serializable]
+public class EnemyGroup
+{
+    public EnemyPilot enemyType;
+    [Min(0)]
+    public int number;
+}
+
+[System.Serializable]
+public class EnemySpawnEvents
+{
+    public UnityEvent
+        OnWaveStarted,
+        OnWaveFinished;
 }

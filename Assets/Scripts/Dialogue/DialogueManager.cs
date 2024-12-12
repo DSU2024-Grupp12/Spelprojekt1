@@ -27,11 +27,9 @@ public class DialogueManager : MonoBehaviour
 
     private void Start() {
         queuedDialogues = new SortedList<int, Dialogue>();
-        Debug.Log(queuedDialogues.Count);
     }
 
     private void Update() {
-        Debug.Log(queuedDialogues.Count);
         if (queuedDialogues.Count > 0 && !processingDialogue) {
             StartCoroutine(ProcessDialogueQueue());
         }

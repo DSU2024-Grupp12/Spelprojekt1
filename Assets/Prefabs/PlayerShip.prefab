@@ -5158,7 +5158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9ddb8d429113c479c13f81dca3ea87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultEquippedTool: {fileID: 0}
+  defaultPrimaryTool: {fileID: 0}
   toolMount: {fileID: 7209564089554924315}
 --- !u!114 &1132009141852493737
 MonoBehaviour:
@@ -5205,49 +5205,37 @@ MonoBehaviour:
           m_StringArgument: 5:main_menu
           m_BoolArgument: 0
         m_CallState: 2
-  OnTakeDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7085579952060942491}
-        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Liten Krock
-          m_BoolArgument: 0
-        m_CallState: 2
-  significantDamageThreshold: 0.2
-  OnTakeDamageSignificant:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7085579952060942491}
-        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
-        m_MethodName: PlayOneShot
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Stor Krock
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3315100848030350885}
-        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
-        m_MethodName: QueueDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 8f6fca223b5a44048b3a2b90a2c1e968, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Stor Krock
-          m_BoolArgument: 0
-        m_CallState: 2
+  takeDamageEvents:
+    significantDamageThreshold: 0.2
+    lowHullStrengthThreshold: 0.5
+    lowHullStrengthReached: 0
+    enemyLayers:
+      serializedVersion: 2
+      m_Bits: 768
+    debrisLayers:
+      serializedVersion: 2
+      m_Bits: 128
+    OnTakeDamage:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageEnemy:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageDebris:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageSignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageEnemySignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageDebrisSignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnReachLowHullStrength:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &3315100848030350885
 MonoBehaviour:
   m_ObjectHideFlags: 0
