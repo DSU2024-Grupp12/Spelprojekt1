@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
@@ -63,5 +65,29 @@ public static class MathExtensions
         double randNormal =
             _mean + stdDev * randStdNormal; //random normal(mean,stdDev^2)
         return (float)randNormal;
+    }
+
+    public static List<(float, T)> GenerateProbabiltyTable<T>(Dictionary<T, float> dict) {
+        float totalWeight = dict.Select(e => e.Value).Sum();
+        List<(float threshold, T)> probablityTable = new();
+        foreach (KeyValuePair<T, float> pair in dict) {
+            float probablity = pair.Value / totalWeight;
+            if (probablityTable.Count == 0) {
+                probablityTable.Add((probablity, pair.Key));
+            }
+            else {
+                float lastThreshold = probablityTable.Last().threshold;
+                probablityTable.Add((lastThreshold + probablity, pair.Key));
+            }
+        }
+        return probablityTable;
+    }
+
+    public static T GetRandomEntryByWeight<T>(List<(float threshold, T value)> table, ref Random random) {
+        float r = random.NextFloat();
+        for (int i = 0; i < table.Count; i++) {
+            if (r <= table[i].threshold) return table[i].value;
+        }
+        return table.Last().value;
     }
 }

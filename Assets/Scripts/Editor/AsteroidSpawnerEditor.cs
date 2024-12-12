@@ -16,11 +16,6 @@ public class AsteroidSpawnerEditor : Editor
     private SerializedProperty seed;
     private SerializedProperty numberOfAsteroids;
     private SerializedProperty radius;
-    private SerializedProperty dist;
-    private SerializedProperty mean;
-    private SerializedProperty standardDevitation;
-    private SerializedProperty minMass;
-    private SerializedProperty maxMass;
 
     private void OnEnable() {
         spawner = target as AsteriodSpawner;
@@ -34,11 +29,6 @@ public class AsteroidSpawnerEditor : Editor
         seed = serializedObject.FindProperty("seed");
         numberOfAsteroids = serializedObject.FindProperty("numberOfAsteroids");
         radius = serializedObject.FindProperty("radius");
-        dist = serializedObject.FindProperty("distributionFunction");
-        mean = serializedObject.FindProperty("mean");
-        standardDevitation = serializedObject.FindProperty("standardDeviation");
-        minMass = serializedObject.FindProperty("minMass");
-        maxMass = serializedObject.FindProperty("maxMass");
     }
 
     public override void OnInspectorGUI() {
@@ -60,16 +50,6 @@ public class AsteroidSpawnerEditor : Editor
         EditorGUILayout.PropertyField(radius);
 
         EditorGUILayout.PropertyField(seed);
-        EditorGUILayout.PropertyField(dist);
-
-        AsteriodSpawner.MassDistribution distribution = (AsteriodSpawner.MassDistribution)dist.enumValueIndex;
-
-        EditorGUILayout.PropertyField(minMass);
-        EditorGUILayout.PropertyField(maxMass);
-        if (distribution == AsteriodSpawner.MassDistribution.Normal) {
-            EditorGUILayout.PropertyField(mean);
-            EditorGUILayout.PropertyField(standardDevitation);
-        }
 
         if (serializedObject.ApplyModifiedProperties()) {
             spawner!.CreateAsteroids();

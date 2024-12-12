@@ -50,8 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60b0670df5917f4abcf898f07b5a7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 392244509131473519, guid: 5b179a84b0756494bb489c9713ed77f1, type: 3}
-  hullStrengthFactor: 10
+  info: {fileID: 0}
 --- !u!114 &755096606577708467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 400
-  threshold: 100
+  threshold: 0
   dampener: 0
   collideWith:
     serializedVersion: 2
