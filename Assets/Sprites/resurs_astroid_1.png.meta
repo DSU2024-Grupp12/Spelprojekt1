@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 68fa2409e77577d4d8ef71ac0bbb0597
+guid: 87dea927808f12d48ab27ac2f600b294
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: nebula moln 4.0_0
+      name: resurs_astroid_1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 492
-        height: 423
+        width: 405
+        height: 371
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba654a55e2a68ea4d9ae84519b5111c1
-      internalID: -1340682903
+      spriteID: bcd0374114533ac42a762b762a4f7073
+      internalID: -686298586
       vertices: []
       indices: 
       edges: []
@@ -154,8 +154,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      nebula moln 4.0_0: -1340682903
-      nebula moln 4.0_1: -377214012
+      resurs_astroid_1_0: -686298586
+      resurs_astroid_1_1: 534749125
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
