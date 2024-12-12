@@ -42,7 +42,10 @@ public class Hull : MonoBehaviour
 
         endOfInvincibility = Time.time + invincibilityWindow;
 
-        float pseudoKineticEnergy = 0.5f * other.otherRigidbody.mass * other.relativeVelocity.magnitude;
+        // other.otherRigidbody returns the wrong rigidBody for some reason so we manually get it instead
+        Rigidbody2D otherBody = other.gameObject.GetComponent<Rigidbody2D>();
+
+        float pseudoKineticEnergy = 0.5f * otherBody.mass * other.relativeVelocity.magnitude;
         TakeDamage(pseudoKineticEnergy, other.gameObject.layer);
     }
 
