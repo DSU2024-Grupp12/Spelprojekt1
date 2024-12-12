@@ -1,8 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 public class AsteriodSpawner : MonoBehaviour
 {
+    [SerializeField]
+    private AsteroidVariant[] variants;
+    private Dictionary<AsteroidVariant, float> weightTable;
+    private List<(float, AsteroidVariant)> probabilityTable;
+
     [SerializeField, HideInInspector]
     private uint numberOfClusters;
 
@@ -16,22 +22,13 @@ public class AsteriodSpawner : MonoBehaviour
         minClusterChildren,
         maxClusterChildren;
 
-    [SerializeField]
-    private Asteroid asteroidPrefab;
-
     [SerializeField, HideInInspector]
     private uint seed, numberOfAsteroids;
 
     [SerializeField, HideInInspector]
     public float radius;
 
-    [SerializeField, HideInInspector]
-    private MassDistribution distributionFunction;
-
-    [SerializeField, HideInInspector, Min(0)]
-    private float mean, standardDeviation, minMass, maxMass;
-
-    void Start() {
+    void Awake() {
         CreateAsteroids();
     }
 
@@ -74,37 +71,26 @@ public class AsteriodSpawner : MonoBehaviour
     }
 
     private void CreateAsteroid(ref Random random, Vector3 position) {
-        Asteroid asteroid = Instantiate(asteroidPrefab, transform, true);
-        asteroid.transform.position = position;
+        GenerateTables();
 
-        // randomize rotation
-        asteroid.transform.eulerAngles = new Vector3(0, 0, random.NextFloat() * 360);
+        AsteroidVariant variant = MathExtensions.GetRandomEntryByWeight(probabilityTable, ref random);
+        Asteroid asteroid = variant.asteroidInfo.CreateAsteroid(position, ref random);
+        asteroid.transform.SetParent(transform);
+    }
 
-        // randomize mass
-        Rigidbody2D body = asteroid.GetComponent<Rigidbody2D>();
-
-        switch (distributionFunction) {
-            case MassDistribution.Linear:
-                body.mass = minMass + random.NextFloat() * (maxMass - minMass);
-                break;
-            case MassDistribution.Normal:
-                body.mass = random.NextGaussian(mean, standardDeviation);
-                body.mass = Mathf.Clamp(body.mass, minMass, maxMass);
-                break;
+    private void GenerateTables() {
+        weightTable = new();
+        probabilityTable = new();
+        foreach (AsteroidVariant variant in variants) {
+            weightTable.Add(variant, variant.weight);
         }
-
-        // adjust scale according to mass
-        float massAtScale1 = asteroidPrefab.GetComponent<Rigidbody2D>().mass;
-        float cubeSquareScale = Mathf.Sqrt(body.mass / massAtScale1);
-        asteroid.transform.localScale = new Vector3(cubeSquareScale, cubeSquareScale, 1);
-
-        // randomize angular velocity
-        body.angularVelocity = -10 + random.NextFloat() * 20f;
+        probabilityTable = MathExtensions.GenerateProbabiltyTable(weightTable);
     }
+}
 
-    public enum MassDistribution
-    {
-        Linear,
-        Normal
-    }
+[System.Serializable]
+public class AsteroidVariant
+{
+    public AsteroidInfo asteroidInfo;
+    public float weight;
 }

@@ -6,4 +6,5 @@ public abstract class Tool : MonoBehaviour
     protected Rigidbody2D shipBody => GetComponentInParent<Rigidbody2D>();
 
     public abstract void ActivateTool();
+    public virtual void Cancel() { }
 }

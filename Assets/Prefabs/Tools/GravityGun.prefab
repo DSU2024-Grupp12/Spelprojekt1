@@ -9707,7 +9707,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -14704,7 +14704,7 @@ MonoBehaviour:
   massLimit: 80
   range: 4
   width: 0.5
-  snappingSpeed: 0.05
+  snappingSpeed: 0.07
   firingVelocity: 8
   beamableLayers:
     serializedVersion: 2

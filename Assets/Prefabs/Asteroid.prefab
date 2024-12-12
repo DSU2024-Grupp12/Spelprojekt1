@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 566960618467579412}
   - component: {fileID: 8825375572312753335}
+  - component: {fileID: 755096606577708467}
+  - component: {fileID: 5806247055375016572}
   - component: {fileID: 813445013602032997}
   - component: {fileID: 3647210561910697334}
   - component: {fileID: 5803826976934392707}
@@ -48,6 +50,105 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60b0670df5917f4abcf898f07b5a7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info: {fileID: 0}
+--- !u!114 &755096606577708467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6391573239209337544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d4f72383220da41b3e7fd31e564c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 400
+  threshold: 0
+  dampener: 0
+  collideWith:
+    serializedVersion: 2
+    m_Bits: 960
+  HullDestroyed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5806247055375016572}
+        m_TargetAssemblyTypeName: ResourceContainer, Assembly-CSharp
+        m_MethodName: BreakContainer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8825375572312753335}
+        m_TargetAssemblyTypeName: Asteroid, Assembly-CSharp
+        m_MethodName: Explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  takeDamageEvents:
+    significantDamageThreshold: 0
+    lowHullStrengthThreshold: 0
+    lowHullStrengthReached: 0
+    enemyLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    debrisLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    OnTakeDamage:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageEnemy:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageDebris:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageSignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageEnemySignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageDebrisSignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnReachLowHullStrength:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &5806247055375016572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6391573239209337544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a4fbc1cd2254342979965342a4074e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resources:
+  - resource: {fileID: 1916773367551793732, guid: ae7fd41e39231fa4ab8f8cf3d5d34834, type: 3}
+    minDroppedPer10UnitMass: 0.2
+    maxDroppedPer10UnitMass: 0.5
+    minValuePer10UnitMass: 0.2
+    maxValuePer10UnitMass: 0.5
+    minNumber: 0
+    maxNumber: 3
+    minValue: 1
+    maxValue: 3
 --- !u!58 &813445013602032997
 CircleCollider2D:
   m_ObjectHideFlags: 0
