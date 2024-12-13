@@ -47,7 +47,7 @@ MonoBehaviour:
       sentences:
       - This ship is a disaster.
     - speaker: Ship Computer
-      portrait: {fileID: 0}
+      portrait: {fileID: 21300000, guid: dd2f5840f48601e4d95d69637117211a, type: 3}
       sentences:
       - Well, it's not in the best condition. And your crashing doesn't help.
   - lines:
@@ -61,7 +61,7 @@ MonoBehaviour:
       sentences:
       - 'Caution: That''s an asteroid.'
     - speaker: Arlo Lynx
-      portrait: {fileID: 0}
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - Wow, thanks for the astute observation. Never would've guessed.
   - lines:
