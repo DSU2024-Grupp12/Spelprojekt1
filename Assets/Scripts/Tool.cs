@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Tool : MonoBehaviour
 {
     protected Transform mount => transform.parent.transform;
     protected Rigidbody2D shipBody => GetComponentInParent<Rigidbody2D>();
 
-    public abstract void ActivateTool();
+    public abstract void ActivateTool(InputAction.CallbackContext context);
     public virtual void Cancel() { }
 }
