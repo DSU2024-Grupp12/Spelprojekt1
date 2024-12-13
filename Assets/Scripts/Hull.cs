@@ -22,6 +22,7 @@ public class Hull : MonoBehaviour
     private float dampener;
 
     public LayerMask collideWith;
+    public LayerModifier[] layerModifiers;
     public UnityEvent HullDestroyed;
     public TakeDamageEvents takeDamageEvents;
 
@@ -50,9 +51,20 @@ public class Hull : MonoBehaviour
     }
 
     public void TakeDamage(float damage, int incurringLayer = 0) {
-        float modifiedDamage = Mathf.Max((damage - threshold) * (1 - dampener), 0);
+        Debug.Log($"{gameObject.name}: {incurringLayer}");
 
-        TakeRawDamage(modifiedDamage, incurringLayer);
+        float layerModifier = 1;
+        float layerMax = float.MaxValue;
+        foreach (LayerModifier modifier in layerModifiers) {
+            if (incurringLayer == LayerMask.NameToLayer(modifier.layer)) {
+                layerModifier = modifier.modifier;
+                layerMax = modifier.max;
+                break;
+            }
+        }
+        float modifiedDamage = Mathf.Clamp((damage - threshold) * (1 - dampener) * layerModifier, 0, layerMax);
+
+        TakeRawDamage(modifiedDamage);
     }
 
     public void TakeRawDamage(float rawDamage, int incurringLayer = 0) {
@@ -102,6 +114,14 @@ public class Hull : MonoBehaviour
             currentStrength = newStrength;
         }
     }
+}
+
+[System.Serializable]
+public struct LayerModifier
+{
+    public string layer;
+    public float modifier;
+    public float max;
 }
 
 [System.Serializable]

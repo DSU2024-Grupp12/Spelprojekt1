@@ -26,7 +26,6 @@ public class Drill : Tool
     }
 
     private void Update() {
-        Debug.Log(currentlyDrilling.Count);
         if (currentlyDrilling.Count > 0) {
             leftParticles.Play();
             rightParticles.Play();
@@ -48,7 +47,6 @@ public class Drill : Tool
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        Debug.Log(other);
         if (drillLayers.Contains(other.gameObject.layer)) {
             Hull drillingHull = other.gameObject.GetComponent<Hull>();
             if (drillingHull) {
