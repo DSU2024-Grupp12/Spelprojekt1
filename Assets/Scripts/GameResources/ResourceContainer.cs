@@ -8,7 +8,6 @@ public class ResourceContainer : MonoBehaviour
     public void BreakContainer() {
         float tenthOfMass = GetComponent<Rigidbody2D>().mass / 10f;
         foreach (ContainedResource resource in resources) {
-            Debug.Log(resource.minNumber);
             // get random number of dropped units based on mass but no smaller than minNumber and no larger than maxNumber
             int low = (int)Mathf.Floor(resource.minDroppedPer10UnitMass * tenthOfMass);
             int high = (int)Mathf.Ceil(resource.maxDroppedPer10UnitMass * tenthOfMass);

@@ -1,15 +1,19 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Hull : MonoBehaviour
+public class Hull : MonoBehaviour, IUIValueProvider<float>
 {
+    [SerializeField]
+    private Shield shield;
+
     [SerializeField, Tooltip("The total amount of kinetic energy the hull can absorb before breaking.")]
     private float strength;
 
     public float fullStrength => strength;
 
-    public float currentStrength { get; private set; }
+    private float currentStrength;
     public bool hullDestroyed { get; private set; }
 
     private float invincibilityWindow = 0.2f;
@@ -51,8 +55,6 @@ public class Hull : MonoBehaviour
     }
 
     public void TakeDamage(float damage, int incurringLayer = 0) {
-        Debug.Log($"{gameObject.name}: {incurringLayer}");
-
         float layerModifier = 1;
         float layerMax = float.MaxValue;
         foreach (LayerModifier modifier in layerModifiers) {
@@ -64,11 +66,18 @@ public class Hull : MonoBehaviour
         }
         float modifiedDamage = Mathf.Clamp((damage - threshold) * (1 - dampener) * layerModifier, 0, layerMax);
 
-        TakeRawDamage(modifiedDamage);
+        if (shield) {
+            if (shield.AbsorbDamage(ref modifiedDamage)) {
+                takeDamageEvents.OnTakeDamageShield?.Invoke();
+            }
+        }
+
+        TakeRawDamage(modifiedDamage, incurringLayer);
     }
 
     public void TakeRawDamage(float rawDamage, int incurringLayer = 0) {
         if (rawDamage <= 0) return;
+
         currentStrength -= rawDamage;
 
         if (currentStrength <= 0 && !hullDestroyed) {
@@ -114,12 +123,23 @@ public class Hull : MonoBehaviour
             currentStrength = newStrength;
         }
     }
+
+    public float BaseValue() {
+        return strength;
+    }
+    public float CurrentValue() {
+        return currentStrength;
+    }
+    public string GetID() {
+        return "hull";
+    }
 }
 
 [System.Serializable]
 public struct LayerModifier
 {
     public string layer;
+    [Min(0)]
     public float modifier;
     public float max;
 }
@@ -143,5 +163,6 @@ public class TakeDamageEvents
         OnTakeDamageSignificant,
         OnTakeDamageEnemySignificant,
         OnTakeDamageDebrisSignificant,
+        OnTakeDamageShield,
         OnReachLowHullStrength;
 }

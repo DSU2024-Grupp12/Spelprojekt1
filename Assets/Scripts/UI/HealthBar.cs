@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    public Hull hull;
+    [SerializeField]
+    private SerializedInterface<IUIValueProvider<float>> providerObject;
+    private IUIValueProvider<float> provider;
 
-    private float fullHealth;
     private RectTransform rect;
 
     private void Start() {
-        fullHealth = hull.fullStrength;
+        provider = providerObject.extract;
         rect = GetComponent<RectTransform>();
     }
 
     private void Update() {
         Vector3 scale = rect.localScale;
-        if (hull) {
-            scale.x = Mathf.Max(hull.currentStrength / fullHealth, 0);
+        if (providerObject != null && provider != null) {
+            scale.x = Mathf.Max(provider.CurrentValue() / provider.BaseValue(), 0);
         }
         else {
             scale.x = 0f;

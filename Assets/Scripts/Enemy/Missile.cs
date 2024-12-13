@@ -96,10 +96,10 @@ public class Missile : MonoBehaviour, IBeamable
     public void Explode() {
         // find all hulls within explosion radius
         foreach (Hull hull in FindObjectsOfType<Hull>()) {
-            float distance = (hull.transform.position - transform.position).magnitude;
+            float distance = ((Vector2)hull.transform.position - (Vector2)transform.position).magnitude;
             if (distance <= explosionRadius) {
-                float dropOff = 1 - (distance / explosionRadius);
-                hull.TakeDamage(explosionPower * dropOff, gameObject.layer);
+                // Debug.Log(explosionPower);
+                hull.TakeDamage(explosionPower, gameObject.layer);
             }
         }
 
@@ -111,6 +111,7 @@ public class Missile : MonoBehaviour, IBeamable
         target = null;
         return true;
     }
+
     /// <inheritdoc />
     public void Dropped() { }
 }
