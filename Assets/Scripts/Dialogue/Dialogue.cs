@@ -31,6 +31,7 @@ public struct Conversation
 public struct Line
 {
     public string speaker;
+    public Sprite portrait;
 
     [TextArea(1, 10)]
     public string[] sentences;

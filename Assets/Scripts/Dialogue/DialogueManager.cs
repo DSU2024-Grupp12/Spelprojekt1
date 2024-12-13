@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField]
     private TMP_Text nameField, dialogueField;
+    [SerializeField]
+    private Image portrait;
 
     [SerializeField]
     private Animator dialogueBoxAnimator;
@@ -75,6 +78,7 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator ProcessLine(Line line) {
         nameField.text = line.speaker;
+        portrait.sprite = line.portrait;
 
         Queue<string> sentences = new();
         foreach (string sentence in line.sentences) {

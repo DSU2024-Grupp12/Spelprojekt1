@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GravityGun : Tool
 {
@@ -77,7 +78,9 @@ public class GravityGun : Tool
         }
     }
 
-    public override void ActivateTool() {
+    public override void ActivateTool(InputAction.CallbackContext context) {
+        if (!context.performed) return;
+
         if (!pickedUpBody) {
             if (ValidBodyInRange(out Rigidbody2D toPickUp)) {
                 PickUp(toPickUp);
