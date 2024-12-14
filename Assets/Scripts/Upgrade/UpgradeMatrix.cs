@@ -19,7 +19,7 @@ public class UpgradeMatrix : MonoBehaviour
             .Where(m => m.attributeID == id)
             .Select(m => m.UpgradeFunction()).ToArray();
 
-        List<float> upgradeValues = new();
+        List<float> upgradeValues = new() { baseValue };
         foreach (Func<float,float> upgrade in upgradeFunctions)
         {
             upgradeValues.Add(upgrade(baseValue));

@@ -42,7 +42,7 @@ public class Ship : MonoBehaviour
     private float
         currentThrust,
         currentTorque;
-    private float boostedForwardThrust => boosting && !stopping ? forwardThrust.value * boostFactor : forwardThrust.value;
+    private float boostedForwardThrust => boosting && !stopping ? forwardThrust * boostFactor : forwardThrust;
 
     [HideInInspector]
     public bool
@@ -98,8 +98,6 @@ public class Ship : MonoBehaviour
         currentThrust += deaccelerating ? -backwardThrust : 0;
         currentTorque += turningClockwise ? -turningForce : 0;
         currentTorque += turningCounterClockwise ? turningForce : 0;
-
-        Debug.Log(currentThrust);
         
         // adjust angular drag
         if (currentThrust != 0 && currentTorque == 0) body.angularDrag = 1f;

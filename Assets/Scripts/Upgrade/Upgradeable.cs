@@ -22,4 +22,6 @@ public class Upgradeable
         }
         set => baseValue = value;
     }
+
+    public static implicit operator float(Upgradeable u) => u.value;
 }
