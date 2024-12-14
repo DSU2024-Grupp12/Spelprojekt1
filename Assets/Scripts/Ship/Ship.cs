@@ -3,14 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ship : MonoBehaviour
 {
+    private Upgradeable mforwardThrust;
+    
+    
     [SerializeField]
     private ParticleSystem explosionPrefab;
     [SerializeField]
     private Thrusters thrusters;
 
     [Header("Thruster Power")]
-    [SerializeField, Min(0)]
-    private float forwardThrust;
+    [SerializeField/*, Min(0)*/]
+    private Upgradeable forwardThrust;
     [SerializeField, Min(0)]
     private float
         backwardThrust,
@@ -39,7 +42,7 @@ public class Ship : MonoBehaviour
     private float
         currentThrust,
         currentTorque;
-    private float boostedForwardThrust => boosting && !stopping ? forwardThrust * boostFactor : forwardThrust;
+    private float boostedForwardThrust => boosting && !stopping ? forwardThrust.value * boostFactor : forwardThrust.value;
 
     [HideInInspector]
     public bool
@@ -96,6 +99,8 @@ public class Ship : MonoBehaviour
         currentTorque += turningClockwise ? -turningForce : 0;
         currentTorque += turningCounterClockwise ? turningForce : 0;
 
+        Debug.Log(currentThrust);
+        
         // adjust angular drag
         if (currentThrust != 0 && currentTorque == 0) body.angularDrag = 1f;
         else body.angularDrag = 0;

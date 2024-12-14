@@ -1,17 +1,16 @@
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Hull : MonoBehaviour, IUIValueProvider<float>
 {
+    public UpgradeMatrix matrix;
+    
     [SerializeField]
     private Shield shield;
 
     [SerializeField, Tooltip("The total amount of kinetic energy the hull can absorb before breaking.")]
     private float strength;
-
-    public float fullStrength => strength;
 
     private float currentStrength;
     public bool hullDestroyed { get; private set; }
@@ -46,10 +45,10 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
         if (Time.time < endOfInvincibility) return;
 
         endOfInvincibility = Time.time + invincibilityWindow;
-
+        
         // other.otherRigidbody returns the wrong rigidBody for some reason so we manually get it instead
         Rigidbody2D otherBody = other.gameObject.GetComponent<Rigidbody2D>();
-
+        
         float pseudoKineticEnergy = 0.5f * otherBody.mass * other.relativeVelocity.magnitude;
         TakeDamage(pseudoKineticEnergy, other.gameObject.layer);
     }
