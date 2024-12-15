@@ -5004,16 +5004,48 @@ MonoBehaviour:
       thrusters: []
     leftSide:
       thrusters: []
-  forwardThrust: 70
-  backwardThrust: 0
-  sideThrust: 0
-  turningForce: 0
-  maxVelocity: 8
-  maxAngularVelocity: 360
-  boostFactor: 0
+  forwardThrust:
+    baseValue: 70
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  backwardThrust:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  sideThrust:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  turningForce:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  maxVelocity:
+    baseValue: 8
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  maxAngularVelocity:
+    baseValue: 360
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  boostFactor:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   stoppingThrust: 0
   stoppingTorque: 0
-  handlingFactor: 0
+  handlingFactor:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   adjustmentFactor: 1
   accelerating: 0
   deaccelerating: 0

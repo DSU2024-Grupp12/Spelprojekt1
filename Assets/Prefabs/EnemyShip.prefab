@@ -14711,12 +14711,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d4f72383220da41b3e7fd31e564c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  matrix: {fileID: 0}
+  shield: {fileID: 0}
   strength: 500
   threshold: 50
   dampener: 0
   collideWith:
     serializedVersion: 2
     m_Bits: 960
+  layerModifiers: []
   HullDestroyed:
     m_PersistentCalls:
       m_Calls:
@@ -14760,6 +14763,9 @@ MonoBehaviour:
     OnTakeDamageDebrisSignificant:
       m_PersistentCalls:
         m_Calls: []
+    OnTakeDamageShield:
+      m_PersistentCalls:
+        m_Calls: []
     OnReachLowHullStrength:
       m_PersistentCalls:
         m_Calls: []
@@ -14795,16 +14801,48 @@ MonoBehaviour:
       thrusters: []
     leftSide:
       thrusters: []
-  forwardThrust: 900
-  backwardThrust: 300
-  sideThrust: 650
-  turningForce: 650
-  maxVelocity: 3.5
-  maxAngularVelocity: 90
-  boostFactor: 1
+  forwardThrust:
+    baseValue: 900
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  backwardThrust:
+    baseValue: 300
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  sideThrust:
+    baseValue: 650
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  turningForce:
+    baseValue: 650
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  maxVelocity:
+    baseValue: 3.5
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  maxAngularVelocity:
+    baseValue: 90
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  boostFactor:
+    baseValue: 1
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   stoppingThrust: 2000
   stoppingTorque: 500
-  handlingFactor: 0.305
+  handlingFactor:
+    baseValue: 0.3
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   adjustmentFactor: 0.804
   accelerating: 0
   deaccelerating: 0

@@ -3,35 +3,33 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ship : MonoBehaviour
 {
-    private Upgradeable mforwardThrust;
-    
-    
     [SerializeField]
     private ParticleSystem explosionPrefab;
     [SerializeField]
     private Thrusters thrusters;
 
     [Header("Thruster Power")]
-    [SerializeField/*, Min(0)*/]
+    [SerializeField]
     private Upgradeable forwardThrust;
-    [SerializeField, Min(0)]
-    private float
+    [SerializeField]
+    private Upgradeable
         backwardThrust,
         sideThrust,
         turningForce;
 
-    [SerializeField, Min(0), Header("Maximums")]
-    private float maxVelocity;
-    [SerializeField, Min(0)]
-    private float maxAngularVelocity;
+    [SerializeField, Header("Maximums")]
+    private Upgradeable maxVelocity;
+    [SerializeField]
+    private Upgradeable maxAngularVelocity;
 
-    [SerializeField, Min(0), Header("Handling")]
-    private float boostFactor;
+    [SerializeField, Header("Handling")]
+    private Upgradeable boostFactor;
     [SerializeField, Min(0)]
     private float
         stoppingThrust,
-        stoppingTorque,
-        handlingFactor;
+        stoppingTorque;
+    [SerializeField]
+    private Upgradeable handlingFactor;
 
     [SerializeField, Range(0, 1)]
     private float adjustmentFactor;
@@ -98,7 +96,7 @@ public class Ship : MonoBehaviour
         currentThrust += deaccelerating ? -backwardThrust : 0;
         currentTorque += turningClockwise ? -turningForce : 0;
         currentTorque += turningCounterClockwise ? turningForce : 0;
-        
+
         // adjust angular drag
         if (currentThrust != 0 && currentTorque == 0) body.angularDrag = 1f;
         else body.angularDrag = 0;

@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [System.Serializable]
 public class Upgradeable
 {
-    [SerializeField] private float baseValue;
-    [SerializeField] [CanBeNull] private UpgradeMatrix matrix;
-    [FormerlySerializedAs("matrixID")] [SerializeField] private string attributeID;
-    public bool highGood;
+    [SerializeField]
+    private float baseValue;
+    [SerializeField, CanBeNull]
+    private UpgradeMatrix matrix;
+    [SerializeField]
+    private string attributeID;
+    public bool highGood = true;
 
-    public float value
-    {
-        get
-        {
-            if (matrix != null && matrix.Contains(attributeID))
+    public float value {
+        get {
+            if (matrix && matrix.Contains(attributeID)) {
+                Debug.Log("get");
                 return matrix.GetUpgradeValue(attributeID, baseValue, highGood);
+            }
             else return baseValue;
         }
         set => baseValue = value;
