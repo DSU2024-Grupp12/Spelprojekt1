@@ -14663,6 +14663,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6849285788494668696}
+  - component: {fileID: 6251247000210234420}
   - component: {fileID: 6434183182749257291}
   m_Layer: 6
   m_Name: GravityGun
@@ -14688,6 +14689,21 @@ Transform:
   - {fileID: 4402330192936307441}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6251247000210234420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800322487651078874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157c28e198519a845a27e8fca32c130e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matrixID: gravityGunMatrix
+  displayName: Gravity Gun
+  modules: []
 --- !u!114 &6434183182749257291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14701,11 +14717,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdDistance: 1
-  massLimit: 80
-  range: 4
   width: 0.5
   snappingSpeed: 0.07
-  firingVelocity: 8
+  massLimit:
+    baseValue: 80
+    matrix: {fileID: 6251247000210234420}
+    attributeID: gravityGunMassLimit
+    highGood: 1
+  range:
+    baseValue: 4
+    matrix: {fileID: 6251247000210234420}
+    attributeID: gravityGunRange
+    highGood: 1
+  firingVelocity:
+    baseValue: 8
+    matrix: {fileID: 6251247000210234420}
+    attributeID: gravityGunFiringVelocity
+    highGood: 1
   beamableLayers:
     serializedVersion: 2
     m_Bits: 640

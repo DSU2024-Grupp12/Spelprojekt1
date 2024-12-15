@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6609302797853731232}
+  - component: {fileID: 1949577596423374204}
   - component: {fileID: 4809108308206089944}
   - component: {fileID: 5839776107365753541}
   - component: {fileID: 7188825352501435723}
@@ -37,6 +38,20 @@ Transform:
   - {fileID: 151454903967398040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1949577596423374204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583580925130933815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157c28e198519a845a27e8fca32c130e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matrixID: drillMatrix
+  displayName: Drill
 --- !u!114 &4809108308206089944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,8 +70,16 @@ MonoBehaviour:
   drillLayers:
     serializedVersion: 2
     m_Bits: 384
-  damageInterval: 0.5
-  damage: 100
+  damageInterval:
+    baseValue: 0.5
+    matrix: {fileID: 1949577596423374204}
+    attributeID: drillDamageInterval
+    highGood: 0
+  damage:
+    baseValue: 100
+    matrix: {fileID: 1949577596423374204}
+    attributeID: drillDamage
+    highGood: 1
 --- !u!95 &5839776107365753541
 Animator:
   serializedVersion: 5

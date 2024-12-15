@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class UpgradeMatrix : MonoBehaviour
 {
-    [SerializeField]
+    public string matrixID;
+    public string displayName;
+
     private List<UpgradeModule> modules;
     private List<UpgradeModule> modulesLastFrame;
 
@@ -15,6 +17,7 @@ public class UpgradeMatrix : MonoBehaviour
     private Dictionary<string, (float b, float u)> upgradeDict;
 
     private void Start() {
+        modules = new();
         containsDict = new();
         upgradeDict = new();
 
@@ -45,6 +48,7 @@ public class UpgradeMatrix : MonoBehaviour
     }
 
     public bool Contains(string id) {
+        if (containsDict == null) return false;
         if (containsDict.ContainsKey(id) && !modulesUpdatedSinceLastFrame) return containsDict[id];
         else {
             bool contains = modules.Select(m => m?.attributeID).Any(aid => aid == id);
@@ -88,5 +92,21 @@ public class UpgradeMatrix : MonoBehaviour
             upgradeDict[id] = (baseValue, ret);
         }
         return ret;
+    }
+
+    public bool AttachModule(UpgradeModule module) {
+        if (!modules.Contains(module)) {
+            modules.Add(module);
+            return true;
+        }
+        return false;
+    }
+
+    public bool RemoveModule(UpgradeModule module) {
+        if (modules.Contains(module)) {
+            modules.Remove(module);
+            return true;
+        }
+        return false;
     }
 }

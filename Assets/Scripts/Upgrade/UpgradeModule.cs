@@ -6,6 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewUpgradeModuleFloat", menuName = "Upgrade Module")]
 public class UpgradeModule : ScriptableObject
 {
+    [Tooltip("The matrix id of the upgrade matrix that this module is designed for")]
+    public string matrixID;
+    [Tooltip("The attribute id of the attribute this module will modify")]
     public string attributeID;
 
     public ModuleTypes moduleType;

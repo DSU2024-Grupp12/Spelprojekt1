@@ -15,7 +15,6 @@ public class Upgradeable
     public float value {
         get {
             if (matrix && matrix.Contains(attributeID)) {
-                Debug.Log("get");
                 return matrix.GetUpgradeValue(attributeID, baseValue, highGood);
             }
             else return baseValue;

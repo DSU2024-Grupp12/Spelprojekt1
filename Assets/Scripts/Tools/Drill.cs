@@ -11,8 +11,8 @@ public class Drill : Tool
 
     public LayerMask drillLayers;
 
-    [SerializeField]
-    private float damageInterval, damage;
+    [SerializeField, Tooltip("(Min 0)")]
+    private Upgradeable damageInterval, damage;
 
     private Dictionary<Collider2D, float> currentlyDrilling;
 

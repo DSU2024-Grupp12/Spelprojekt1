@@ -4,13 +4,11 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Hull : MonoBehaviour, IUIValueProvider<float>
 {
-    public UpgradeMatrix matrix;
-    
     [SerializeField]
     private Shield shield;
 
-    [SerializeField, Tooltip("The total amount of kinetic energy the hull can absorb before breaking.")]
-    private float strength;
+    [SerializeField, Tooltip("The total amount of kinetic energy the hull can absorb before breaking.\n(Min 0)")]
+    private Upgradeable strength;
 
     private float currentStrength;
     public bool hullDestroyed { get; private set; }
@@ -18,11 +16,11 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
     private float invincibilityWindow = 0.2f;
     private float endOfInvincibility;
 
-    [SerializeField, Tooltip("The minimum amount of kinetic energy required before any damage is dealt.")]
-    private float threshold;
+    [SerializeField, Tooltip("The minimum amount of kinetic energy required before any damage is dealt.\n(Min 0)")]
+    private Upgradeable threshold;
 
-    [SerializeField, Range(0, 1), Tooltip("The coefficient with which the damage taken is multiplied.")]
-    private float dampener;
+    [SerializeField, Tooltip("The coefficient with which the damage taken is multiplied.\n(Min 0, Max 1)")]
+    private Upgradeable dampener;
 
     public LayerMask collideWith;
     public LayerModifier[] layerModifiers;
@@ -45,10 +43,10 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
         if (Time.time < endOfInvincibility) return;
 
         endOfInvincibility = Time.time + invincibilityWindow;
-        
+
         // other.otherRigidbody returns the wrong rigidBody for some reason so we manually get it instead
         Rigidbody2D otherBody = other.gameObject.GetComponent<Rigidbody2D>();
-        
+
         float pseudoKineticEnergy = 0.5f * otherBody.mass * other.relativeVelocity.magnitude;
         TakeDamage(pseudoKineticEnergy, other.gameObject.layer);
     }
@@ -118,8 +116,9 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
 
     public void SetHullStrength(float newStrength) {
         if (!hullInitialized) {
-            strength = newStrength;
-            currentStrength = newStrength;
+            float diff = newStrength - strength;
+            strength.value = newStrength;
+            currentStrength += diff;
         }
     }
 

@@ -7,10 +7,12 @@ public class GravityGun : Tool
 {
     public float
         holdDistance,
+        width,
+        snappingSpeed;
+
+    public Upgradeable
         massLimit,
         range,
-        width,
-        snappingSpeed,
         firingVelocity;
 
     public LayerMask beamableLayers;

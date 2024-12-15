@@ -9,26 +9,28 @@ public class Ship : MonoBehaviour
     private Thrusters thrusters;
 
     [Header("Thruster Power")]
-    [SerializeField]
+    [SerializeField, Tooltip("(Min 0)")]
     private Upgradeable forwardThrust;
-    [SerializeField]
+    [SerializeField, Tooltip("(Min 0)")]
     private Upgradeable
         backwardThrust,
         sideThrust,
         turningForce;
 
-    [SerializeField, Header("Maximums")]
+    [Header("Maximums")]
+    [SerializeField, Tooltip("(Min 0)")]
     private Upgradeable maxVelocity;
-    [SerializeField]
+    [SerializeField, Tooltip("(Min 0)")]
     private Upgradeable maxAngularVelocity;
 
-    [SerializeField, Header("Handling")]
+    [Header("Handling")]
+    [SerializeField, Tooltip("(Min 1)")]
     private Upgradeable boostFactor;
     [SerializeField, Min(0)]
     private float
         stoppingThrust,
         stoppingTorque;
-    [SerializeField]
+    [SerializeField, Tooltip("(Min 0)")]
     private Upgradeable handlingFactor;
 
     [SerializeField, Range(0, 1)]

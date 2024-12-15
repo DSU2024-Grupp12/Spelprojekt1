@@ -5193,7 +5193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157c28e198519a845a27e8fca32c130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modules: []
+  matrixID: playerShipMatrix
+  displayName: Ship
 --- !u!114 &6830495024464102766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5259,7 +5260,7 @@ MonoBehaviour:
   maxAngularVelocity:
     baseValue: 120
     matrix: {fileID: 45005349452178148}
-    attributeID: minVelocity
+    attributeID: maxAngularVelocity
     highGood: 1
   boostFactor:
     baseValue: 3.5
@@ -5293,15 +5294,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d4f72383220da41b3e7fd31e564c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matrix: {fileID: 0}
   shield: {fileID: 6340787955948192973}
-  strength: 1000
-  threshold: 100
-  dampener: 0.5
+  strength:
+    baseValue: 1000
+    matrix: {fileID: 45005349452178148}
+    attributeID: hullStrength
+    highGood: 1
+  threshold:
+    baseValue: 100
+    matrix: {fileID: 45005349452178148}
+    attributeID: hullThreshold
+    highGood: 1
+  dampener:
+    baseValue: 0
+    matrix: {fileID: 45005349452178148}
+    attributeID: hullDampener
+    highGood: 1
   collideWith:
     serializedVersion: 2
     m_Bits: 896
-  layerModifiers: []
+  layerModifiers:
+  - layer: Asteroid
+    modifier: 0.5
+    max: 250
   HullDestroyed:
     m_PersistentCalls:
       m_Calls:
@@ -5317,7 +5332,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4047870880761550480}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ApplicationHandler, Assembly-CSharp
         m_MethodName: ChangeSceneDelayed
         m_Mode: 5

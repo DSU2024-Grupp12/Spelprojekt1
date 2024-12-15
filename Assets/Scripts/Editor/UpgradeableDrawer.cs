@@ -139,7 +139,7 @@ public class UpgradeableDrawer : PropertyDrawer
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-        if (property.isExpanded) return EditorGUIUtility.singleLineHeight * 2;
+        if (property.isExpanded) return EditorGUIUtility.singleLineHeight * 2 + 4f;
         else return EditorGUIUtility.singleLineHeight;
     }
 }
