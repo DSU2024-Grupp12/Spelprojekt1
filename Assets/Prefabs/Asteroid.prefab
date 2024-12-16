@@ -63,12 +63,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d4f72383220da41b3e7fd31e564c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 400
-  threshold: 0
-  dampener: 0
+  shield: {fileID: 0}
+  strength:
+    baseValue: 400
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  threshold:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  dampener:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   collideWith:
     serializedVersion: 2
     m_Bits: 960
+  layerModifiers: []
   HullDestroyed:
     m_PersistentCalls:
       m_Calls:
@@ -124,6 +138,9 @@ MonoBehaviour:
     OnTakeDamageDebrisSignificant:
       m_PersistentCalls:
         m_Calls: []
+    OnTakeDamageShield:
+      m_PersistentCalls:
+        m_Calls: []
     OnReachLowHullStrength:
       m_PersistentCalls:
         m_Calls: []
@@ -139,16 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a4fbc1cd2254342979965342a4074e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources:
-  - resource: {fileID: 1916773367551793732, guid: ae7fd41e39231fa4ab8f8cf3d5d34834, type: 3}
-    minDroppedPer10UnitMass: 0.2
-    maxDroppedPer10UnitMass: 0.5
-    minValuePer10UnitMass: 0.2
-    maxValuePer10UnitMass: 0.5
-    minNumber: 0
-    maxNumber: 3
-    minValue: 1
-    maxValue: 3
+  resources: []
 --- !u!58 &813445013602032997
 CircleCollider2D:
   m_ObjectHideFlags: 0

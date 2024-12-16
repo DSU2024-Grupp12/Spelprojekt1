@@ -4870,11 +4870,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2241363487494897364}
+  - component: {fileID: 5048511744733115576}
   - component: {fileID: 4047870880761550480}
   - component: {fileID: 5042903144001891012}
   - component: {fileID: 3377094416118959403}
+  - component: {fileID: 45005349452178148}
   - component: {fileID: 6830495024464102766}
   - component: {fileID: 1132009141852493737}
+  - component: {fileID: 6340787955948192973}
   - component: {fileID: 417615014983797967}
   - component: {fileID: 3315100848030350885}
   - component: {fileID: 7085579952060942491}
@@ -4906,6 +4909,18 @@ Transform:
   - {fileID: 7209564089554924315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5048511744733115576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25b0eaed2e1c0f409cecdead66daa41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4047870880761550480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4952,7 +4967,19 @@ MonoBehaviour:
     m_ActionId: c2185116-2fe5-47cf-a37b-ea4ee5543853
     m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ReturnToGameplay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 564bf33c-c7aa-4162-a44d-5cb1f7aa2983
     m_ActionName: UI/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
@@ -5159,6 +5186,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b7a39579-f675-4cab-9290-e5c498a213f2
     m_ActionName: Player/Cancel[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5048511744733115576}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 104c1002-2a23-4cce-8062-45db2859a3e2
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -5177,7 +5220,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultPrimaryTool: {fileID: 0}
+  defaultSecondaryTool: {fileID: 0}
   toolMount: {fileID: 7209564089554924315}
+--- !u!114 &45005349452178148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157c28e198519a845a27e8fca32c130e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matrixID: playerShipMatrix
+  displayName: Ship
 --- !u!114 &6830495024464102766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5215,16 +5273,48 @@ MonoBehaviour:
     leftSide:
       thrusters:
       - {fileID: 24352828868438799}
-  forwardThrust: 1400
-  backwardThrust: 700
-  sideThrust: 900
-  turningForce: 1500
-  maxVelocity: 7
-  maxAngularVelocity: 120
-  boostFactor: 3.5
+  forwardThrust:
+    baseValue: 1400
+    matrix: {fileID: 45005349452178148}
+    attributeID: forwardThrust
+    highGood: 1
+  backwardThrust:
+    baseValue: 700
+    matrix: {fileID: 45005349452178148}
+    attributeID: backwardThrust
+    highGood: 1
+  sideThrust:
+    baseValue: 900
+    matrix: {fileID: 45005349452178148}
+    attributeID: sideThrust
+    highGood: 1
+  turningForce:
+    baseValue: 1500
+    matrix: {fileID: 45005349452178148}
+    attributeID: turningForce
+    highGood: 1
+  maxVelocity:
+    baseValue: 7
+    matrix: {fileID: 45005349452178148}
+    attributeID: maxVelocity
+    highGood: 1
+  maxAngularVelocity:
+    baseValue: 120
+    matrix: {fileID: 45005349452178148}
+    attributeID: maxAngularVelocity
+    highGood: 1
+  boostFactor:
+    baseValue: 3.5
+    matrix: {fileID: 45005349452178148}
+    attributeID: boostFactor
+    highGood: 1
   stoppingThrust: 3000
   stoppingTorque: 360
-  handlingFactor: 196.4
+  handlingFactor:
+    baseValue: 200
+    matrix: {fileID: 45005349452178148}
+    attributeID: handlingFactor
+    highGood: 1
   adjustmentFactor: 0.12
   accelerating: 0
   deaccelerating: 0
@@ -5245,12 +5335,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d4f72383220da41b3e7fd31e564c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 1000
-  threshold: 100
-  dampener: 0.5
+  shield: {fileID: 6340787955948192973}
+  strength:
+    baseValue: 1000
+    matrix: {fileID: 45005349452178148}
+    attributeID: hullStrength
+    highGood: 1
+  threshold:
+    baseValue: 100
+    matrix: {fileID: 45005349452178148}
+    attributeID: hullThreshold
+    highGood: 1
+  dampener:
+    baseValue: 0
+    matrix: {fileID: 45005349452178148}
+    attributeID: hullDampener
+    highGood: 1
   collideWith:
     serializedVersion: 2
     m_Bits: 896
+  layerModifiers:
+  - layer: Asteroid
+    modifier: 0.5
+    max: 250
   HullDestroyed:
     m_PersistentCalls:
       m_Calls:
@@ -5266,7 +5373,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4047870880761550480}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ApplicationHandler, Assembly-CSharp
         m_MethodName: ChangeSceneDelayed
         m_Mode: 5
@@ -5296,7 +5403,31 @@ MonoBehaviour:
         m_Calls: []
     OnTakeDamageDebris:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3315100848030350885}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 8f6fca223b5a44048b3a2b90a2c1e968, type: 2}
+            m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7085579952060942491}
+          m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+          m_MethodName: PlayOneShot
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Liten Krock
+            m_BoolArgument: 0
+          m_CallState: 2
     OnTakeDamageSignificant:
       m_PersistentCalls:
         m_Calls: []
@@ -5305,10 +5436,68 @@ MonoBehaviour:
         m_Calls: []
     OnTakeDamageDebrisSignificant:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3315100848030350885}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 8f6fca223b5a44048b3a2b90a2c1e968, type: 2}
+            m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7085579952060942491}
+          m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+          m_MethodName: PlayOneShot
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Stor Krock
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnTakeDamageShield:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7085579952060942491}
+          m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+          m_MethodName: PlayOneShot
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Liten Krock
+            m_BoolArgument: 0
+          m_CallState: 2
     OnReachLowHullStrength:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &6340787955948192973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fece82f27ff58a641916d1720f3d655c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absorbtionCapacity: 300
+  absorbtionRate: 1
+  absorbtionLimit: 300
+  fallThroughDamage: 1
+  autoRegenerate: 1
+  regenerationRate: 30
+  regenerationCooldown: 5
 --- !u!114 &417615014983797967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5471,7 +5660,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -5490,7 +5679,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.67
+  m_Radius: 2.34
 --- !u!1 &3683418663752188193
 GameObject:
   m_ObjectHideFlags: 0
