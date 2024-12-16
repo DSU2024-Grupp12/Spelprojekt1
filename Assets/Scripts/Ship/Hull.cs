@@ -77,6 +77,8 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
 
         currentStrength -= rawDamage;
 
+        takeDamageEvents.OnTakeAnyDamage?.Invoke();
+
         if (currentStrength <= 0 && !hullDestroyed) {
             hullDestroyed = true;
             HullDestroyed.Invoke();
@@ -155,6 +157,7 @@ public class TakeDamageEvents
     public LayerMask enemyLayers;
     public LayerMask debrisLayers;
     public UnityEvent
+        OnTakeAnyDamage,
         OnTakeDamage,
         OnTakeDamageEnemy,
         OnTakeDamageDebris,

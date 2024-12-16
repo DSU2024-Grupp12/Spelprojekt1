@@ -43,7 +43,7 @@ public class CargoHold : MonoBehaviour
     /// <summary>
     /// Pays the amount specified if the player has at least that many resources in the hold.
     /// </summary>
-    /// <returns>True if player could pay, false otherwise</returns>
+    /// <returns>True if player payed, false otherwise</returns>
     public bool Pay(int green, int purple) {
         if (!CheckBalance(green, purple)) return false;
         if (cargo.ContainsKey(Resource.Color.Green)) cargo[Resource.Color.Green] -= green;

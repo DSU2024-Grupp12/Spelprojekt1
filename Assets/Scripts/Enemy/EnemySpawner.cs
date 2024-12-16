@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     private float startOfScene;
 
     private float timeUntilNextWave;
-    private bool inWave;
+    public static bool InWave { get; private set; }
 
     private float halfDiagonal = 15f;
     private Unity.Mathematics.Random random;
@@ -44,13 +44,13 @@ public class EnemySpawner : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (!inWave && Time.time >= timeUntilNextWave) {
+        if (!InWave && Time.time >= timeUntilNextWave) {
             StartCoroutine(ProcessWave());
         }
     }
 
     public IEnumerator ProcessWave() {
-        inWave = true;
+        InWave = true;
 
         EnemyWave[] validWaves = waves.Where(w => w.dontSpawnUntilTimeHasPassed < Time.time - startOfScene).ToArray();
         if (validWaves.Length > 0) {
@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
         else {
             timeUntilNextWave = Time.time + timeBetweenWaves;
         }
-        inWave = false;
+        InWave = false;
     }
 
     public void SpawnEnemy(EnemyPilot enemyType) {
