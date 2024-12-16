@@ -39,7 +39,7 @@ public class Perimeter : MonoBehaviour
             }
 
             if (outsideTimer - damageInterval >= 0) {
-                playerHull.TakeRawDamage(damageAmount);
+                playerHull.TakeRawDamage(damageAmount, 0.AsLayerMask());
                 outsideTimer = 0f;
             }
         }
