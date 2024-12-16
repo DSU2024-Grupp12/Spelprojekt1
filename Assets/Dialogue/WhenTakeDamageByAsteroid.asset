@@ -19,7 +19,7 @@ MonoBehaviour:
     timeBetweenQueuedDialogue: 1
   priority: 0
   queueable: 0
-  probability: 0.159
+  probability: 1
   conversationVariations:
   - lines:
     - speaker: Ship Computer

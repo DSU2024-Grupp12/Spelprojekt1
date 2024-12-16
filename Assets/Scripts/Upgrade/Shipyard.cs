@@ -29,6 +29,7 @@ public class Shipyard : MonoBehaviour, IInteractable
 
     public void Start() {
         Unhighlight();
+        shipyardUpgradeUsed = false;
     }
 
     public void Interact() {
@@ -39,7 +40,9 @@ public class Shipyard : MonoBehaviour, IInteractable
         }
         Unhighlight();
         MenuManager.Instance.OpenMenu(shipyardMenuID, BuildMenuInfo());
-        if (player) player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        if (player) {
+            LockPlayer(player.GetComponent<Rigidbody2D>());
+        }
         MenuManager.OnReturnToGameplay += ShipyardMenuClosed;
     }
 
@@ -113,5 +116,10 @@ public class Shipyard : MonoBehaviour, IInteractable
     private void ShipyardMenuClosed() {
         Highlight();
         MenuManager.OnReturnToGameplay -= ShipyardMenuClosed;
+    }
+
+    private void LockPlayer(Rigidbody2D p) {
+        p.velocity = Vector2.zero;
+        p.angularVelocity = 0f;
     }
 }

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4157346466304040077}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,17 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b88231f0f74d84bb427aec66bad10c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  variants: []
   numberOfClusters: 43
   minClusterRadius: 8.6
   maxClusterRadius: 35
   minClusterChildren: 12
   maxClusterChildren: 21
-  asteroidPrefab: {fileID: 8825375572312753335, guid: 2542b8e52ee2e7046886a299d438dba7, type: 3}
   seed: 360
   numberOfAsteroids: 750
   radius: 300
-  distributionFunction: 1
-  mean: 40.2
-  standardDeviation: 300
-  minMass: 21.93
-  maxMass: 1000

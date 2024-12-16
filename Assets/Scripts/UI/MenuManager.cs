@@ -28,6 +28,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void ReturnToGameplay() {
+        if (gameplayOverlay.enabled) return;
         foreach (Menu m in menus) m.Close();
         gameplayOverlay.enabled = true;
         playerInput.SwitchCurrentActionMap("Player");
@@ -36,12 +37,14 @@ public class MenuManager : MonoBehaviour
     }
 
     public void OpenMenu(string menuId, MenuInfo menuInfo) {
+        gameplayOverlay.enabled = false;
         Menu menu = GetMenuByID(menuId);
         playerInput.SwitchCurrentActionMap(menu.actionMapID);
         CloseAllMenus();
         menu.Open(menuInfo);
     }
     public void OpenMenu(string menuId) {
+        gameplayOverlay.enabled = false;
         Menu menu = GetMenuByID(menuId);
         playerInput.SwitchCurrentActionMap(menu.actionMapID);
         CloseAllMenus();

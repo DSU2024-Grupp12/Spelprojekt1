@@ -32,6 +32,7 @@ public class EnemySpawner : MonoBehaviour
         mainCamera = Camera.main;
         timeUntilNextWave = Time.time + timeBetweenWaves;
         startOfScene = Time.time;
+        InWave = false;
 
         random = new((uint)Random.Range(0, int.MaxValue));
 
