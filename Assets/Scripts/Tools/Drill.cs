@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -52,7 +53,7 @@ public class Drill : Tool
             if (drillingHull) {
                 if (currentlyDrilling.TryGetValue(other, out float time)) {
                     if (Time.time > time + damageInterval) {
-                        drillingHull.TakeDamage(damage, LayerMask.NameToLayer("PlayerShip"));
+                        drillingHull.TakeDamage(damage, LayerMask.NameToLayer("Drill"));
                         currentlyDrilling[other] = Time.time;
                     }
                     Rigidbody2D body = other.gameObject.GetComponent<Rigidbody2D>();
