@@ -16,7 +16,7 @@ MonoBehaviour:
   attributeID: maxAngularVelocity
   moduleDisplayName: Upgrade Angular Velocity
   moduleDescription: increases maximum angular velocity by 400%
-  greenResourceCost: 10
+  greenResourceCost: 0
   purpleResourceCost: 0
   moduleType: 2
   modifier: 5

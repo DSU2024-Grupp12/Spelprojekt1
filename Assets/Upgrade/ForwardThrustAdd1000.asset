@@ -16,7 +16,7 @@ MonoBehaviour:
   attributeID: forwardThrust
   moduleDisplayName: Upgrade Thrusters
   moduleDescription: Increases your forward thrust by 1000
-  greenResourceCost: 5
-  purpleResourceCost: 15
+  greenResourceCost: 10
+  purpleResourceCost: 5
   moduleType: 0
   modifier: 1000
