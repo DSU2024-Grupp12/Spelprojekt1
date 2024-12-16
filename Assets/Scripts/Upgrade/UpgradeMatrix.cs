@@ -9,62 +9,53 @@ public class UpgradeMatrix : MonoBehaviour
     public string displayName;
 
     private List<UpgradeModule> modules;
-    private List<UpgradeModule> modulesLastFrame;
 
-    private bool modulesUpdatedSinceLastFrame;
-
-    private Dictionary<string, bool> containsDict;
     private Dictionary<string, (float b, float u)> upgradeDict;
+    private Dictionary<string, bool> recalculated;
+
+    private bool initialized;
 
     private void Start() {
         modules = new();
-        containsDict = new();
         upgradeDict = new();
-
-        modulesLastFrame = new();
-        for (int i = 0; i < modules.Count; i++) {
-            modulesLastFrame.Add(modules[i]);
-        }
+        recalculated = new();
+        initialized = true;
     }
 
     private void Update() {
-        modulesUpdatedSinceLastFrame = false;
-        // if the number of modules in the matrix has changed, we recalculate
-        if (modulesLastFrame.Count != modules.Count) modulesUpdatedSinceLastFrame = true;
-        else {
-            for (int i = 0; i < modules.Count; i++) {
-                if (!modules[i] || !modulesLastFrame[i]) break;
-                // if at least one module does not match the last frame, we recalculate
-                if (!modulesLastFrame[i].Equals(modules[i])) {
-                    modulesUpdatedSinceLastFrame = true;
-                    break;
-                }
-            }
-        }
-        modulesLastFrame.Clear();
-        for (int i = 0; i < modules.Count; i++) {
-            modulesLastFrame.Add(modules[i]);
-        }
-    }
-
-    public bool Contains(string id) {
-        if (containsDict == null) return false;
-        if (containsDict.ContainsKey(id) && !modulesUpdatedSinceLastFrame) return containsDict[id];
-        else {
-            bool contains = modules.Select(m => m?.attributeID).Any(aid => aid == id);
-            if (!containsDict.TryAdd(id, contains)) {
-                containsDict[id] = contains;
-            }
-            return contains;
-        }
+        // recalculate = false;
+        // // if the number of modules in the matrix has changed, we recalculate
+        // if (modulesLastFrame.Count != modules.Count) recalculate = true;
+        // else {
+        //     for (int i = 0; i < modules.Count; i++) {
+        //         if (!modules[i] || !modulesLastFrame[i]) break;
+        //         // if at least one module does not match the last frame, we recalculate
+        //         if (!modulesLastFrame[i].Equals(modules[i])) {
+        //             recalculate = true;
+        //             break;
+        //         }
+        //     }
+        // }
+        // modulesLastFrame.Clear();
+        // for (int i = 0; i < modules.Count; i++) {
+        //     modulesLastFrame.Add(modules[i]);
+        // }
     }
 
     public float GetUpgradeValue(string id, float baseValue, bool highGood) {
+        if (!initialized) return baseValue;
+
+        // if this value has not been seen before we add recalculation check
+        recalculated.TryAdd(id, false);
+
         // if the modules list is unchanged and the attribute has been calculated, retrieve from dictionary
-        if (upgradeDict.ContainsKey(id) && !modulesUpdatedSinceLastFrame) {
+        if (upgradeDict.ContainsKey(id) && recalculated[id]) {
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             // if the baseValue has changed, eg. from the inspector, then we recalculate
-            if (upgradeDict[id].b == baseValue) return upgradeDict[id].u;
+            if (upgradeDict[id].b != baseValue) {
+                recalculated[id] = false;
+                return GetUpgradeValue(id, baseValue, highGood);
+            }
         }
 
         // find all modules that modify attribute with id, and get their upgrade function
@@ -91,12 +82,14 @@ public class UpgradeMatrix : MonoBehaviour
         if (!upgradeDict.TryAdd(id, (baseValue, ret))) {
             upgradeDict[id] = (baseValue, ret);
         }
+        recalculated[id] = true;
         return ret;
     }
 
     public bool AttachModule(UpgradeModule module) {
         if (!modules.Contains(module)) {
             modules.Add(module);
+            CallForRecalculate();
             return true;
         }
         return false;
@@ -105,8 +98,15 @@ public class UpgradeMatrix : MonoBehaviour
     public bool RemoveModule(UpgradeModule module) {
         if (modules.Contains(module)) {
             modules.Remove(module);
+            CallForRecalculate();
             return true;
         }
         return false;
+    }
+
+    private void CallForRecalculate() {
+        foreach (string s in recalculated.Keys.ToArray()) {
+            recalculated[s] = false;
+        }
     }
 }

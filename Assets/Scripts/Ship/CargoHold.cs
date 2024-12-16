@@ -30,4 +30,24 @@ public class CargoHold : MonoBehaviour
             return 0;
         }
     }
+
+    public bool CheckBalance(int greenReq, int purpleReq) {
+        bool hasEnough = true;
+
+        if (GetCargoContent(Resource.Color.Green) < greenReq) hasEnough = false;
+        if (GetCargoContent(Resource.Color.Purple) < purpleReq) hasEnough = false;
+
+        return hasEnough;
+    }
+
+    /// <summary>
+    /// Pays the amount specified if the player has at least that many resources in the hold.
+    /// </summary>
+    /// <returns>True if player could pay, false otherwise</returns>
+    public bool Pay(int green, int purple) {
+        if (!CheckBalance(green, purple)) return false;
+        if (cargo.ContainsKey(Resource.Color.Green)) cargo[Resource.Color.Green] -= green;
+        if (cargo.ContainsKey(Resource.Color.Purple)) cargo[Resource.Color.Purple] -= purple;
+        return true;
+    }
 }

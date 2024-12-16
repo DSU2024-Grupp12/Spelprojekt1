@@ -11,6 +11,13 @@ public class UpgradeModule : ScriptableObject
     [Tooltip("The attribute id of the attribute this module will modify")]
     public string attributeID;
 
+    public string moduleDisplayName;
+    [TextArea(1, 4)]
+    public string moduleDescription;
+
+    public int greenResourceCost;
+    public int purpleResourceCost;
+
     public ModuleTypes moduleType;
     public float modifier;
 

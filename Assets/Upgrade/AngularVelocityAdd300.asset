@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matrixID: playerShipMatrix
   attributeID: maxAngularVelocity
-  moduleType: 0
-  modifier: 300
+  moduleDisplayName: Upgrade Angular Velocity
+  moduleDescription: increases maximum angular velocity by 400%
+  greenResourceCost: 10
+  purpleResourceCost: 0
+  moduleType: 2
+  modifier: 5

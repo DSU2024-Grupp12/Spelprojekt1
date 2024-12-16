@@ -4870,6 +4870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2241363487494897364}
+  - component: {fileID: 5048511744733115576}
   - component: {fileID: 4047870880761550480}
   - component: {fileID: 5042903144001891012}
   - component: {fileID: 3377094416118959403}
@@ -4908,6 +4909,18 @@ Transform:
   - {fileID: 7209564089554924315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5048511744733115576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25b0eaed2e1c0f409cecdead66daa41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4047870880761550480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4954,7 +4967,19 @@ MonoBehaviour:
     m_ActionId: c2185116-2fe5-47cf-a37b-ea4ee5543853
     m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ReturnToGameplay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 564bf33c-c7aa-4162-a44d-5cb1f7aa2983
     m_ActionName: UI/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
@@ -5161,6 +5186,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b7a39579-f675-4cab-9290-e5c498a213f2
     m_ActionName: Player/Cancel[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5048511744733115576}
+        m_TargetAssemblyTypeName: InteractableManager, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 104c1002-2a23-4cce-8062-45db2859a3e2
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -5619,7 +5660,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
