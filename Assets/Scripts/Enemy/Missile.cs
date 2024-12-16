@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Ship))]
@@ -107,11 +108,15 @@ public class Missile : MonoBehaviour, IBeamable
     }
 
     /// <inheritdoc />
+    public event Action<IBeamable> OnIllegalCollision;
+    /// <inheritdoc />
     public bool PickUp() {
         target = null;
         return true;
     }
-
     /// <inheritdoc />
     public void Dropped() { }
+
+    // ReSharper disable once UnusedMember.Local
+    private void NeverCalled() => OnIllegalCollision?.Invoke(this);
 }

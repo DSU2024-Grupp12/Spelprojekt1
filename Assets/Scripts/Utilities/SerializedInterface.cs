@@ -6,8 +6,10 @@ using UnityEngine;
 [System.Serializable]
 public class SerializedInterface<T> : ISerializationCallbackReceiver where T : IInterfaceIdentity
 {
-    public GameObject _object;
-    public string id;
+    [SerializeField]
+    private GameObject _object;
+    [SerializeField]
+    private string id;
 
     public T extract {
         get {
@@ -18,6 +20,7 @@ public class SerializedInterface<T> : ISerializationCallbackReceiver where T : I
         }
     }
     public T[] extractMany => _object.GetComponents<T>();
+    public GameObject gameObject => _object;
 
     public T this[string s] {
         get { return extractMany.Where(i => i.GetID() == s).First(); }

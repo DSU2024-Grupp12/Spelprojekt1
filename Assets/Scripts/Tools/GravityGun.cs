@@ -104,11 +104,10 @@ public class GravityGun : Tool
         if (beamables != null) {
             foreach (IBeamable beamable in beamables) {
                 if (!beamable.PickUp()) return;
+                beamable.OnIllegalCollision += Detach;
             }
             pickedUpBody = body;
             container.transform.localScale = pickedUpBody.transform.localScale;
-            pickedUpBody.bodyType = RigidbodyType2D.Kinematic;
-            pickedUpBody.useFullKinematicContacts = true;
         }
     }
 
@@ -117,10 +116,11 @@ public class GravityGun : Tool
         Detach();
     }
 
+    private void Detach(IBeamable beamable) => Detach();
     private void Detach() {
-        pickedUpBody.bodyType = RigidbodyType2D.Dynamic;
         IBeamable[] beamables = pickedUpBody.GetComponents<IBeamable>();
         foreach (IBeamable beamable in beamables) {
+            beamable.OnIllegalCollision -= Detach;
             beamable.Dropped();
         }
         pickedUpBody = null;
@@ -164,6 +164,7 @@ public class GravityGun : Tool
         bodiesInRange.Sort(CompareDistance);
         bodyInRange = bodiesInRange.First();
 
+        if (bodyInRange.bodyType != RigidbodyType2D.Dynamic) return false;
         if (bodyInRange.mass >= massLimit) return false;
         return true;
     }

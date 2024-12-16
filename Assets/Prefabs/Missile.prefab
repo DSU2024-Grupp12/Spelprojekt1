@@ -4973,7 +4973,7 @@ MonoBehaviour:
   explosionPower: 350
   willExplodeOn:
     serializedVersion: 2
-    m_Bits: 960
+    m_Bits: 9152
 --- !u!114 &6529525793434261171
 MonoBehaviour:
   m_ObjectHideFlags: 0
