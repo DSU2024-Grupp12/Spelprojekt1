@@ -32,8 +32,9 @@ public class Shipyard : MonoBehaviour, IInteractable
     }
 
     public void Interact() {
-        if (shipyardUpgradeUsed) {
-            Debug.Log("upgrade used");
+        if (shipyardUpgradeUsed || EnemySpawner.InWave) {
+            Popup.Display("Shipyard unavailable", 1f);
+
             return;
         }
         Unhighlight();
@@ -102,9 +103,10 @@ public class Shipyard : MonoBehaviour, IInteractable
                 match.AttachModule(module);
                 shipyardUpgradeUsed = true;
                 MenuManager.Instance.ReturnToGameplay();
-                return;
             }
-            Debug.Log("Not enough resources to buy that upgrade");
+            else {
+                Popup.Display("Not enough resources to buy that upgrade", 1.5f);
+            }
         };
     }
 

@@ -14,8 +14,11 @@ public class Menu : MonoBehaviour
 
     private Canvas canvas;
 
+    private bool closeOnAwake;
+
     private void Awake() {
         canvas = GetComponent<Canvas>();
+        if (closeOnAwake) Close();
     }
 
     public void Open(MenuInfo menuInfo) {
@@ -40,7 +43,8 @@ public class Menu : MonoBehaviour
     }
 
     public void Close() {
-        canvas.enabled = false;
+        if (canvas) canvas.enabled = false;
+        else closeOnAwake = true;
     }
 
     public void ReturnToGameplay() {
