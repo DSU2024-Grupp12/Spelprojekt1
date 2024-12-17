@@ -37,7 +37,10 @@ public class Menu : MonoBehaviour
             if (menuInfo.Contains(field.key)) {
                 (string s, UnityAction a) = menuInfo[field.key];
                 if (field.field) field.field.text = s;
-                if (a != null && field.button) field.button.onClick.AddListener(a);
+                if (a != null && field.button) {
+                    field.button.onClick.RemoveAllListeners();
+                    field.button.onClick.AddListener(a);
+                }
             }
         }
     }
