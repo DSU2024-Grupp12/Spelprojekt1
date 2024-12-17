@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -18,6 +19,13 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField]
     private Animator dialogueBoxAnimator;
+
+    [SerializeField]
+    private AudioSource typewriterSource;
+    [SerializeField]
+    private AudioClip typewriterClip;
+
+    public UnityEvent<string> OnDialogueFinished;
 
     private SortedList<int, Dialogue> queuedDialogues;
 
@@ -57,8 +65,9 @@ public class DialogueManager : MonoBehaviour
             queuedDialogues.RemoveAt(queuedDialogues.Count - 1);
             speedSettings = highestPriority.speedSettings;
             yield return ProcessConversation(highestPriority.conversation);
+            OnDialogueFinished?.Invoke(highestPriority.onFinishMessage);
             EndDialogue();
-            yield return new WaitForSeconds(speedSettings.timeBetweenQueuedDialogue);
+            yield return new WaitForSecondsRealtime(speedSettings.timeBetweenQueuedDialogue);
         }
 
         processingDialogue = false;
@@ -72,7 +81,7 @@ public class DialogueManager : MonoBehaviour
 
         while (lines.Count > 0) {
             yield return ProcessLine(lines.Dequeue());
-            yield return new WaitForSeconds(speedSettings.timeBetweenLines);
+            yield return new WaitForSecondsRealtime(speedSettings.timeBetweenLines);
         }
     }
 
@@ -87,7 +96,7 @@ public class DialogueManager : MonoBehaviour
 
         while (sentences.Count > 0) {
             yield return ProcessSentences(sentences.Dequeue());
-            yield return new WaitForSeconds(speedSettings.timeBetweenSentences);
+            yield return new WaitForSecondsRealtime(speedSettings.timeBetweenSentences);
         }
     }
 
@@ -99,7 +108,8 @@ public class DialogueManager : MonoBehaviour
         dialogueField.text = "";
         foreach (char c in sentence) {
             dialogueField.text += c;
-            yield return new WaitForSeconds(speedSettings.typewriterSpeed);
+            typewriterSource.PlayOneShot(typewriterClip);
+            yield return new WaitForSecondsRealtime(speedSettings.typewriterSpeed);
         }
     }
 
