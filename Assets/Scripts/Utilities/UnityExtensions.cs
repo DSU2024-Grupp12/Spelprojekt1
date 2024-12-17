@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class UnityExtensions
@@ -8,6 +9,23 @@ public static class UnityExtensions
     /// </summary>
     public static bool Contains(this LayerMask mask, int layer) {
         return mask == (mask | (1 << layer));
+        // return (mask & (1 << layer)) != 0;
+    }
+
+    /// <summary>
+    /// Checks if any layer exists in both masks
+    /// </summary>
+    /// <returns>True if at least one layer exists in both mask and layers. If mask and layers share no layers then false.</returns>
+    public static bool Contains(this LayerMask mask, LayerMask layers) {
+        return (layers & mask) != 0;
+    }
+
+    public static int[] GetLayers(this LayerMask mask) {
+        List<int> layers = new();
+        for (int i = 0; i < 32; i++) {
+            if (mask.Contains(i)) layers.Add(i);
+        }
+        return layers.ToArray();
     }
 
     //https://docs.unity3d.com/6000.0/Documentation/Manual/layermask-add.html
@@ -28,6 +46,11 @@ public static class UnityExtensions
         if (!mask.Contains(layer)) return false;
         mask &= ~(1 << layer);
         return true;
+    }
+
+    public static LayerMask AsLayerMask(this int layer) {
+        LayerMask layerAsLayerMask = (1 << layer);
+        return layerAsLayerMask;
     }
 
     /// <summary>

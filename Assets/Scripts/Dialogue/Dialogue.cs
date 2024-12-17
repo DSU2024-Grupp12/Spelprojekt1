@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue", order = 20)]
+[CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue")]
 public class Dialogue : ScriptableObject
 {
     public SpeedSettings speedSettings;
@@ -31,6 +31,7 @@ public struct Conversation
 public struct Line
 {
     public string speaker;
+    public Sprite portrait;
 
     [TextArea(1, 10)]
     public string[] sentences;

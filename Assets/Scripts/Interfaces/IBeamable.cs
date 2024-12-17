@@ -1,5 +1,9 @@
-﻿public interface IBeamable
+﻿using System;
+
+public interface IBeamable
 {
+    public event Action<IBeamable> OnIllegalCollision;
+
     /// <summary>
     /// Performs any actions required for this object to be picked up by the gravity gun
     /// and returns false if such a state cannot be actualized.

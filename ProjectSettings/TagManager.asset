@@ -15,11 +15,11 @@ TagManager:
   - Asteroid
   - EnemyShip
   - Missile
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Resource
+  - Interactable
+  - DestructableEnvironment
+  - Obstacle
+  - Drill
   - 
   - 
   - 

@@ -7,18 +7,25 @@ public class PlayerController : MonoBehaviour
     private Ship playerShip;
 
     [SerializeField]
-    private Tool defaultEquippedTool;
+    private Tool
+        defaultPrimaryTool,
+        defaultSecondaryTool;
 
-    private Tool equippedTool;
+    private Tool primaryTool;
+    private Tool secondaryTool;
 
     [SerializeField]
     private Transform toolMount;
 
+    [SerializeField]
+    private string onDeathSceneLoadName;
+    [SerializeField]
+    private float onDeathSceneLoadDelay;
+
     void Start() {
         playerShip = GetComponent<Ship>();
-        if (!transform.GetComponentInChildren<Tool>()) {
-            equippedTool = Instantiate(defaultEquippedTool, toolMount, false);
-        }
+        if (defaultPrimaryTool) primaryTool = Instantiate(defaultPrimaryTool, toolMount, false);
+        if (defaultSecondaryTool) secondaryTool = Instantiate(defaultSecondaryTool, toolMount, false);
     }
 
     public void Accelerate(InputAction.CallbackContext context) {
@@ -54,14 +61,25 @@ public class PlayerController : MonoBehaviour
     }
 
     public void PrimaryActivateTool(InputAction.CallbackContext context) {
-        if (context.performed) {
-            equippedTool.PrimaryActivation();
-        }
+        primaryTool.ActivateTool(context);
     }
 
     public void SecondaryActivateTool(InputAction.CallbackContext context) {
+        if (secondaryTool) secondaryTool.ActivateTool(context);
+    }
+
+    public void CancelTool(InputAction.CallbackContext context) {
         if (context.performed) {
-            equippedTool.SecondaryActivation();
+            if (primaryTool) primaryTool.Cancel();
+            if (secondaryTool) secondaryTool.Cancel();
         }
+    }
+
+    public void LoadOnDeathScene() {
+        ApplicationHandler.ChangeSceneDelayed(onDeathSceneLoadName, onDeathSceneLoadDelay);
+    }
+
+    public void ReturnToGameplay() {
+        MenuManager.Instance.ReturnToGameplay();
     }
 }

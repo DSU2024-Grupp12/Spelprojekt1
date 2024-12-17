@@ -106,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -288,7 +288,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.09
-      minScalar: 0.07
+      minScalar: 0.15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 52.41
+      scalar: 19.19
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4857,7 +4857,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5896083107833835557}
@@ -4970,10 +4970,10 @@ MonoBehaviour:
   lifeTime: 10
   turningSpeed: 10
   explosionRadius: 2
-  explosionPower: 50
+  explosionPower: 350
   willExplodeOn:
     serializedVersion: 2
-    m_Bits: 960
+    m_Bits: 9152
 --- !u!114 &6529525793434261171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4986,6 +4986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d836febb8f17448a3826af8c0e5a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   thrusters:
     thrusterSounds: {fileID: 0}
     largeThrusterAudioAssetName: 
@@ -5003,18 +5004,49 @@ MonoBehaviour:
       thrusters: []
     leftSide:
       thrusters: []
-  forwardThrust: 70
-  backwardThrust: 0
-  sideThrust: 0
-  turningForce: 0
-  maxVelocity: 8
-  maxAngularVelocity: 360
-  boostFactor: 0
+  forwardThrust:
+    baseValue: 70
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  backwardThrust:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  sideThrust:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  turningForce:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  maxVelocity:
+    baseValue: 8
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  maxAngularVelocity:
+    baseValue: 360
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  boostFactor:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   stoppingThrust: 0
   stoppingTorque: 0
-  handlingFactor: 0
+  handlingFactor:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   adjustmentFactor: 1
-  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   accelerating: 0
   deaccelerating: 0
   strafingStarBoard: 0

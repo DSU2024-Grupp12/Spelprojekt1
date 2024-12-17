@@ -14650,6 +14650,7 @@ GameObject:
   - component: {fileID: 6419078622766373621}
   - component: {fileID: 211535661126868925}
   - component: {fileID: 1868654690609154493}
+  - component: {fileID: 4086055524968440817}
   m_Layer: 8
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -14696,7 +14697,7 @@ MonoBehaviour:
   - {fileID: 4889722281703575201}
   - {fileID: 3177187308967164024}
   stopDistance: 5
-  minFireDistance: 12
+  maxFireDistance: 12
   fireRate: 4
 --- !u!114 &3981858272896800190
 MonoBehaviour:
@@ -14710,12 +14711,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d4f72383220da41b3e7fd31e564c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 500
-  threshold: 50
-  dampener: 0
+  shield: {fileID: 0}
+  strength:
+    baseValue: 500
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  threshold:
+    baseValue: 50
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  dampener:
+    baseValue: 0
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   collideWith:
     serializedVersion: 2
     m_Bits: 960
+  layerModifiers: []
   HullDestroyed:
     m_PersistentCalls:
       m_Calls:
@@ -14731,6 +14746,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  takeDamageEvents:
+    significantDamageThreshold: 0
+    lowHullStrengthThreshold: 0
+    lowHullStrengthReached: 0
+    enemyLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    debrisLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    OnTakeDamage:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageEnemy:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageDebris:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageSignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageEnemySignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageDebrisSignificant:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTakeDamageShield:
+      m_PersistentCalls:
+        m_Calls: []
+    OnReachLowHullStrength:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &6419078622766373621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14743,7 +14792,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d836febb8f17448a3826af8c0e5a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   thrusters:
+    thrusterSounds: {fileID: 0}
+    largeThrusterAudioAssetName: 
+    smallThrusterAudioAssetName: 
     back:
       thrusters:
       - {fileID: 1965541691283683548}
@@ -14759,18 +14812,49 @@ MonoBehaviour:
       thrusters: []
     leftSide:
       thrusters: []
-  forwardThrust: 900
-  backwardThrust: 300
-  sideThrust: 650
-  turningForce: 650
-  maxVelocity: 3.5
-  maxAngularVelocity: 90
-  boostFactor: 1
+  forwardThrust:
+    baseValue: 900
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  backwardThrust:
+    baseValue: 300
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  sideThrust:
+    baseValue: 650
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  turningForce:
+    baseValue: 650
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  maxVelocity:
+    baseValue: 3.5
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  maxAngularVelocity:
+    baseValue: 90
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
+  boostFactor:
+    baseValue: 1
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   stoppingThrust: 2000
   stoppingTorque: 500
-  handlingFactor: 0.305
+  handlingFactor:
+    baseValue: 0.3
+    matrix: {fileID: 0}
+    attributeID: 
+    highGood: 1
   adjustmentFactor: 0.804
-  explosionPrefab: {fileID: 727639024672266710, guid: 460515cac89b9d644af11b9db1c2c869, type: 3}
   accelerating: 0
   deaccelerating: 0
   strafingStarBoard: 0
@@ -14869,3 +14953,25 @@ PolygonCollider2D:
       - {x: 0.783381, y: -0.06394589}
       - {x: 0.78324795, y: 0.117955804}
   m_UseDelaunayMesh: 0
+--- !u!114 &4086055524968440817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329250972712105302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a4fbc1cd2254342979965342a4074e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resources:
+  - resource: {fileID: 0}
+    minDroppedPer10UnitMass: 0
+    maxDroppedPer10UnitMass: 0
+    minValuePer10UnitMass: 0
+    maxValuePer10UnitMass: 0
+    minNumber: 0
+    maxNumber: 0
+    minValue: 0
+    maxValue: 0

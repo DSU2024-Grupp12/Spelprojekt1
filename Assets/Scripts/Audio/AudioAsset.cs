@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-[CreateAssetMenu(fileName = "New Audio Asset", menuName = "Audio Asset", order = 21)]
+[CreateAssetMenu(fileName = "New Audio Asset", menuName = "Audio Asset")]
 public class AudioAsset : ScriptableObject
 {
     public new string name;
