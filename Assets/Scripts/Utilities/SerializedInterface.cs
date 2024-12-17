@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,7 +11,7 @@ public class SerializedInterface<T> : ISerializationCallbackReceiver where T : I
 
     public T extract {
         get {
-            if (id != "") {
+            if (id != "" && _object) {
                 return extractMany.Where(i => i.GetID() == id).First();
             }
             else return _object.GetComponent<T>();
@@ -24,6 +22,10 @@ public class SerializedInterface<T> : ISerializationCallbackReceiver where T : I
 
     public T this[string s] {
         get { return extractMany.Where(i => i.GetID() == s).First(); }
+    }
+
+    public bool Defined() {
+        return _object;
     }
 
     /// <inheritdoc />

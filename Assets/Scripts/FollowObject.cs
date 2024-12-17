@@ -10,6 +10,15 @@ public class FollowObject : MonoBehaviour
     [SerializeField]
     private GameObject leader;
 
+    [SerializeField]
+    private PlayerReference playerRef;
+
+    private void Start() {
+        if (!leader && playerRef.player) {
+            leader = playerRef.player;
+        }
+    }
+
     // Update is called once per frame
     void Update() {
         if (leader) {
