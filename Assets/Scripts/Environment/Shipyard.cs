@@ -27,21 +27,24 @@ public class Shipyard : MonoBehaviour, IInteractable
 
     private bool shipyardUpgradeUsed;
 
+    UpgradeModule module1;
+    UpgradeModule module2;
+    UpgradeModule module3;
+
     public void Start() {
         Unhighlight();
         shipyardUpgradeUsed = false;
     }
 
     public void Interact() {
-        if (shipyardUpgradeUsed || EnemySpawner.InWave) {
+        if (shipyardUpgradeUsed) {
             Popup.Display("Shipyard unavailable", 1f);
-
             return;
         }
         Unhighlight();
         MenuManager.Instance.OpenMenu(shipyardMenuID, BuildMenuInfo());
         if (player) {
-            LockPlayer(player.GetComponent<Rigidbody2D>());
+            IInteractable.LockPlayer(player.GetComponent<Rigidbody2D>());
         }
         MenuManager.OnReturnToGameplay += ShipyardMenuClosed;
     }
@@ -73,9 +76,9 @@ public class Shipyard : MonoBehaviour, IInteractable
             case 0: return new MenuInfo();
             case > 0:
                 MenuInfo info = new MenuInfo();
-                UpgradeModule module1 = GetRandomUpgradeModule();
-                UpgradeModule module2 = GetRandomUpgradeModule();
-                UpgradeModule module3 = GetRandomUpgradeModule();
+                if (!module1) module1 = GetRandomUpgradeModule();
+                if (!module2) module2 = GetRandomUpgradeModule();
+                if (!module3) module3 = GetRandomUpgradeModule();
                 info.AddEntry(UpgradeItem1Name, module1.moduleDisplayName, AddModuleToPlayerDelegate(module1));
                 info.AddEntry(UpgradeItem2Name, module2.moduleDisplayName, AddModuleToPlayerDelegate(module2));
                 info.AddEntry(UpgradeItem3Name, module3.moduleDisplayName, AddModuleToPlayerDelegate(module3));
@@ -116,10 +119,5 @@ public class Shipyard : MonoBehaviour, IInteractable
     private void ShipyardMenuClosed() {
         Highlight();
         MenuManager.OnReturnToGameplay -= ShipyardMenuClosed;
-    }
-
-    private void LockPlayer(Rigidbody2D p) {
-        p.velocity = Vector2.zero;
-        p.angularVelocity = 0f;
     }
 }

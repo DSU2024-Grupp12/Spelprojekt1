@@ -33,6 +33,8 @@ public class GravityGun : Tool
     }
 
     void Update() {
+        SetColliderDimensions();
+
         if (pickedUpBody) {
             spriteRenderer.enabled = true;
             ConnectBeamToPoint(pickedUpBody.transform.position);

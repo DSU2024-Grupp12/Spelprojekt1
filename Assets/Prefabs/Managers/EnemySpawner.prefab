@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6909449926228114700}
   - component: {fileID: 3819233601829268479}
+  - component: {fileID: 293248210366609955}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -50,7 +51,31 @@ MonoBehaviour:
   enemySpawnEvents:
     OnWaveStarted:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 293248210366609955}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 986b6852028135743bef0a27d1cf266d, type: 2}
+            m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnWaveFinished:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &293248210366609955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8838918714545813273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8535e0aae10dd2645b87a08667066136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

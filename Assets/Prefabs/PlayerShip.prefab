@@ -4955,8 +4955,8 @@ MonoBehaviour:
     m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+      - m_Target: {fileID: 3377094416118959403}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: ReturnToGameplay
         m_Mode: 1
         m_Arguments:
@@ -5209,6 +5209,8 @@ MonoBehaviour:
   defaultPrimaryTool: {fileID: 0}
   defaultSecondaryTool: {fileID: 0}
   toolMount: {fileID: 7209564089554924315}
+  onDeathSceneLoadName: main_menu
+  onDeathSceneLoadDelay: 5
 --- !u!114 &45005349452178148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5360,16 +5362,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ApplicationHandler, Assembly-CSharp
-        m_MethodName: ChangeSceneDelayed
-        m_Mode: 5
+      - m_Target: {fileID: 3377094416118959403}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: LoadOnDeathScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 5:main_menu
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   takeDamageEvents:
@@ -5385,7 +5387,7 @@ MonoBehaviour:
     OnTakeAnyDamage:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 3377094416118959403}
           m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
           m_MethodName: ReturnToGameplay
           m_Mode: 1
@@ -5478,8 +5480,8 @@ MonoBehaviour:
             m_StringArgument: Liten Krock
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        - m_Target: {fileID: 3377094416118959403}
+          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
           m_MethodName: ReturnToGameplay
           m_Mode: 1
           m_Arguments:
