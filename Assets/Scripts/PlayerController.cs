@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform toolMount;
 
+    [SerializeField]
+    private string onDeathSceneLoadName;
+    [SerializeField]
+    private float onDeathSceneLoadDelay;
+
     void Start() {
         playerShip = GetComponent<Ship>();
         if (defaultPrimaryTool) primaryTool = Instantiate(defaultPrimaryTool, toolMount, false);
@@ -68,5 +73,13 @@ public class PlayerController : MonoBehaviour
             if (primaryTool) primaryTool.Cancel();
             if (secondaryTool) secondaryTool.Cancel();
         }
+    }
+
+    public void LoadOnDeathScene() {
+        ApplicationHandler.ChangeSceneDelayed(onDeathSceneLoadName, onDeathSceneLoadDelay);
+    }
+
+    public void ReturnToGameplay() {
+        MenuManager.Instance.ReturnToGameplay();
     }
 }

@@ -57,7 +57,7 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
         foreach (LayerModifier modifier in layerModifiers) {
             if (incurringLayer == LayerMask.NameToLayer(modifier.layer)) {
                 layerModifier = modifier.modifier;
-                layerMax = modifier.max;
+                if (modifier.max > 0) layerMax = modifier.max;
                 break;
             }
         }

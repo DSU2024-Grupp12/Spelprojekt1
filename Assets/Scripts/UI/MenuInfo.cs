@@ -37,6 +37,10 @@ public class MenuInfo : IEnumerable<MenuInfoEntry>
         return AddEntry(key, value, null);
     }
 
+    public bool AddEntry(string key, UnityAction callback) {
+        return AddEntry(key, "", callback);
+    }
+
     public bool AddEntries(MenuInfo otherMenuInfo) {
         bool conflicts = true;
         foreach (MenuInfoEntry entry in otherMenuInfo) {

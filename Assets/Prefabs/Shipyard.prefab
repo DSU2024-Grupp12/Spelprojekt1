@@ -84,7 +84,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipyardMenuID: Shipyard
   highlightPrompt: {fileID: 7114683998931331269}
-  availableUpgradeModules: []
+  availableUpgradeModules:
+  - {fileID: 11400000, guid: 15a836b44fe438a4487cfd1bee733f85, type: 2}
+  - {fileID: 11400000, guid: 9aac0a5178d78584282ed60e40249f94, type: 2}
 --- !u!1 &5102124118394303945
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +114,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5102124118394303945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -20.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -347,7 +349,7 @@ Transform:
   m_GameObject: {fileID: 6547386577997662432}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 2.66, y: 2.63, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
