@@ -15,6 +15,7 @@ MonoBehaviour:
   basePrefab: {fileID: 8825375572312753335, guid: 2542b8e52ee2e7046886a299d438dba7, type: 3}
   sprite: {fileID: 21300000, guid: 9a9524676fc66f046a9d1c2cb38e0432, type: 3}
   colorModifier: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  minimapColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
   hullStrengthFactor: 10
   distribution: 1
   mean: 50

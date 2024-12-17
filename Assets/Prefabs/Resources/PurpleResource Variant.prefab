@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PurpleResource Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 854416221556518781, guid: ae7fd41e39231fa4ab8f8cf3d5d34834, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 854416221556518781, guid: ae7fd41e39231fa4ab8f8cf3d5d34834, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7971698
+      objectReference: {fileID: 0}
+    - target: {fileID: 854416221556518781, guid: ae7fd41e39231fa4ab8f8cf3d5d34834, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9504191
+      objectReference: {fileID: 0}
     - target: {fileID: 1916773367551793732, guid: ae7fd41e39231fa4ab8f8cf3d5d34834, type: 3}
       propertyPath: resourceColor
       value: 1

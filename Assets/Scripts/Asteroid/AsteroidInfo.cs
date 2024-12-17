@@ -10,7 +10,7 @@ public class AsteroidInfo : ScriptableObject
     [SerializeField]
     private Sprite sprite;
     [SerializeField]
-    private Color colorModifier = Color.white;
+    private Color colorModifier = Color.white, minimapColor = Color.gray;
 
     [Header("Hull settings")]
     [Tooltip("The hull strength of the asteroid will be equal to its mass multiplied by this factor")]
@@ -47,9 +47,16 @@ public class AsteroidInfo : ScriptableObject
         created.info = this;
 
         // set sprite parameters
-        SpriteRenderer spriteRenderer = created.GetComponentInChildren<SpriteRenderer>();
-        spriteRenderer.sprite = sprite;
-        spriteRenderer.color = colorModifier;
+        SpriteRenderer[] spriteRenderer = created.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer renderer in spriteRenderer) {
+            if (renderer.gameObject.layer == LayerMask.NameToLayer("Asteroid")) {
+                renderer.sprite = sprite;
+                renderer.color = colorModifier;
+            }
+            if (renderer.gameObject.layer == LayerMask.NameToLayer("Minimap")) {
+                renderer.color = minimapColor;
+            }
+        }
 
         // set resources
         ResourceContainer resourceContainer = created.GetComponent<ResourceContainer>();
