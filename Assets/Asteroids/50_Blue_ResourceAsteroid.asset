@@ -19,8 +19,8 @@ MonoBehaviour:
   distribution: 0
   mean: 50
   standardDeviation: 300
-  minMass: 60
-  maxMass: 60
+  minMass: 80
+  maxMass: 80
   resources:
   - resource: {fileID: 1916773367551793732, guid: ae7fd41e39231fa4ab8f8cf3d5d34834, type: 3}
     minDroppedPer10UnitMass: 0

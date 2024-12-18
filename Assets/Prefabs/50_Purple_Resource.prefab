@@ -164,15 +164,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resources:
-  - resource: {fileID: 0}
+  - resource: {fileID: 6696321602402826667, guid: 9f37fcd4d465d064dae4d4493dcbe6ac, type: 3}
     minDroppedPer10UnitMass: 0
     maxDroppedPer10UnitMass: 0
     minValuePer10UnitMass: 0
     maxValuePer10UnitMass: 0
-    minNumber: 0
-    maxNumber: 0
-    minValue: 0
-    maxValue: 0
+    minNumber: 10
+    maxNumber: 10
+    minValue: 5
+    maxValue: 5
 --- !u!58 &813445013602032997
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 40
+  m_Mass: 80
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
