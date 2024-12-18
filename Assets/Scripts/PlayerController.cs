@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Boost(InputAction.CallbackContext context) {
-        playerShip.boosting = context.ReadValueAsButton();
+        playerShip.boosters.boosting = context.ReadValueAsButton();
     }
 
     public void Stop(InputAction.CallbackContext context) {

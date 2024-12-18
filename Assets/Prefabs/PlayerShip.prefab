@@ -4875,6 +4875,7 @@ GameObject:
   - component: {fileID: 3377094416118959403}
   - component: {fileID: 45005349452178148}
   - component: {fileID: 6830495024464102766}
+  - component: {fileID: 761666309068110185}
   - component: {fileID: 1132009141852493737}
   - component: {fileID: 6340787955948192973}
   - component: {fileID: 417615014983797967}
@@ -5294,11 +5295,7 @@ MonoBehaviour:
     matrix: {fileID: 45005349452178148}
     attributeID: maxAngularVelocity
     highGood: 1
-  boostFactor:
-    baseValue: 3.5
-    matrix: {fileID: 45005349452178148}
-    attributeID: boostFactor
-    highGood: 1
+  boosters: {fileID: 761666309068110185}
   stoppingThrust: 3000
   stoppingTorque: 360
   handlingFactor:
@@ -5313,6 +5310,43 @@ MonoBehaviour:
   strafingPort: 0
   turningClockwise: 0
   turningCounterClockwise: 0
+--- !u!114 &761666309068110185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977748105022777842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62fdd769608cf44598f2b88034ea2ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostFactor:
+    baseValue: 3.5
+    matrix: {fileID: 45005349452178148}
+    attributeID: boostFactor
+    highGood: 1
+  boostLength:
+    baseValue: 3
+    matrix: {fileID: 45005349452178148}
+    attributeID: boostLength
+    highGood: 1
+  boostRecovery:
+    baseValue: 0.4
+    matrix: {fileID: 45005349452178148}
+    attributeID: boostRecovery
+    highGood: 1
+  boostDepletedDelay:
+    baseValue: 3
+    matrix: {fileID: 45005349452178148}
+    attributeID: boostDepletedDelay
+    highGood: 0
+  boostActiveDelay:
+    baseValue: 1
+    matrix: {fileID: 45005349452178148}
+    attributeID: boostActiveDelay
+    highGood: 0
   boosting: 0
 --- !u!114 &1132009141852493737
 MonoBehaviour:
