@@ -69,6 +69,9 @@ public class Minimap : MonoBehaviour
     public static void AddMarker(MinimapMarker marker) {
         markers.Add(marker);
     }
+    public static void RemoveMarker(MinimapMarker marker) {
+        markers.Remove(marker);
+    }
 
     public static MinimapMarker PlaceMarker(MinimapMarker prefab, Vector3 position) {
         return PlaceMarker(prefab, null, position);

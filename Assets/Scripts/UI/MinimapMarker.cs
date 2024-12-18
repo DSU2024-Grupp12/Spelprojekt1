@@ -3,13 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class MinimapMarker : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private SpriteRenderer proxyPrefab;
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private bool seperateProxySprite;
-    [SerializeField, Tooltip("If this value is null the proxy will use the same sprite as the marker.")]
+    [SerializeField, HideInInspector,
+     Tooltip("If this value is null the proxy will use the same sprite as the marker.")]
     private Sprite proxySprite;
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private Color proxyColor;
 
     public bool disabled { get; private set; }
@@ -33,6 +34,10 @@ public class MinimapMarker : MonoBehaviour
         Minimap.AddMarker(this);
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (!active) spriteRenderer.enabled = false;
+    }
+
+    private void OnDestroy() {
+        Minimap.RemoveMarker(this);
     }
 
     public void Activate() {
