@@ -19,11 +19,12 @@ MonoBehaviour:
     timeBetweenQueuedDialogue: 1
   priority: 0
   queueable: 0
-  probability: 0.159
+  probability: 0.383
+  onFinishMessage: 
   conversationVariations:
   - lines:
     - speaker: Ship Computer
-      portrait: {fileID: 21300000, guid: dd2f5840f48601e4d95d69637117211a, type: 3}
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - Hull damaged.
       - Watch out for obstacles.
@@ -38,7 +39,7 @@ MonoBehaviour:
       - Whoa!
   - lines:
     - speaker: Ship Computer
-      portrait: {fileID: 21300000, guid: dd2f5840f48601e4d95d69637117211a, type: 3}
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - Look out!
   - lines:
@@ -47,7 +48,7 @@ MonoBehaviour:
       sentences:
       - This ship is a disaster.
     - speaker: Ship Computer
-      portrait: {fileID: 21300000, guid: dd2f5840f48601e4d95d69637117211a, type: 3}
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - Well, it's not in the best condition. And your crashing doesn't help.
   - lines:
@@ -57,7 +58,7 @@ MonoBehaviour:
       - "Ouch\u2014should have seen that one coming!"
   - lines:
     - speaker: Ship Computer
-      portrait: {fileID: 21300000, guid: dd2f5840f48601e4d95d69637117211a, type: 3}
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - 'Caution: That''s an asteroid.'
     - speaker: Arlo Lynx
@@ -71,16 +72,16 @@ MonoBehaviour:
       - Whoa!
   - lines:
     - speaker: Ship Computer
-      portrait: {fileID: 21300000, guid: dd2f5840f48601e4d95d69637117211a, type: 3}
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - 'Caution: Avoid obstacles.'
   - lines:
     - speaker: Ship Computer
-      portrait: {fileID: 21300000, guid: dd2f5840f48601e4d95d69637117211a, type: 3}
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - 'Caution: Watch out for obstacles.'
   - lines:
     - speaker: Ship Computer
-      portrait: {fileID: 21300000, guid: dd2f5840f48601e4d95d69637117211a, type: 3}
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - 'Careful: There are obstacles in your path.'

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa4ab502aba62c747bb0a177c14eb8f8, type: 3}
-  m_Name: WhenFightEnemy
+  m_Name: IntroDialogue
   m_EditorClassIdentifier: 
   speedSettings:
     typewriterSpeed: 0.05
@@ -19,45 +19,53 @@ MonoBehaviour:
     timeBetweenQueuedDialogue: 1
   priority: 0
   queueable: 0
-  probability: 0.114
+  probability: 1
   onFinishMessage: 
   conversationVariations:
   - lines:
     - speaker: Arlo Lynx
       portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
-      - Eat rocks!
-  - lines:
-    - speaker: Ship Computer
-      portrait: {fileID: 0}
-      sentences:
-      - Impressive hit.
-    - speaker: Arlo Lynx
-      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
-      sentences:
-      - Not too shabby, if I can say so myself.
-  - lines:
-    - speaker: Arlo Lynx
-      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
-      sentences:
-      - How many more can there be? We need to find a way out of here.
-  - lines:
-    - speaker: Arlo Lynx
-      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
-      sentences:
-      - Ha! That'll teach you!
-  - lines:
-    - speaker: Arlo Lynx
-      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
-      sentences:
-      - That's what I thought!
-  - lines:
+      - Do you know where we are yet?
     - speaker: Ship Computer
       portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
-      - "Solid hit\u2014keep it up!"
-  - lines:
+      - Negative. Long-range scanner is still damaged.
+    - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
+      sentences:
+      - "Great\u2026 Can you identify that metal structure?"
     - speaker: Ship Computer
       portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
-      - Direct hit!
+      - "The structure is not within my available data library. Short-range scanner
+        is unable to penetrate the structure\u2019s hull."
+    - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
+      sentences:
+      - Who made it?
+    - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
+      sentences:
+      - Unable to identify.
+    - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
+      sentences:
+      - Well, what can you tell me?
+    - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
+      sentences:
+      - Scanner detects abnormal gravitational readings emanating from the structure.
+        Scanner also detects a nearby shipyard with repair capabilities.
+    - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
+      sentences:
+      - "A shipyard? Why didn\u2019t you say anything?"
+    - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
+      sentences:
+      - No previous queries have requested data about shipyards.
+    - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
+      sentences:
+      - "Fine\u2026 Set a course for the shipyard."
