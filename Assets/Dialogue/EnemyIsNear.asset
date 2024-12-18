@@ -19,49 +19,61 @@ MonoBehaviour:
     timeBetweenQueuedDialogue: 1
   priority: 0
   queueable: 0
-  probability: 0.831
+  probability: 1
+  onFinishMessage: 
   conversationVariations:
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - 'An object just appeared on the radar. '
       - "It's moving fast\u2014toward us."
     - speaker: Arlo Lynx
+      portrait: {fileID: 0}
       sentences:
       - Great... We've got company.
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - Danger detected.
       - A ship appeared on the radar. It's getting closer.
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - Danger detected.
       - Stay alert.
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - 'Warning: Enemies are approaching!'
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - 'Warning: Enemies detected.'
     - speaker: Arlo Lynx
+      portrait: {fileID: 0}
       sentences:
       - You've got to be kidding me...
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - No. No, I'm not.
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - Danger detected.
       - Enemies are approaching.
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - 'Warning: Enemy detected on the radar.'
     - speaker: Arlo Lynx
+      portrait: {fileID: 0}
       sentences:
       - Oh, give me a break...

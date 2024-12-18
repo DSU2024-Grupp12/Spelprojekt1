@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class HealthBar : MonoBehaviour
@@ -6,10 +7,20 @@ public class HealthBar : MonoBehaviour
     private SerializedInterface<IUIValueProvider<float>> providerObject;
     private IUIValueProvider<float> provider;
 
+    [SerializeField]
+    private PlayerReference playerRef;
+    [SerializeField]
+    private string shieldOrHull;
+
     private RectTransform rect;
 
     private void Start() {
-        provider = providerObject.extract;
+        if (providerObject.Defined()) provider = providerObject.extract;
+        else {
+            provider = playerRef.player.GetComponents<IUIValueProvider<float>>()
+                                .Where(p => p.GetID() == shieldOrHull)
+                                .First();
+        }
         rect = GetComponent<RectTransform>();
     }
 

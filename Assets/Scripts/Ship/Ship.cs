@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Ship : MonoBehaviour
+public class Ship : MonoBehaviour, IUIValueProvider<float>
 {
     [SerializeField]
     private ParticleSystem explosionPrefab;
@@ -219,6 +219,18 @@ public class Ship : MonoBehaviour
     private Vector2 GetDirectionVector(float eulerAngleZ) {
         float theta = (eulerAngleZ % 360) * Mathf.Deg2Rad;
         return new Vector2(-Mathf.Sin(theta), Mathf.Cos(theta));
+    }
+    /// <inheritdoc />
+    public string GetID() {
+        return "ship";
+    }
+    /// <inheritdoc />
+    public float BaseValue() {
+        return 0;
+    }
+    /// <inheritdoc />
+    public float CurrentValue() {
+        return body.velocity.magnitude;
     }
 }
 

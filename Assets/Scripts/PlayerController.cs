@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float onDeathSceneLoadDelay;
 
+    private void Awake() {
+        PlayerReference.SetPlayer(gameObject);
+    }
+
     void Start() {
         playerShip = GetComponent<Ship>();
         if (defaultPrimaryTool) primaryTool = Instantiate(defaultPrimaryTool, toolMount, false);

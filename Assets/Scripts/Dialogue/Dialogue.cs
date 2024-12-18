@@ -11,6 +11,8 @@ public class Dialogue : ScriptableObject
     [Range(0, 1)]
     public float probability = 1f;
 
+    public string onFinishMessage;
+
     public Conversation[] conversationVariations;
 
     public Conversation conversation {
