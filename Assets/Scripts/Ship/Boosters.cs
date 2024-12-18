@@ -40,26 +40,21 @@ public class Boosters : MonoBehaviour, IUIValueProvider<float>
 
     public void Update() {
         if (inDelay) {
-            Debug.Log("Delay");
             return;
         }
         if (inactive) {
-            Debug.Log("inactive");
             return;
         }
         if (boosting && remaingBoost > 0) {
             // boost normally
-            Debug.Log("boost");
             remaingBoost -= Time.deltaTime;
         }
         if (boosting && remaingBoost < 0) {
             // boost depleted
-            Debug.Log("boost depleted");
             StartCoroutine(BoostRecoveryDelay(boostDepletedDelay, boostActiveDelay));
             remaingBoost = 0;
         }
         if (!boosting) {
-            Debug.Log("Recovering");
             remaingBoost = Mathf.Max(0, remaingBoost);
             remaingBoost += boostRecovery * Time.deltaTime;
             remaingBoost = Mathf.Min(boostLength, remaingBoost);
@@ -72,7 +67,6 @@ public class Boosters : MonoBehaviour, IUIValueProvider<float>
         yield return new WaitForSeconds(recoveryDelay);
         inDelay = false;
         while (remaingBoost < inactiveDelay) {
-            Debug.Log("Recovering");
             remaingBoost += boostRecovery * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }

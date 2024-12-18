@@ -85,6 +85,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipyardMenuID: Shipyard
   highlightPrompt: {fileID: 7114683998931331269}
+  repairCost: 0
+  repairAmount: 300
   availableUpgradeModules:
   - {fileID: 11400000, guid: 15a836b44fe438a4487cfd1bee733f85, type: 2}
   - {fileID: 11400000, guid: 9aac0a5178d78584282ed60e40249f94, type: 2}

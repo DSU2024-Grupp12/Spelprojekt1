@@ -13,12 +13,16 @@ public class Shipyard : MonoBehaviour, IInteractable
     private const string UpgradeItem1Purple = "UpgradeItem1PurpleCost";
     private const string UpgradeItem2Purple = "UpgradeItem2PurpleCost";
     private const string UpgradeItem3Purple = "UpgradeItem3PurpleCost";
+    private const string RepairShipCost = "RepairShipCost";
 
     [SerializeField]
     private string shipyardMenuID;
 
     [SerializeField]
     private Canvas highlightPrompt;
+
+    [SerializeField]
+    private int repairCost, repairAmount;
 
     [SerializeField]
     private UpgradeModule[] availableUpgradeModules;
@@ -38,14 +42,20 @@ public class Shipyard : MonoBehaviour, IInteractable
 
     public void Interact() {
         if (shipyardUpgradeUsed) {
-            Popup.Display("Shipyard unavailable", 1f);
+            Popup.Display("Shipyard used", 1f);
+            return;
+        }
+        if (EnemySpawner.InWave) {
+            Popup.Display("Too many enemies nearby", 1f);
             return;
         }
         Unhighlight();
         MenuManager.Instance.OpenMenu(shipyardMenuID, BuildMenuInfo());
+        EnemySpawner.LockEnemySpawning();
         if (player) {
             IInteractable.LockPlayer(player.GetComponent<Rigidbody2D>());
         }
+
         MenuManager.OnReturnToGameplay += ShipyardMenuClosed;
     }
 
@@ -88,6 +98,7 @@ public class Shipyard : MonoBehaviour, IInteractable
                 info.AddEntry(UpgradeItem1Purple, module1.purpleResourceCost.ToString());
                 info.AddEntry(UpgradeItem2Purple, module2.purpleResourceCost.ToString());
                 info.AddEntry(UpgradeItem3Purple, module3.purpleResourceCost.ToString());
+                info.AddEntry(RepairShipCost, repairCost.ToString(), RepairShipDelegate());
 
                 return info;
             default: return new MenuInfo();
@@ -116,8 +127,22 @@ public class Shipyard : MonoBehaviour, IInteractable
         };
     }
 
+    private UnityAction RepairShipDelegate() {
+        return () => {
+            Hull playerHull = player.GetComponent<Hull>();
+            if (playerHull.RepairHull(repairAmount)) {
+                shipyardUpgradeUsed = true;
+                MenuManager.Instance.ReturnToGameplay();
+            }
+            else {
+                Popup.Display("Ship does not need repair.", 1f);
+            }
+        };
+    }
+
     private void ShipyardMenuClosed() {
         Highlight();
         MenuManager.OnReturnToGameplay -= ShipyardMenuClosed;
+        EnemySpawner.UnlockEnemySpawning();
     }
 }

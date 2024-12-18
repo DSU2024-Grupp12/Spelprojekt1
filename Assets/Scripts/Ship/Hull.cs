@@ -109,11 +109,13 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
         }
     }
 
-    public void RepairHull(float repairAmount) {
+    public bool RepairHull(float repairAmount) {
+        if (Mathf.Approximately(currentStrength, strength)) return false;
         currentStrength = Mathf.Min(strength, currentStrength + repairAmount);
         if (currentStrength > strength * takeDamageEvents.lowHullStrengthThreshold) {
             takeDamageEvents.lowHullStrengthReached = false;
         }
+        return true;
     }
 
     public void SetHullStrength(float newStrength) {

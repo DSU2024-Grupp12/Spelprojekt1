@@ -188,7 +188,8 @@ public class Ship : MonoBehaviour, IUIValueProvider<float>
             return;
         }
 
-        if (accelerating || boosters.boosting) thrusters.back.Play();
+        if (accelerating) thrusters.back.Play();
+        else if (boosters && boosters.boosting) thrusters.back.Play();
         else thrusters.back.Stop();
 
         if (deaccelerating) thrusters.front.Play();
