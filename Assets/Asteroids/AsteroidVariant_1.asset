@@ -19,8 +19,8 @@ MonoBehaviour:
   distribution: 1
   mean: 50
   standardDeviation: 300
-  minMass: 20
-  maxMass: 400
+  minMass: 80
+  maxMass: 100
   resources: []
   explosionPrefab: {fileID: 392244509131473519, guid: 5b179a84b0756494bb489c9713ed77f1, type: 3}
   minExplodeInto: 0

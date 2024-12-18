@@ -136,6 +136,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.03
@@ -178,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
@@ -214,6 +226,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.04
@@ -256,7 +280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
@@ -292,6 +316,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.25
@@ -334,7 +370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
@@ -425,6 +461,10 @@ PrefabInstance:
     - target: {fileID: 566960618467579412, guid: ea45a04fe0d010c4a9f349b8e057432a, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 755096606577708467, guid: ea45a04fe0d010c4a9f349b8e057432a, type: 3}
+      propertyPath: strength.baseValue
+      value: 200000
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: ea45a04fe0d010c4a9f349b8e057432a, type: 3}
       propertyPath: m_Mass
@@ -564,6 +604,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.26
@@ -606,7 +658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
@@ -698,6 +750,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 755096606577708467, guid: ea45a04fe0d010c4a9f349b8e057432a, type: 3}
+      propertyPath: strength.baseValue
+      value: 200000
+      objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: ea45a04fe0d010c4a9f349b8e057432a, type: 3}
       propertyPath: m_Mass
       value: 300
@@ -729,6 +785,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.12
@@ -771,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
@@ -807,6 +875,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.91
@@ -849,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
@@ -885,6 +965,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.28
@@ -927,7 +1019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
@@ -963,6 +1055,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.37
@@ -1005,7 +1109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
@@ -1041,6 +1145,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1693870237219455340}
     m_Modifications:
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 125885321366543539, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6509804
+      objectReference: {fileID: 0}
     - target: {fileID: 566960618467579412, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.26
@@ -1083,7 +1199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647210561910697334, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: m_Mass
-      value: 80
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5806247055375016572, guid: da12b8302fe981744a2705d6dd4e9ccf, type: 3}
       propertyPath: resources.Array.data[0].resource
