@@ -181,7 +181,7 @@ MonoBehaviour:
     highGood: 1
   collideWith:
     serializedVersion: 2
-    m_Bits: 960
+    m_Bits: 13248
   layerModifiers:
   - layer: Drill
     modifier: 3
