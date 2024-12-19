@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4ab502aba62c747bb0a177c14eb8f8, type: 3}
+  m_Name: LoremIpsum
+  m_EditorClassIdentifier: 
+  speedSettings:
+    typewriterSpeed: 0.05
+    timeBetweenSentences: 0
+    timeBetweenLines: 0
+    endOfDialogueLingerTime: 10
+    timeBetweenQueuedDialogue: 0
+  priority: 0
+  queueable: 0
+  probability: 1
+  onFinishMessage: introFinished
+  conversationVariations:
+  - lines:
+    - speaker: 
+      portrait: {fileID: 0}
+      sentences:
+      - "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit, sed do eiusmod
+        tempor \nincididunt ut labore et dolore magna aliqua. \n                \nUt
+        enim ad minim veniam, quis nostrud \nexercitation ullamco laboris nisi ut
+        aliquip ex \nea commodo consequat. Duis aute irure dolor \nin reprehenderit
+        in voluptate velit esse cillum \ndolore eu fugiat nulla pariatur. \n               
+        \nExcepteur sint occaecat cupidatat non \nproident, sunt in culpa qui officia
+        deserunt \nmollit anim id est laborum.\n\r"

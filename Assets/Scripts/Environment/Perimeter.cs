@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class Perimeter : MonoBehaviour
 {
     [SerializeField]
-    private AsteriodSpawner asteroidSpawner;
+    private float perimeterRadius;
 
     [SerializeField]
     private Hull playerHull;
@@ -17,16 +17,18 @@ public class Perimeter : MonoBehaviour
     private float outsideTimer;
     private bool exitPerimeter;
 
+    private ParticleSystem nebula;
+
     public UnityEvent OnExitPerimeter;
 
     void Start() {
-        SetNebulaScale();
+        nebula = GetComponentInChildren<ParticleSystem>();
     }
 
     void Update() {
         if (playerHull) {
             float distanceFromCenter = playerHull.transform.position.magnitude;
-            if (distanceFromCenter > asteroidSpawner.radius) {
+            if (distanceFromCenter > perimeterRadius) {
                 outsideTimer += Time.deltaTime;
                 if (!exitPerimeter) {
                     exitPerimeter = true;
@@ -39,16 +41,10 @@ public class Perimeter : MonoBehaviour
             }
 
             if (outsideTimer - damageInterval >= 0) {
-                playerHull.TakeRawDamage(damageAmount);
+                Debug.Log("deal perimeter damage");
+                playerHull.TakeRawDamage(damageAmount * (distanceFromCenter - perimeterRadius));
                 outsideTimer = 0f;
             }
         }
-    }
-
-    public void SetNebulaScale() {
-        Vector3 scale = transform.localScale;
-        scale.x = asteroidSpawner.radius * 2;
-        scale.y = asteroidSpawner.radius * 2;
-        transform.localScale = scale;
     }
 }

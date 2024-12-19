@@ -46,5 +46,6 @@ public struct SpeedSettings
         typewriterSpeed,
         timeBetweenSentences,
         timeBetweenLines,
+        endOfDialogueLingerTime,
         timeBetweenQueuedDialogue;
 }

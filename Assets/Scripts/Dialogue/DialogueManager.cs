@@ -30,8 +30,9 @@ public class DialogueManager : MonoBehaviour
     private SortedList<int, Dialogue> queuedDialogues;
 
     private bool inDialogue {
-        get => dialogueBoxAnimator.GetBool("InDialogue");
-        set => dialogueBoxAnimator.SetBool("InDialogue", value);
+        set {
+            if (dialogueBoxAnimator) dialogueBoxAnimator.SetBool("InDialogue", value);
+        }
     }
 
     private bool processingDialogue;
@@ -66,6 +67,7 @@ public class DialogueManager : MonoBehaviour
             speedSettings = highestPriority.speedSettings;
             yield return ProcessConversation(highestPriority.conversation);
             OnDialogueFinished?.Invoke(highestPriority.onFinishMessage);
+            yield return new WaitForSecondsRealtime(speedSettings.endOfDialogueLingerTime);
             EndDialogue();
             yield return new WaitForSecondsRealtime(speedSettings.timeBetweenQueuedDialogue);
         }
@@ -86,8 +88,8 @@ public class DialogueManager : MonoBehaviour
     }
 
     private IEnumerator ProcessLine(Line line) {
-        nameField.text = line.speaker;
-        portrait.sprite = line.portrait;
+        if (nameField) nameField.text = line.speaker;
+        if (portrait) portrait.sprite = line.portrait;
 
         Queue<string> sentences = new();
         foreach (string sentence in line.sentences) {
@@ -108,7 +110,7 @@ public class DialogueManager : MonoBehaviour
         dialogueField.text = "";
         foreach (char c in sentence) {
             dialogueField.text += c;
-            typewriterSource.PlayOneShot(typewriterClip);
+            if (c != ' ') typewriterSource.PlayOneShot(typewriterClip);
             yield return new WaitForSecondsRealtime(speedSettings.typewriterSpeed);
         }
     }
@@ -116,7 +118,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue() {
         inDialogue = false;
         dialogueField.text = "";
-        nameField.text = "";
+        if (nameField) nameField.text = "";
     }
 
     public void StartDialogue() {
