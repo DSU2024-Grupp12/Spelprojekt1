@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matrixID: drillMatrix
   displayName: Drill
+  stackModules: 0
 --- !u!114 &4809108308206089944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +117,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 141312
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

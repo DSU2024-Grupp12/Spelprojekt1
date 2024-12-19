@@ -5191,6 +5191,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 104c1002-2a23-4cce-8062-45db2859a3e2
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1fdb10df-c4d7-4c0b-94be-776a2aea5715
+    m_ActionName: Player/Map[/Keyboard/m]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -5328,12 +5332,12 @@ MonoBehaviour:
     attributeID: boostFactor
     highGood: 1
   boostLength:
-    baseValue: 3
+    baseValue: 5
     matrix: {fileID: 45005349452178148}
     attributeID: boostLength
     highGood: 1
   boostRecovery:
-    baseValue: 0.4
+    baseValue: 1.4
     matrix: {fileID: 45005349452178148}
     attributeID: boostRecovery
     highGood: 1
@@ -5366,6 +5370,7 @@ MonoBehaviour:
     matrix: {fileID: 45005349452178148}
     attributeID: hullStrength
     highGood: 1
+  inCloud: 0
   threshold:
     baseValue: 100
     matrix: {fileID: 45005349452178148}
@@ -5721,7 +5726,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 141312
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

@@ -60,4 +60,14 @@ public static class UnityExtensions
         float theta = (eulerAngleZ % 360) * Mathf.Deg2Rad;
         return new Vector2(-Mathf.Sin(theta), Mathf.Cos(theta));
     }
+
+    public static bool HasComponent<T>(this GameObject gameObject, out T component) where T : Component {
+        component = gameObject.GetComponent<T>();
+        return component;
+    }
+
+    public static bool HasComponent<T>(this Component component1, out T component2) where T : Component {
+        component2 = component1.GetComponent<T>();
+        return component2;
+    }
 }

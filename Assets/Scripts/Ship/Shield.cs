@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Shield : MonoBehaviour, IUIValueProvider<float>
@@ -35,9 +34,9 @@ public class Shield : MonoBehaviour, IUIValueProvider<float>
     /// </summary>
     /// <returns>Returns true if any damage was absorbed, and false if not</returns>
     public bool AbsorbDamage(ref float damage) {
-        if (currentCapacity <= 0 || damage <= 0) return false;
-
+        if (damage <= 0) return false;
         timeUntilRegenStart = Time.time + regenerationCooldown;
+        if (currentCapacity <= 0) return false;
 
         // absorb damage based on absorbtion rate, unless it exceeds absorbtionlimit
         float absorbedDamage = Mathf.Min(damage * absorbtionRate, absorbtionLimit);

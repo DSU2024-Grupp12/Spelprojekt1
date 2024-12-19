@@ -16,6 +16,8 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
     private float invincibilityWindow = 0.2f;
     private float endOfInvincibility;
 
+    public bool inCloud;
+
     [SerializeField, Tooltip("The minimum amount of kinetic energy required before any damage is dealt.\n(Min 0)")]
     private Upgradeable threshold;
 
@@ -51,7 +53,11 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
         TakeDamage(pseudoKineticEnergy, other.gameObject.layer);
     }
 
-    public void TakeDamage(float damage, int incurringLayer = 0) {
+    /// <summary>
+    /// Deals damage to the hull, adjusting for hulls dampening, threshold and layer modifiers
+    /// </summary>
+    /// <returns>True if the damage would reduce the current hull to 0 or less</returns>
+    public bool TakeDamage(float damage, int incurringLayer = 0) {
         float layerModifier = 1;
         float layerMax = float.MaxValue;
         foreach (LayerModifier modifier in layerModifiers) {
@@ -69,11 +75,15 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
             }
         }
 
-        TakeRawDamage(modifiedDamage, incurringLayer);
+        return TakeRawDamage(modifiedDamage, incurringLayer);
     }
 
-    public void TakeRawDamage(float rawDamage, int incurringLayer = 0) {
-        if (rawDamage <= 0) return;
+    /// <summary>
+    /// Deals damage to the hull, not adjusting for hulls dampening, threshold, layer modifiers and shield
+    /// </summary>
+    /// <returns>True if the damage would reduce the current hull to 0 or less</returns>
+    public bool TakeRawDamage(float rawDamage, int incurringLayer = 0) {
+        if (rawDamage <= 0) return false;
 
         currentStrength -= rawDamage;
 
@@ -82,7 +92,7 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
         if (currentStrength <= 0 && !hullDestroyed) {
             hullDestroyed = true;
             HullDestroyed.Invoke();
-            return;
+            return true;
         }
 
         if (rawDamage >= takeDamageEvents.significantDamageThreshold * strength) {
@@ -107,6 +117,7 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
                 takeDamageEvents.lowHullStrengthReached = true;
             }
         }
+        return false;
     }
 
     public bool RepairHull(float repairAmount) {

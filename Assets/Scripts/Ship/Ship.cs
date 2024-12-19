@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -228,7 +229,8 @@ public class Ship : MonoBehaviour, IUIValueProvider<float>
     }
     /// <inheritdoc />
     public float CurrentValue() {
-        return body.velocity.magnitude;
+        if (body) return body.velocity.magnitude;
+        else return 0;
     }
 }
 
