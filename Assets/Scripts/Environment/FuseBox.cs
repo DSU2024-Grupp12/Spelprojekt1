@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Hull))]
@@ -12,7 +13,10 @@ public class FuseBox : MonoBehaviour
     [SerializeField]
     private SerializedInterface<IElectrical>[] devices;
 
+    private List<Transform> connectors;
+
     private void Start() {
+        connectors = new();
         if (connectorPrefab) {
             foreach (SerializedInterface<IElectrical> device in devices) {
                 Vector2 position = device.gameObject.transform.position;
@@ -20,7 +24,7 @@ public class FuseBox : MonoBehaviour
                 Transform connector = Instantiate(
                     connectorPrefab,
                     transform.position + Vector3.forward * 5,
-                    Quaternion.FromToRotation(transform.up, to)
+                    Quaternion.FromToRotation(Vector3.up, to.normalized)
                 );
 
                 connector.localScale = new Vector3(1, to.magnitude, 1);
@@ -28,9 +32,10 @@ public class FuseBox : MonoBehaviour
                 foreach (ParticleSystem system in connector.GetComponentsInChildren<ParticleSystem>()) {
                     ParticleSystem.MainModule main = system.main;
                     main.startLifetime = connector.localScale.y;
+                    system.Play();
                 }
 
-                connector.transform.SetParent(transform);
+                connectors.Add(connector);
             }
         }
     }
@@ -43,6 +48,9 @@ public class FuseBox : MonoBehaviour
             Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y, -3);
             Instantiate(explosionPrefab, explosionPosition, transform.rotation)
                 .transform.localScale = transform.localScale;
+        }
+        foreach (Transform connector in connectors) {
+            Destroy(connector.gameObject);
         }
         Destroy(gameObject);
     }

@@ -5,6 +5,9 @@ using Random = Unity.Mathematics.Random;
 public class AsteriodSpawner : MonoBehaviour
 {
     [SerializeField]
+    private bool recreateAsteroidsOnStart;
+
+    [SerializeField]
     private AsteroidVariant[] variants;
     private Dictionary<AsteroidVariant, float> weightTable;
     private List<(float, AsteroidVariant)> probabilityTable;
@@ -29,7 +32,7 @@ public class AsteriodSpawner : MonoBehaviour
     public float radius;
 
     void Awake() {
-        CreateAsteroids();
+        if (recreateAsteroidsOnStart) CreateAsteroids();
     }
 
     public void ClearAsteroids() {

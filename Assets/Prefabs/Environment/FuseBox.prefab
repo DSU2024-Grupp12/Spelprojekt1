@@ -66,7 +66,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -83,18 +83,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022998333, y: 0.022998929}
+  m_Offset: {x: 1.0732985, y: 0.022999048}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 5}
+    oldSize: {x: 7.77, y: 6.79}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.839939, y: 4.817877}
+  m_Size: {x: 5.324876, y: 6.0739017}
   m_EdgeRadius: 0
 --- !u!50 &5503893291003081976
 Rigidbody2D:
@@ -104,7 +104,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9171797434866392257}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 3
 --- !u!114 &4117439876431639796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
     matrix: {fileID: 0}
     attributeID: 
     highGood: 1
+  inCloud: 0
   threshold:
     baseValue: 0
     matrix: {fileID: 0}
@@ -153,7 +154,7 @@ MonoBehaviour:
     highGood: 1
   collideWith:
     serializedVersion: 2
-    m_Bits: 5056
+    m_Bits: 21440
   layerModifiers:
   - layer: 
     modifier: 0
@@ -251,7 +252,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 032e257c88aa92640b522e465482e607, type: 3}
+  m_Sprite: {fileID: -988530873, guid: d3f22ecccffefbd4e96fac3fcfff7e2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
