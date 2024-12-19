@@ -179,13 +179,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The standard Lorem Ipsum passage, used since the 1500s\r\n\"Lorem ipsum
-    dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-    ut labore et dolore magna aliqua.\n\nUt enim ad minim veniam, quis nostrud exercitation
-    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    \n\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-    deserunt mollit anim id est laborum.\"\r\n\r"
+  m_text: "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit, sed do eiusmod
+    tempor \nincididunt ut labore et dolore magna aliqua. \n                \nUt
+    enim ad minim veniam, quis nostrud \nexercitation ullamco laboris nisi ut aliquip
+    ex \nea commodo consequat. Duis aute irure dolor \nin reprehenderit in voluptate
+    velit esse cillum \ndolore eu fugiat nulla pariatur. \n                \nExcepteur
+    sint occaecat cupidatat non \nproident, sunt in culpa qui officia deserunt \nmollit
+    anim id est laborum.\n\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -394,7 +394,7 @@ MonoBehaviour:
   portrait: {fileID: 0}
   dialogueBoxAnimator: {fileID: 0}
   typewriterSource: {fileID: 297191575}
-  typewriterClip: {fileID: 8300000, guid: e5a40afe55546cf4a89f4a42b2c033b1, type: 3}
+  typewriterClip: {fileID: 8300000, guid: b1cc02bb35b4d9a4fb914a61d35cbbc6, type: 3}
   OnDialogueFinished:
     m_PersistentCalls:
       m_Calls:

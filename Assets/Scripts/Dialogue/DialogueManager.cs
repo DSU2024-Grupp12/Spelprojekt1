@@ -67,6 +67,7 @@ public class DialogueManager : MonoBehaviour
             speedSettings = highestPriority.speedSettings;
             yield return ProcessConversation(highestPriority.conversation);
             OnDialogueFinished?.Invoke(highestPriority.onFinishMessage);
+            yield return new WaitForSecondsRealtime(speedSettings.endOfDialogueLingerTime);
             EndDialogue();
             yield return new WaitForSecondsRealtime(speedSettings.timeBetweenQueuedDialogue);
         }
@@ -109,7 +110,7 @@ public class DialogueManager : MonoBehaviour
         dialogueField.text = "";
         foreach (char c in sentence) {
             dialogueField.text += c;
-            typewriterSource.PlayOneShot(typewriterClip);
+            if (c != ' ') typewriterSource.PlayOneShot(typewriterClip);
             yield return new WaitForSecondsRealtime(speedSettings.typewriterSpeed);
         }
     }
