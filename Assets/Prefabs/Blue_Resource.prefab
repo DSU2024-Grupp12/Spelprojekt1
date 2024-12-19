@@ -70,6 +70,7 @@ MonoBehaviour:
     matrix: {fileID: 0}
     attributeID: 
     highGood: 1
+  inCloud: 0
   threshold:
     baseValue: 0
     matrix: {fileID: 0}
@@ -82,7 +83,7 @@ MonoBehaviour:
     highGood: 1
   collideWith:
     serializedVersion: 2
-    m_Bits: 960
+    m_Bits: 9152
   layerModifiers:
   - layer: Drill
     modifier: 3
