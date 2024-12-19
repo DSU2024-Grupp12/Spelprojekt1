@@ -87,6 +87,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void HoldCheatSheet(InputAction.CallbackContext context) {
+        if (context.performed) {
+            MenuManager.Instance.ToggleMenuAsOverlay("CheatSheet", true);
+        }
+        if (context.canceled) {
+            MenuManager.Instance.ToggleMenuAsOverlay("CheatSheet", false);
+        }
+    }
+
     public void LoadOnDeathScene() {
         ApplicationHandler.ChangeSceneDelayed(onDeathSceneLoadName, onDeathSceneLoadDelay);
     }

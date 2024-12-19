@@ -55,8 +55,26 @@ public class MenuManager : MonoBehaviour
         return menu;
     }
 
+    public void ToggleMenuAsOverlay(string menuId, bool on) {
+        ToggleMenuAsOverlay(menuId, null, on);
+    }
+
+    public void ToggleMenuAsOverlay(string menuId, MenuInfo info, bool on) {
+        Menu menu = GetMenuByID(menuId);
+        if (on) {
+            if (info != null) menu.Open(info);
+            else menu.Open();
+        }
+        else {
+            menu.Close();
+        }
+    }
+
     public void HideGameplayOverlay() {
         gameplayOverlay.enabled = false;
+    }
+    public void UnhideGameplayOverlay() {
+        gameplayOverlay.enabled = true;
     }
 
     private void CloseAllMenus() {
