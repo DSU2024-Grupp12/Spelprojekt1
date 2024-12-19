@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91de0eeb8fc7f14aa7db93159a9672e, type: 3}
+  m_Name: 50_Purple_ResourceAsteroid
+  m_EditorClassIdentifier: 
+  basePrefab: {fileID: 8825375572312753335, guid: 4d817a36c3220194aab53fd96bee99d7, type: 3}
+  sprite: {fileID: -444679597, guid: 11605f84264831149bf7923eecf686e5, type: 3}
+  colorModifier: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
+  hullStrengthFactor: 10
+  distribution: 0
+  mean: 50
+  standardDeviation: 300
+  minMass: 20
+  maxMass: 20
+  resources:
+  - resource: {fileID: 6696321602402826667, guid: 9f37fcd4d465d064dae4d4493dcbe6ac, type: 3}
+    minDroppedPer10UnitMass: 0
+    maxDroppedPer10UnitMass: 0
+    minValuePer10UnitMass: 0
+    maxValuePer10UnitMass: 0
+    minNumber: 10
+    maxNumber: 10
+    minValue: 5
+    maxValue: 5
+  explosionPrefab: {fileID: 392244509131473519, guid: 5b179a84b0756494bb489c9713ed77f1, type: 3}
+  minExplodeInto: 0
+  maxExplodeInto: 0
+  explodeInto: []
