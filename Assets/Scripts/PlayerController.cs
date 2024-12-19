@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
 [RequireComponent(typeof(Ship))]
 public class PlayerController : MonoBehaviour
@@ -32,39 +33,39 @@ public class PlayerController : MonoBehaviour
         if (defaultSecondaryTool) secondaryTool = Instantiate(defaultSecondaryTool, toolMount, false);
     }
 
-    public void Accelerate(InputAction.CallbackContext context) {
+    public void Accelerate(CallbackContext context) {
         playerShip.accelerating = context.ReadValueAsButton();
     }
 
-    public void Deaccelerate(InputAction.CallbackContext context) {
+    public void Deaccelerate(CallbackContext context) {
         playerShip.deaccelerating = context.ReadValueAsButton();
     }
 
-    public void TurnClockwise(InputAction.CallbackContext context) {
+    public void TurnClockwise(CallbackContext context) {
         playerShip.turningClockwise = context.ReadValueAsButton();
     }
 
-    public void TurnCounterClockwise(InputAction.CallbackContext context) {
+    public void TurnCounterClockwise(CallbackContext context) {
         playerShip.turningCounterClockwise = context.ReadValueAsButton();
     }
 
-    public void StrafeStarBoard(InputAction.CallbackContext context) {
+    public void StrafeStarBoard(CallbackContext context) {
         playerShip.strafingStarBoard = context.ReadValueAsButton();
     }
 
-    public void StrafePort(InputAction.CallbackContext context) {
+    public void StrafePort(CallbackContext context) {
         playerShip.strafingPort = context.ReadValueAsButton();
     }
 
-    public void Boost(InputAction.CallbackContext context) {
+    public void Boost(CallbackContext context) {
         playerShip.boosters.boosting = context.ReadValueAsButton();
     }
 
-    public void Stop(InputAction.CallbackContext context) {
+    public void Stop(CallbackContext context) {
         playerShip.stopping = context.ReadValueAsButton();
     }
 
-    public void PrimaryActivateTool(InputAction.CallbackContext context) {
+    public void PrimaryActivateTool(CallbackContext context) {
         primaryTool.Unhide();
         primaryTool.ActivateTool(context);
         if (secondaryTool) {
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SecondaryActivateTool(InputAction.CallbackContext context) {
+    public void SecondaryActivateTool(CallbackContext context) {
         if (secondaryTool) {
             primaryTool.Hide();
             secondaryTool.Unhide();
@@ -80,14 +81,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void CancelTool(InputAction.CallbackContext context) {
+    public void CancelTool(CallbackContext context) {
         if (context.performed) {
             if (primaryTool) primaryTool.Cancel();
             if (secondaryTool) secondaryTool.Cancel();
         }
     }
 
-    public void HoldCheatSheet(InputAction.CallbackContext context) {
+    public void HoldCheatSheet(CallbackContext context) {
         if (context.performed) {
             MenuManager.Instance.ToggleMenuAsOverlay("CheatSheet", true);
         }
@@ -100,7 +101,9 @@ public class PlayerController : MonoBehaviour
         ApplicationHandler.ChangeSceneDelayed(onDeathSceneLoadName, onDeathSceneLoadDelay);
     }
 
-    public void ReturnToGameplay() {
-        MenuManager.Instance.ReturnToGameplay();
+    public void ReturnToGameplay(CallbackContext context) {
+        if (context.performed) {
+            MenuManager.Instance.ReturnToGameplay();
+        }
     }
 }
