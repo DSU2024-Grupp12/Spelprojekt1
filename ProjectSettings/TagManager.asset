@@ -20,9 +20,9 @@ TagManager:
   - DestructableEnvironment
   - Obstacle
   - Drill
-  - 
-  - 
-  - 
+  - Minimap
+  - Background
+  - Effect
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MinimapRing1
+    uniqueID: 822703727
+    locked: 0
+  - name: MinimapRing2
+    uniqueID: 3649784967
+    locked: 0
+  - name: MinimapRing3
+    uniqueID: 2981519467
+    locked: 0
+  - name: MinimapRing4
+    uniqueID: 1617327747
+    locked: 0
+  - name: MinimapRing5
+    uniqueID: 847751989
+    locked: 0
+  - name: MinimapRing6
+    uniqueID: 1391678763
     locked: 0

@@ -20,43 +20,54 @@ MonoBehaviour:
   priority: 0
   queueable: 0
   probability: 0.468
+  onFinishMessage: 
   conversationVariations:
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - 'Warning: Power levels are dropping.'
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - Hold on. I'm going to fix this.
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - The ship has sustained critical damage.
       - Systems are failing.
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - "No, no, no\u2014hold on. I've got this."
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - 'Warning: Power levels are dropping.'
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - 'Warning: Ship is in critical state.'
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - 'Warning: Immediate repairs are required.'
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - The ship is critically damaged.
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - The ship has sustained critical damage.
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - Uh-oh, we're losing power!

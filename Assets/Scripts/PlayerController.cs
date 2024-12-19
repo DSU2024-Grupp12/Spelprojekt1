@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float onDeathSceneLoadDelay;
 
+    private void Awake() {
+        PlayerReference.SetPlayer(gameObject);
+    }
+
     void Start() {
         playerShip = GetComponent<Ship>();
         if (defaultPrimaryTool) primaryTool = Instantiate(defaultPrimaryTool, toolMount, false);
@@ -53,7 +57,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Boost(InputAction.CallbackContext context) {
-        playerShip.boosting = context.ReadValueAsButton();
+        playerShip.boosters.boosting = context.ReadValueAsButton();
     }
 
     public void Stop(InputAction.CallbackContext context) {
@@ -61,11 +65,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public void PrimaryActivateTool(InputAction.CallbackContext context) {
+        primaryTool.Unhide();
         primaryTool.ActivateTool(context);
+        if (secondaryTool) {
+            secondaryTool.Hide();
+        }
     }
 
     public void SecondaryActivateTool(InputAction.CallbackContext context) {
-        if (secondaryTool) secondaryTool.ActivateTool(context);
+        if (secondaryTool) {
+            primaryTool.Hide();
+            secondaryTool.Unhide();
+            secondaryTool.ActivateTool(context);
+        }
     }
 
     public void CancelTool(InputAction.CallbackContext context) {

@@ -20,8 +20,15 @@ MonoBehaviour:
   priority: 0
   queueable: 1
   probability: 1
+  onFinishMessage: 
   conversationVariations:
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
-      - "F\xF6r l\xE5ngt bort, \xE5k tillbaka tack"
+      - 'Warning: Power levels are dropping.'
+      - Steer out of the cloud.
+    - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
+      sentences:
+      - Stay out of the electromagnetic cloud!

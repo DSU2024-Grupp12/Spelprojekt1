@@ -8,4 +8,6 @@ public abstract class Tool : MonoBehaviour
 
     public abstract void ActivateTool(InputAction.CallbackContext context);
     public virtual void Cancel() { }
+    public virtual void Hide() { }
+    public virtual void Unhide() { }
 }

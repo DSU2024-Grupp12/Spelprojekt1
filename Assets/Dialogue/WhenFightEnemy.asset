@@ -20,35 +20,44 @@ MonoBehaviour:
   priority: 0
   queueable: 0
   probability: 0.114
+  onFinishMessage: 
   conversationVariations:
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - Eat rocks!
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: 0}
       sentences:
       - Impressive hit.
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - Not too shabby, if I can say so myself.
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - How many more can there be? We need to find a way out of here.
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - Ha! That'll teach you!
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - That's what I thought!
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - "Solid hit\u2014keep it up!"
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - Direct hit!

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5015595737348811599}
   - component: {fileID: 392244509131473519}
   - component: {fileID: 2323661583070811288}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: dustExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}

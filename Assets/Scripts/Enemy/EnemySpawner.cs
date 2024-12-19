@@ -21,9 +21,13 @@ public class EnemySpawner : MonoBehaviour
 
     private float timeUntilNextWave;
     public static bool InWave { get; private set; }
+    private static bool locked;
 
     private float halfDiagonal = 15f;
     private Unity.Mathematics.Random random;
+
+    private float remainingTimeWhenLocked;
+    private static bool remainingTimeSet;
 
     public EnemySpawnEvents enemySpawnEvents;
 
@@ -45,6 +49,14 @@ public class EnemySpawner : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if (locked) {
+            if (!remainingTimeSet) {
+                remainingTimeWhenLocked = timeUntilNextWave - Time.time;
+                remainingTimeSet = true;
+            }
+            timeUntilNextWave = Time.time + remainingTimeWhenLocked;
+            return;
+        }
         if (!InWave && Time.time >= timeUntilNextWave) {
             StartCoroutine(ProcessWave());
         }
@@ -60,9 +72,8 @@ public class EnemySpawner : MonoBehaviour
             EnemyWave randomWave = validWaves[Random.Range(0, validWaves.Length)];
             foreach (EnemyGroup group in randomWave.enemyGroups) {
                 for (int i = 0; i < group.number; i++) {
-                    while (FindObjectsOfType<EnemyPilot>().Length >= randomWave.maxEnemiesAtOnce) {
-                        yield return null;
-                    }
+                    bool maxEnemiesPresent = FindObjectsOfType<EnemyPilot>().Length >= randomWave.maxEnemiesAtOnce;
+                    yield return new WaitUntil(() => !maxEnemiesPresent);
                     SpawnEnemy(group.enemyType);
                     yield return new WaitForSeconds(1f);
                 }
@@ -90,6 +101,15 @@ public class EnemySpawner : MonoBehaviour
 
         EnemyPilot enemyPilot = Instantiate(enemyType, position, Quaternion.identity);
         enemyPilot.target = defaultTarget;
+    }
+
+    public static void LockEnemySpawning() {
+        locked = true;
+    }
+
+    public static void UnlockEnemySpawning() {
+        locked = false;
+        remainingTimeSet = false;
     }
 }
 

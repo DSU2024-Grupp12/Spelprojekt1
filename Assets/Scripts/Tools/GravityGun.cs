@@ -22,7 +22,7 @@ public class GravityGun : Tool
     private ParticleSystem container, indicator, invalidIndicator;
 
     [SerializeField]
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer, gravityGun;
 
     [SerializeField]
     private BoxCollider2D inRangeCollider;
@@ -176,5 +176,15 @@ public class GravityGun : Tool
         float squaredRangeA = (r1.transform.position - transform.position).sqrMagnitude;
         float squaredRangeB = (r2.transform.position - transform.position).sqrMagnitude;
         return squaredRangeA.CompareTo(squaredRangeB);
+    }
+
+    /// <inheritdoc />
+    public override void Hide() {
+        gravityGun.enabled = false;
+    }
+
+    /// <inheritdoc />
+    public override void Unhide() {
+        gravityGun.enabled = true;
     }
 }
