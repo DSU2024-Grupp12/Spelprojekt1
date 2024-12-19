@@ -65,17 +65,17 @@ public class PlayerController : MonoBehaviour
     }
 
     public void PrimaryActivateTool(InputAction.CallbackContext context) {
-        primaryTool.gameObject.SetActive(true);
+        primaryTool.Unhide();
         primaryTool.ActivateTool(context);
         if (secondaryTool) {
-            secondaryTool.gameObject.SetActive(false);
+            secondaryTool.Hide();
         }
     }
 
     public void SecondaryActivateTool(InputAction.CallbackContext context) {
         if (secondaryTool) {
-            primaryTool.gameObject.SetActive(false);
-            secondaryTool.gameObject.SetActive(true);
+            primaryTool.Hide();
+            secondaryTool.Unhide();
             secondaryTool.ActivateTool(context);
         }
     }

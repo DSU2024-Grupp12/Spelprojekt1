@@ -24,7 +24,11 @@ public class MenuManager : MonoBehaviour
             return;
         }
         Instance = this;
-        ReturnToGameplay();
+
+        gameplayOverlay.enabled = true;
+        foreach (Menu m in menus) m.Close();
+        playerInput.SwitchCurrentActionMap("Player");
+        inMenu = false;
     }
 
     public void ReturnToGameplay() {
