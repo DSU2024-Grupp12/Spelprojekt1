@@ -33,7 +33,7 @@ public class MenuManager : MonoBehaviour
 
     public void ReturnToGameplay() {
         gameplayOverlay.enabled = true;
-        playerInput.SwitchCurrentActionMap("Player");
+        if (playerInput.currentActionMap.name != "Player") playerInput.SwitchCurrentActionMap("Player");
         if (inMenu) {
             foreach (Menu m in menus) m.Close();
             inMenu = false;
