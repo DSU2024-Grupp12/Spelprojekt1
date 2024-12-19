@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -23,26 +24,23 @@ public class Ship : MonoBehaviour, IUIValueProvider<float>
     [SerializeField, Tooltip("(Min 0)")]
     private Upgradeable maxAngularVelocity;
 
+    [Space]
+    public Boosters boosters;
+
     [Header("Handling")]
-    [SerializeField, Tooltip("(Min 1)")]
-    private Upgradeable boostFactor;
     [SerializeField, Min(0)]
-    private float
-        stoppingThrust,
-        stoppingTorque;
+    private float stoppingThrust;
+    [SerializeField, Min(0)]
+    private float stoppingTorque;
     [SerializeField, Tooltip("(Min 0)")]
     private Upgradeable handlingFactor;
-
     [SerializeField, Range(0, 1)]
     private float adjustmentFactor;
-
-    // [SerializeField, Range(-1, 1)]
-    // private float handlingCutoff;
 
     private float
         currentThrust,
         currentTorque;
-    private float boostedForwardThrust => boosting && !stopping ? forwardThrust * boostFactor : forwardThrust;
+    private float boost => !stopping ? boosters.GetBoost(forwardThrust) : 0;
 
     [HideInInspector]
     public bool
@@ -51,8 +49,7 @@ public class Ship : MonoBehaviour, IUIValueProvider<float>
         strafingStarBoard,
         strafingPort,
         turningClockwise,
-        turningCounterClockwise,
-        boosting;
+        turningCounterClockwise;
 
     public bool stopping {
         get => _stopping;
@@ -94,7 +91,8 @@ public class Ship : MonoBehaviour, IUIValueProvider<float>
             }
         }
 
-        currentThrust += accelerating || boosting ? boostedForwardThrust : 0;
+        currentThrust += accelerating ? forwardThrust : 0;
+        if (boosters) currentThrust += boosters.boosting ? boost : 0;
         currentThrust += deaccelerating ? -backwardThrust : 0;
         currentTorque += turningClockwise ? -turningForce : 0;
         currentTorque += turningCounterClockwise ? turningForce : 0;
@@ -191,7 +189,8 @@ public class Ship : MonoBehaviour, IUIValueProvider<float>
             return;
         }
 
-        if (accelerating || boosting) thrusters.back.Play();
+        if (accelerating) thrusters.back.Play();
+        else if (boosters && boosters.boosting) thrusters.back.Play();
         else thrusters.back.Stop();
 
         if (deaccelerating) thrusters.front.Play();
@@ -230,7 +229,8 @@ public class Ship : MonoBehaviour, IUIValueProvider<float>
     }
     /// <inheritdoc />
     public float CurrentValue() {
-        return body.velocity.magnitude;
+        if (body) return body.velocity.magnitude;
+        else return 0;
     }
 }
 

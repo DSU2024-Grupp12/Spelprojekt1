@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Minimap : MonoBehaviour
 {
@@ -16,7 +17,17 @@ public class Minimap : MonoBehaviour
     private static List<MinimapMarker> markers;
 
     private float radius;
+    [SerializeField]
     private Camera minimapCamera;
+    [SerializeField]
+    private Canvas canvas;
+
+    [SerializeField]
+    private float largeSize;
+    private Vector2 smallSize;
+    private Vector3 smallPosition;
+
+    private RectTransform rect;
 
     private void Awake() {
         markers = new();
@@ -24,8 +35,10 @@ public class Minimap : MonoBehaviour
     }
 
     void Start() {
-        minimapCamera = GetComponentInChildren<Camera>();
         radius = minimapCamera.orthographicSize;
+        rect = GetComponent<RectTransform>();
+        smallSize = rect.sizeDelta;
+        smallPosition = rect.anchoredPosition;
     }
 
     void Update() {
@@ -71,6 +84,21 @@ public class Minimap : MonoBehaviour
     }
     public static void RemoveMarker(MinimapMarker marker) {
         markers.Remove(marker);
+    }
+
+    public void HoldLarge(InputAction.CallbackContext context) {
+        if (context.performed) {
+            rect.sizeDelta = new Vector2(largeSize, largeSize);
+            rect.anchoredPosition = new Vector3(
+                -canvas.pixelRect.width / 2,
+                canvas.pixelRect.height / 2,
+                smallPosition.z
+            );
+        }
+        if (context.canceled) {
+            rect.sizeDelta = smallSize;
+            rect.anchoredPosition = smallPosition;
+        }
     }
 
     public static MinimapMarker PlaceMarker(MinimapMarker prefab, Vector3 position) {

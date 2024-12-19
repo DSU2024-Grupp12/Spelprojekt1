@@ -25,6 +25,11 @@ public class CameraZoomControl : MonoBehaviour
     }
 
     private void Update() {
+        if (playerShipSpeed == null) {
+            StopAllCoroutines();
+            StartCoroutine(SetCameraZoom(baseSize, timeUntilFullyZoomOut));
+            return;
+        }
         if (!zoomingOut && playerShipSpeed.CurrentValue() > startZoomOutAtSpeed) {
             StopAllCoroutines();
             float time = Mathf.Min(Time.time - timeSinceStartZoomIn, timeUntilFullyZoomOut);

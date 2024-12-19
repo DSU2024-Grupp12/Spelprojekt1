@@ -24,31 +24,39 @@ public class MenuManager : MonoBehaviour
             return;
         }
         Instance = this;
-        ReturnToGameplay();
+
+        gameplayOverlay.enabled = true;
+        foreach (Menu m in menus) m.Close();
+        playerInput.SwitchCurrentActionMap("Player");
+        inMenu = false;
     }
 
     public void ReturnToGameplay() {
-        if (gameplayOverlay.enabled) return;
-        foreach (Menu m in menus) m.Close();
         gameplayOverlay.enabled = true;
         playerInput.SwitchCurrentActionMap("Player");
-        inMenu = false;
-        OnReturnToGameplay?.Invoke();
+        if (inMenu) {
+            foreach (Menu m in menus) m.Close();
+            inMenu = false;
+            OnReturnToGameplay?.Invoke();
+        }
     }
 
     public void OpenMenu(string menuId, MenuInfo menuInfo) {
-        gameplayOverlay.enabled = false;
-        Menu menu = GetMenuByID(menuId);
-        playerInput.SwitchCurrentActionMap(menu.actionMapID);
-        CloseAllMenus();
-        menu.Open(menuInfo);
+        PrepMenu(menuId).Open(menuInfo);
     }
     public void OpenMenu(string menuId) {
-        gameplayOverlay.enabled = false;
+        PrepMenu(menuId).Open();
+    }
+    private Menu PrepMenu(string menuId) {
+        inMenu = true;
         Menu menu = GetMenuByID(menuId);
         playerInput.SwitchCurrentActionMap(menu.actionMapID);
         CloseAllMenus();
-        menu.Open();
+        return menu;
+    }
+
+    public void HideGameplayOverlay() {
+        gameplayOverlay.enabled = false;
     }
 
     private void CloseAllMenus() {
