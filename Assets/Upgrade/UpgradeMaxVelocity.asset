@@ -16,7 +16,7 @@ MonoBehaviour:
   attributeID: maxVelocity
   moduleDisplayName: Upgrade Max Velocity
   moduleDescription: Increases your max velocity by 50%
-  greenResourceCost: 0
-  purpleResourceCost: 0
+  greenResourceCost: 150
+  purpleResourceCost: 400
   moduleType: 2
   modifier: 1.5
