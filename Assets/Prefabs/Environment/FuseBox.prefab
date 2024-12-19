@@ -66,7 +66,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -104,7 +104,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9171797434866392257}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 3
 --- !u!114 &4117439876431639796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
     matrix: {fileID: 0}
     attributeID: 
     highGood: 1
+  inCloud: 0
   threshold:
     baseValue: 0
     matrix: {fileID: 0}
@@ -153,7 +154,7 @@ MonoBehaviour:
     highGood: 1
   collideWith:
     serializedVersion: 2
-    m_Bits: 5056
+    m_Bits: 21440
   layerModifiers:
   - layer: 
     modifier: 0
