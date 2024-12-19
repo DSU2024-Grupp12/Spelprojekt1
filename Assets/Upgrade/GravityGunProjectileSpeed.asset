@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42b5f7cedacc96140ab9b079b1a72722, type: 3}
-  m_Name: AngularVelocityAdd300
+  m_Name: GravityGunProjectileSpeed
   m_EditorClassIdentifier: 
-  matrixID: playerShipMatrix
-  attributeID: maxAngularVelocity
-  moduleDisplayName: Upgrade Angular Velocity
-  moduleDescription: increases maximum angular velocity by 400%
-  greenResourceCost: 300
-  purpleResourceCost: 300
+  matrixID: 
+  attributeID: 
+  moduleDisplayName: 
+  moduleDescription: Increases the projectile speed of objects fired by the gravity
+    gun by 75%
+  greenResourceCost: 800
+  purpleResourceCost: 250
   moduleType: 2
-  modifier: 5
+  modifier: 1.75
