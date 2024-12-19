@@ -65,11 +65,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public void PrimaryActivateTool(InputAction.CallbackContext context) {
+        primaryTool.gameObject.SetActive(true);
         primaryTool.ActivateTool(context);
+        if (secondaryTool) {
+            secondaryTool.gameObject.SetActive(false);
+        }
     }
 
     public void SecondaryActivateTool(InputAction.CallbackContext context) {
-        if (secondaryTool) secondaryTool.ActivateTool(context);
+        if (secondaryTool) {
+            primaryTool.gameObject.SetActive(false);
+            secondaryTool.gameObject.SetActive(true);
+            secondaryTool.ActivateTool(context);
+        }
     }
 
     public void CancelTool(InputAction.CallbackContext context) {
