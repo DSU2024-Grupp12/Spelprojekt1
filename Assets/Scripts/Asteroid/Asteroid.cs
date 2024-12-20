@@ -4,7 +4,6 @@ using Random = UnityEngine.Random;
 
 public class Asteroid : MonoBehaviour, IBeamable
 {
-    [HideInInspector]
     public AsteroidInfo info;
 
     [SerializeField]
@@ -63,10 +62,29 @@ public class Asteroid : MonoBehaviour, IBeamable
                 AsteroidInfo randomChildInfo = info.explodeInto[Random.Range(0, info.explodeInto.Length)];
                 Asteroid child = randomChildInfo.CreateAsteroid(position);
                 Vector2 direction = (position - (Vector2)transform.position).normalized;
-                child.GetComponent<Rigidbody2D>().AddForce(direction * body.mass * 20);
+                child.GetComponent<Rigidbody2D>().AddForce(direction * child.GetComponent<Rigidbody2D>().mass * 10);
             }
         }
         Destroy(gameObject);
+    }
+
+    public void SetStaticParameters(AsteroidInfo withInfo) {
+        if (!withInfo) return;
+        // set sprite parameters
+        SpriteRenderer[] spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer r in spriteRenderer) {
+            if (r.gameObject.layer == LayerMask.NameToLayer("Asteroid")) {
+                r.sprite = withInfo.sprite;
+                r.color = withInfo.colorModifier;
+            }
+            if (r.gameObject.layer == LayerMask.NameToLayer("Minimap")) {
+                r.color = withInfo.minimapColor;
+            }
+        }
+
+        // set resources
+        ResourceContainer resourceContainer = GetComponent<ResourceContainer>();
+        resourceContainer.resources = withInfo.resources;
     }
 
     private void AdjustScaleHullToMass() {

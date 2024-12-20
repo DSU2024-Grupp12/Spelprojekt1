@@ -23,7 +23,6 @@ public class Cloud : MonoBehaviour
 
     private void Update() {
         Collider2D[] cols = currentlyClouding.Keys.ToArray();
-        Debug.Log(cols.Length);
         foreach (Collider2D col in cols) {
             if (!col) { // if the collider has been destroyed from an external source we remove it
                 currentlyClouding.Remove(col);

@@ -255,3 +255,4 @@ MonoBehaviour:
   minimapCamera: {fileID: 0}
   canvas: {fileID: 0}
   largeSize: 900
+  largeCameraSize: 60

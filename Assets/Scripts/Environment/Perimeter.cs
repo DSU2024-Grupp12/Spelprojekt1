@@ -41,7 +41,6 @@ public class Perimeter : MonoBehaviour
             }
 
             if (outsideTimer - damageInterval >= 0) {
-                Debug.Log("deal perimeter damage");
                 playerHull.TakeRawDamage(damageAmount * (distanceFromCenter - perimeterRadius));
                 outsideTimer = 0f;
             }

@@ -8,9 +8,9 @@ public class AsteroidInfo : ScriptableObject
 
     [Header("Sprite settings")]
     [SerializeField]
-    private Sprite sprite;
+    public Sprite sprite;
     [SerializeField]
-    private Color colorModifier = Color.white, minimapColor = Color.gray;
+    public Color colorModifier = Color.white, minimapColor = Color.gray;
 
     [Header("Hull settings")]
     [Tooltip("The hull strength of the asteroid will be equal to its mass multiplied by this factor")]
@@ -29,7 +29,7 @@ public class AsteroidInfo : ScriptableObject
 
     [Header("Resource settings")]
     [SerializeField]
-    private ContainedResource[] resources;
+    public ContainedResource[] resources;
 
     [Header("Explosion Settings")]
     public ParticleSystem explosionPrefab;
@@ -46,21 +46,7 @@ public class AsteroidInfo : ScriptableObject
         Asteroid created = Instantiate(basePrefab, position, Quaternion.Euler(randomRotation));
         created.info = this;
 
-        // set sprite parameters
-        SpriteRenderer[] spriteRenderer = created.GetComponentsInChildren<SpriteRenderer>();
-        foreach (SpriteRenderer renderer in spriteRenderer) {
-            if (renderer.gameObject.layer == LayerMask.NameToLayer("Asteroid")) {
-                renderer.sprite = sprite;
-                renderer.color = colorModifier;
-            }
-            if (renderer.gameObject.layer == LayerMask.NameToLayer("Minimap")) {
-                renderer.color = minimapColor;
-            }
-        }
-
-        // set resources
-        ResourceContainer resourceContainer = created.GetComponent<ResourceContainer>();
-        resourceContainer.resources = resources;
+        created.SetStaticParameters(this);
 
         // set rigidbody parameters
         created.mass = GetRandomMass(ref random, distribution);

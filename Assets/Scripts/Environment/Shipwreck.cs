@@ -8,11 +8,13 @@ public class Shipwreck : MonoBehaviour, IInteractable
     [SerializeField]
     private Canvas highlighPrompt;
 
+    [SerializeField]
+    private SpriteRenderer sprite;
+
     private Rigidbody2D player;
 
     private void Start() {
         Unhighlight();
-        Transform sprite = GetComponentInChildren<SpriteRenderer>().transform;
         sprite.transform.Rotate(0, 0, Random.Range(0f, 360f));
     }
 
