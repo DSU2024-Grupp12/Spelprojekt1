@@ -135,6 +135,10 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
         return true;
     }
 
+    public bool AtFullStrength() {
+        return Mathf.Approximately(currentStrength, strength);
+    }
+
     public void SetHullStrength(float newStrength) {
         if (!hullInitialized) {
             float diff = newStrength - strength;

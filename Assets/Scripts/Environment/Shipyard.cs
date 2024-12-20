@@ -76,7 +76,7 @@ public class Shipyard : MonoBehaviour, IInteractable
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerShip")) {
             InteractableManager.QueueInteractable(this);
-            player = other.gameObject.transform;
+            if (other.gameObject.GetComponent<Rigidbody2D>()) player = other.gameObject.transform;
         }
     }
 
@@ -137,10 +137,13 @@ public class Shipyard : MonoBehaviour, IInteractable
     private UnityAction RepairShipDelegate() {
         return () => {
             Hull playerHull = player.GetComponent<Hull>();
-            if (playerHull.RepairHull(repairAmount)) {
-                shipyardUpgradeUsed = true;
-                ShipyardUsed?.Invoke();
-                MenuManager.Instance.ReturnToGameplay();
+            if (!playerHull.AtFullStrength()) {
+                if (playerHull.GetComponent<CargoHold>().Pay(repairCost, 0)) {
+                    shipyardUpgradeUsed = true;
+                    ShipyardUsed?.Invoke();
+                    MenuManager.Instance.ReturnToGameplay();
+                }
+                Popup.Display("Not enough resources to repair ship", 1f);
             }
             else {
                 Popup.Display("Ship does not need repair.", 1f);
