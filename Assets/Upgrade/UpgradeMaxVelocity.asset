@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matrixID: playerShipMatrix
   attributeID: maxVelocity
-  moduleDisplayName: Upgrade Max Velocity
+  moduleDisplayName: Max Velocity
   moduleDescription: Increases your max velocity by 50%
   greenResourceCost: 150
   purpleResourceCost: 400

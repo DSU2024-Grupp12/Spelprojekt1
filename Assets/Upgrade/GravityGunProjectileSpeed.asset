@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b5f7cedacc96140ab9b079b1a72722, type: 3}
   m_Name: GravityGunProjectileSpeed
   m_EditorClassIdentifier: 
-  matrixID: 
-  attributeID: 
-  moduleDisplayName: 
+  matrixID: gravityGunMatrix
+  attributeID: gravityGunFiringVelocity
+  moduleDisplayName: Gravity Gun Power
   moduleDescription: Increases the projectile speed of objects fired by the gravity
     gun by 75%
   greenResourceCost: 800

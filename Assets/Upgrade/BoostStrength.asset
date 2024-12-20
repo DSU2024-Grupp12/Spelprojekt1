@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b5f7cedacc96140ab9b079b1a72722, type: 3}
   m_Name: BoostStrength
   m_EditorClassIdentifier: 
-  matrixID: 
-  attributeID: 
-  moduleDisplayName: 
+  matrixID: playerShipMatrix
+  attributeID: boostFactor
+  moduleDisplayName: Boost Strength
   moduleDescription: Increases the speed of the boost by 100%
   greenResourceCost: 250
   purpleResourceCost: 600
