@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Drill : Tool
@@ -22,6 +23,10 @@ public class Drill : Tool
         private set => drillAnimator.SetBool("drilling", value);
     }
 
+    private bool startedDrilling;
+    public UnityEvent StartedDrilling;
+    public UnityEvent StoppedDrilling;
+
     void Start() {
         currentlyDrilling = new();
     }
@@ -30,10 +35,18 @@ public class Drill : Tool
         if (currentlyDrilling.Count > 0) {
             leftParticles.Play();
             rightParticles.Play();
+            if (!startedDrilling) {
+                startedDrilling = true;
+                StartedDrilling?.Invoke();
+            }
         }
         else {
             leftParticles.Stop();
             rightParticles.Stop();
+            if (startedDrilling) {
+                startedDrilling = false;
+                StoppedDrilling?.Invoke();
+            }
         }
     }
 

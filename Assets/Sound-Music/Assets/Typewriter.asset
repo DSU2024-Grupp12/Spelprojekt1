@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec9837ef8f74c44ba610d7f90e2a6db, type: 3}
+  m_Name: Typewriter
+  m_EditorClassIdentifier: 
+  name: Typewriter
+  clips:
+  - {fileID: 8300000, guid: c34f990a144ff6f4192a3a83c782d3ca, type: 3}
+  - {fileID: 8300000, guid: 43e9e22ff6a51da4abd165332895a909, type: 3}
+  - {fileID: 8300000, guid: b1cc02bb35b4d9a4fb914a61d35cbbc6, type: 3}
+  loopedOneShotClip: {fileID: 0}
+  output: {fileID: -4857717253486240446, guid: 658560f9c5943494689659d284c7893e, type: 2}
+  playOnAwake: 0
+  loop: 0
+  priority: 128
+  volume: 1
+  pitch: 1
+  randomPitch: 0
+  minPitchVariation: 1
+  maxPitchVariation: 1

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: LargeThruster
   clips:
-  - {fileID: 8300000, guid: 5f09f9cfe70fefb4082b192885a22c83, type: 3}
+  - {fileID: 8300000, guid: db2d9bfe7c0e93844909a2649d43b4c9, type: 3}
   loopedOneShotClip: {fileID: 8300000, guid: 5f09f9cfe70fefb4082b192885a22c83, type: 3}
   output: {fileID: -4857717253486240446, guid: 658560f9c5943494689659d284c7893e, type: 2}
   playOnAwake: 0
   loop: 1
   priority: 128
-  volume: 0.7
+  volume: 1
   pitch: 1
   randomPitch: 0
   minPitchVariation: 1

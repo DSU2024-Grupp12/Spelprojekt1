@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class GravityGun : Tool
@@ -26,6 +27,10 @@ public class GravityGun : Tool
 
     [SerializeField]
     private BoxCollider2D inRangeCollider;
+
+    public UnityEvent GravityGunPickUp;
+    public UnityEvent GravityGunDrop;
+    public UnityEvent GravityGunShoot;
 
     void Start() {
         SetBeamLength(0);
@@ -110,11 +115,13 @@ public class GravityGun : Tool
             }
             pickedUpBody = body;
             container.transform.localScale = pickedUpBody.transform.localScale;
+            GravityGunPickUp?.Invoke();
         }
     }
 
     private void Blast() {
         pickedUpBody.velocity = (Vector2)mount.up * firingVelocity;
+        GravityGunShoot?.Invoke();
         Detach();
     }
 
@@ -126,6 +133,7 @@ public class GravityGun : Tool
             beamable.Dropped();
         }
         pickedUpBody = null;
+        GravityGunDrop?.Invoke();
     }
 
     private void SetColliderDimensions() {
