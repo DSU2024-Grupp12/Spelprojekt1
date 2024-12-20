@@ -14651,6 +14651,7 @@ GameObject:
   - component: {fileID: 211535661126868925}
   - component: {fileID: 1868654690609154493}
   - component: {fileID: 4086055524968440817}
+  - component: {fileID: 4428433365385173114}
   m_Layer: 8
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -14718,6 +14719,7 @@ MonoBehaviour:
     matrix: {fileID: 0}
     attributeID: 
     highGood: 1
+  inCloud: 0
   threshold:
     baseValue: 50
     matrix: {fileID: 0}
@@ -14745,6 +14747,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4428433365385173114}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: QueueDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: ac3fd130034e8d24181bfa42b1ca0930, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14849,11 +14863,7 @@ MonoBehaviour:
     matrix: {fileID: 0}
     attributeID: 
     highGood: 1
-  boostFactor:
-    baseValue: 1
-    matrix: {fileID: 0}
-    attributeID: 
-    highGood: 1
+  boosters: {fileID: 0}
   stoppingThrust: 2000
   stoppingTorque: 500
   handlingFactor:
@@ -14868,7 +14878,6 @@ MonoBehaviour:
   strafingPort: 0
   turningClockwise: 0
   turningCounterClockwise: 0
-  boosting: 0
 --- !u!50 &211535661126868925
 Rigidbody2D:
   serializedVersion: 4
@@ -14982,6 +14991,18 @@ MonoBehaviour:
     maxNumber: 0
     minValue: 0
     maxValue: 0
+--- !u!114 &4428433365385173114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329250972712105302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8535e0aae10dd2645b87a08667066136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8204844546918146527
 PrefabInstance:
   m_ObjectHideFlags: 0

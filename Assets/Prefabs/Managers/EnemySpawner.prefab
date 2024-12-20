@@ -47,7 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultTarget: {fileID: 0}
   waves: []
-  timeBetweenWaves: 120
+  timeBetweenWaves: 30
+  minSpawnRadius: 3
+  maxSpawnRadius: 10
   enemySpawnEvents:
     OnWaveStarted:
       m_PersistentCalls:

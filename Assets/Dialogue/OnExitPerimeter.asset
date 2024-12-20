@@ -16,6 +16,7 @@ MonoBehaviour:
     typewriterSpeed: 0.05
     timeBetweenSentences: 1
     timeBetweenLines: 1
+    endOfDialogueLingerTime: 0
     timeBetweenQueuedDialogue: 1
   priority: 0
   queueable: 1

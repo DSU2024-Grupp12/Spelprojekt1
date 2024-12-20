@@ -81,6 +81,12 @@ public class AsteriodSpawner : MonoBehaviour
         asteroid.transform.SetParent(transform);
     }
 
+    public void UpdateAsteroids() {
+        foreach (Asteroid asteroid in FindObjectsByType<Asteroid>(FindObjectsSortMode.None)) {
+            asteroid.SetStaticParameters(asteroid.info);
+        }
+    }
+
     private void GenerateTables() {
         weightTable = new();
         probabilityTable = new();

@@ -8,18 +8,20 @@ public class Shipwreck : MonoBehaviour, IInteractable
     [SerializeField]
     private Canvas highlighPrompt;
 
+    [SerializeField]
+    private SpriteRenderer sprite;
+
     private Rigidbody2D player;
 
     private void Start() {
         Unhighlight();
-        Transform sprite = GetComponentInChildren<SpriteRenderer>().transform;
-        sprite.transform.Rotate(0, 0, Random.Range(0f, 360f));
+        if (sprite) sprite.transform.Rotate(0, 0, Random.Range(0f, 360f));
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerShip")) {
             InteractableManager.QueueInteractable(this);
-            player = other.gameObject.GetComponent<Rigidbody2D>();
+            if (other.gameObject.GetComponent<Rigidbody2D>()) player = other.gameObject.GetComponent<Rigidbody2D>();
         }
     }
 

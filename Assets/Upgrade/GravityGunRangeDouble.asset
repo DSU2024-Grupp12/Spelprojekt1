@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matrixID: gravityGunMatrix
   attributeID: gravityGunRange
-  moduleDisplayName: Upgrade Gravity Gun Range
+  moduleDisplayName: Gravity Gun Range
   moduleDescription: Doubles your gravity guns pickup range
   greenResourceCost: 400
   purpleResourceCost: 200

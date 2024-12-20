@@ -23,9 +23,10 @@ public class Minimap : MonoBehaviour
     private Canvas canvas;
 
     [SerializeField]
-    private float largeSize;
+    private float largeSize, largeCameraSize;
     private Vector2 smallSize;
     private Vector3 smallPosition;
+    private float smallCameraSize;
 
     private RectTransform rect;
 
@@ -39,6 +40,7 @@ public class Minimap : MonoBehaviour
         rect = GetComponent<RectTransform>();
         smallSize = rect.sizeDelta;
         smallPosition = rect.anchoredPosition;
+        smallCameraSize = minimapCamera.orthographicSize;
     }
 
     void Update() {
@@ -52,19 +54,19 @@ public class Minimap : MonoBehaviour
                     if (marker.useProxy) {
                         if (!marker.currentProxy) marker.InstatiateProxy();
                         marker.currentProxy.position = GetProxyPosition(toMarker.normalized);
-                        marker.Deactivate();
                     }
                 }
             }
             else if (toMarker.magnitude > radius * outsideScreenProxyDistance) {
                 if (marker.useProxy) {
                     if (!marker.currentProxy) marker.InstatiateProxy();
-                    marker.currentProxy.position = GetProxyPosition(toMarker.normalized);
-                    marker.Deactivate();
+                    if (marker.currentProxy) marker.currentProxy.position = GetProxyPosition(toMarker.normalized);
+                    marker.Hide();
                 }
             }
             else {
-                marker.Activate();
+                if (marker.active) marker.Unhide();
+                else marker.Hide();
                 marker.DestroyProxy();
             }
             if (toMarker.magnitude < marker.disableDistance) marker.Disable();
@@ -94,10 +96,14 @@ public class Minimap : MonoBehaviour
                 canvas.pixelRect.height / 2,
                 smallPosition.z
             );
+            minimapCamera.orthographicSize = largeCameraSize;
+            radius = largeCameraSize;
         }
         if (context.canceled) {
             rect.sizeDelta = smallSize;
             rect.anchoredPosition = smallPosition;
+            minimapCamera.orthographicSize = smallCameraSize;
+            radius = smallCameraSize;
         }
     }
 

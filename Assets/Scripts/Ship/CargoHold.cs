@@ -12,7 +12,7 @@ public class CargoHold : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Resource")) {
             Resource resource = other.GetComponent<Resource>();
-            resource.Attract(this);
+            resource.CollectIn(this);
         }
     }
 

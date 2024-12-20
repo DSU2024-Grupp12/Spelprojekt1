@@ -15,6 +15,7 @@ MonoBehaviour:
   basePrefab: {fileID: 8825375572312753335, guid: 4d817a36c3220194aab53fd96bee99d7, type: 3}
   sprite: {fileID: -444679597, guid: 11605f84264831149bf7923eecf686e5, type: 3}
   colorModifier: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
+  minimapColor: {r: 0.735849, g: 0.010412939, b: 0.5496752, a: 1}
   hullStrengthFactor: 12
   distribution: 0
   mean: 50
@@ -27,10 +28,10 @@ MonoBehaviour:
     maxDroppedPer10UnitMass: 0
     minValuePer10UnitMass: 0
     maxValuePer10UnitMass: 0
-    minNumber: 25
-    maxNumber: 25
-    minValue: 5
-    maxValue: 5
+    minNumber: 5
+    maxNumber: 5
+    minValue: 25
+    maxValue: 25
   explosionPrefab: {fileID: 392244509131473519, guid: 5b179a84b0756494bb489c9713ed77f1, type: 3}
   minExplodeInto: 0
   maxExplodeInto: 0

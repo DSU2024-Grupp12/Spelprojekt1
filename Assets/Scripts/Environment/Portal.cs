@@ -44,7 +44,7 @@ public class Portal : MonoBehaviour, IInteractable
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerShip")) {
             InteractableManager.QueueInteractable(this);
-            player = other.gameObject.GetComponent<Rigidbody2D>();
+            if (other.gameObject.GetComponent<Rigidbody2D>()) player = other.gameObject.GetComponent<Rigidbody2D>();
         }
     }
 

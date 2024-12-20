@@ -57,6 +57,7 @@ public class AsteroidSpawnerEditor : Editor
 
         if (GUILayout.Button("Create Asteroids")) spawner!.CreateAsteroids();
         if (GUILayout.Button("Clear Asteroids")) spawner!.ClearAsteroids();
+        if (GUILayout.Button("Update Asteroids")) spawner!.UpdateAsteroids();
     }
 
     public void OnInspectorUpdate() {

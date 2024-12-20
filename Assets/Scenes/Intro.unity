@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030518, y: 0.000026703}
-  m_SizeDelta: {x: 1241.0676, y: 1045.9822}
+  m_AnchoredPosition: {x: -0.000030517, y: -0.000012755}
+  m_SizeDelta: {x: 1241.0676, y: 890.7339}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &177863594
 MonoBehaviour:
@@ -179,13 +179,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit, sed do eiusmod
-    tempor \nincididunt ut labore et dolore magna aliqua. \n                \nUt
-    enim ad minim veniam, quis nostrud \nexercitation ullamco laboris nisi ut aliquip
-    ex \nea commodo consequat. Duis aute irure dolor \nin reprehenderit in voluptate
-    velit esse cillum \ndolore eu fugiat nulla pariatur. \n                \nExcepteur
-    sint occaecat cupidatat non \nproident, sunt in culpa qui officia deserunt \nmollit
-    anim id est laborum.\n\r"
+  m_text: "Log (Day #231)\n               \nI\u2019ve lost track of time. I don\u2019t
+    know where I am. \nApoidea keeps recalculating the coordinates. \nNo success.
+    Some strange magnetic fog \nencapsulates the area. \r\n\r               \nThe
+    ship was damaged when I tried to escape.\n\r\r               \nThere are plenty
+    of asteroids in the area, \nif I can harness the minerals, I could restore my
+    \nship. But I sense... something else is here too."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -261,6 +260,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 177863592}
+  m_CullTransparentMesh: 1
+--- !u!1 &236615889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 236615890}
+  - component: {fileID: 236615892}
+  - component: {fileID: 236615891}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &236615890
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236615889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 442215283}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 5.2974, y: -3.5313}
+  m_SizeDelta: {x: 1409.824, y: 1030.1311}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &236615891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236615889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1539206978, guid: 4108bf2cbbe65e9488cab6c7d5798efd, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &236615892
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236615889}
   m_CullTransparentMesh: 1
 --- !u!1 &297191574
 GameObject:
@@ -407,7 +481,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 5:Gameplay
+          m_StringArgument: 5:Level_1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!4 &297191577
@@ -520,6 +594,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1837682183}
+  - {fileID: 236615890}
   - {fileID: 177863593}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -704,7 +779,7 @@ MonoBehaviour:
         m_MethodName: QueueDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: aece6f311328b33459292ecca1382855, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 51c892d1335980444a3dd00d73604f03, type: 2}
           m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0

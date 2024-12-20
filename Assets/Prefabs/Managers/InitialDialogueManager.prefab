@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 532417239146323345}
   - component: {fileID: 4954841712745115230}
   - component: {fileID: 3870980211320408077}
+  - component: {fileID: 5352836236991618948}
   m_Layer: 0
   m_Name: InitialDialogueManager
   m_TagString: Untagged
@@ -54,7 +55,7 @@ MonoBehaviour:
         m_MethodName: QueueDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 11400000, guid: 45188a953fa52f7439c94350be4c6665, type: 2}
           m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -97,3 +98,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc9f96e19ead414aac0ac4a03a110c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5352836236991618948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3211207705142435869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949dce97de0bbda49b8881f831450b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeners:
+  - message: IntroDialogueFinished
+    OnReceiveMessage:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3870980211320408077}
+          m_TargetAssemblyTypeName: TimeWizard, Assembly-CSharp
+          m_MethodName: UnStopTime
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

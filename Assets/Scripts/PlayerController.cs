@@ -106,4 +106,7 @@ public class PlayerController : MonoBehaviour
             MenuManager.Instance.ReturnToGameplay();
         }
     }
+    public void ReturnToGameplay() {
+        MenuManager.Instance.ReturnToGameplay();
+    }
 }
