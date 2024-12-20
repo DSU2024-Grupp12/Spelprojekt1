@@ -21,10 +21,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private Animator dialogueBoxAnimator;
 
-    [SerializeField]
-    private AudioSource typewriterSource;
-    [SerializeField]
-    private AudioClip typewriterClip;
+    public UnityEvent Typewriter;
 
     public UnityEvent<string> OnDialogueFinished;
 
@@ -111,7 +108,7 @@ public class DialogueManager : MonoBehaviour
         dialogueField.text = "";
         foreach (char c in sentence) {
             dialogueField.text += c;
-            if (c != ' ') typewriterSource.PlayOneShot(typewriterClip);
+            if (c != ' ') Typewriter?.Invoke();
             yield return new WaitForSecondsRealtime(speedSettings.typewriterSpeed);
         }
     }

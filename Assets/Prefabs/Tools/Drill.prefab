@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4809108308206089944}
   - component: {fileID: 5839776107365753541}
   - component: {fileID: 7188825352501435723}
+  - component: {fileID: 5902312030748960768}
   m_Layer: 6
   m_Name: Drill
   m_TagString: Untagged
@@ -81,6 +82,36 @@ MonoBehaviour:
     matrix: {fileID: 1949577596423374204}
     attributeID: drillDamage
     highGood: 1
+  StartedDrilling:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5902312030748960768}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Drilling
+          m_BoolArgument: 0
+        m_CallState: 2
+  StoppedDrilling:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5902312030748960768}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: Stop
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Drilling
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &5839776107365753541
 Animator:
   serializedVersion: 5
@@ -147,6 +178,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6993294, y: 0.37284988}
   m_EdgeRadius: 0
+--- !u!114 &5902312030748960768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583580925130933815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b223f038e44f2cbaed22d4647e3f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assets:
+  - {fileID: 11400000, guid: 038c5cd6e3d4fce489ee2c3f5bab6378, type: 2}
 --- !u!1 &4103828628376530193
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +308,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 1.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -316,7 +361,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.09
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5093,7 +5138,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 1.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5146,7 +5191,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.09
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2

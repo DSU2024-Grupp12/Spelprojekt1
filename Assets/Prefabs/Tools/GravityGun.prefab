@@ -14665,6 +14665,7 @@ GameObject:
   - component: {fileID: 6849285788494668696}
   - component: {fileID: 6251247000210234420}
   - component: {fileID: 6434183182749257291}
+  - component: {fileID: 238395041533763969}
   m_Layer: 6
   m_Name: GravityGun
   m_TagString: Untagged
@@ -14744,6 +14745,66 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8306403329193726568}
   gravityGun: {fileID: 8857372172205998}
   inRangeCollider: {fileID: 7097363796081594986}
+  GravityGunPickUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 238395041533763969}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GravityGunLoop
+          m_BoolArgument: 0
+        m_CallState: 2
+  GravityGunDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 238395041533763969}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: Stop
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GravityGunLoop
+          m_BoolArgument: 0
+        m_CallState: 2
+  GravityGunShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 238395041533763969}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GravityGunShoot
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &238395041533763969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800322487651078874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b223f038e44f2cbaed22d4647e3f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assets:
+  - {fileID: 11400000, guid: 86ef54a7f7412f8408428f157795157e, type: 2}
+  - {fileID: 11400000, guid: 9680e73783c7df944b2314cbfc27eec6, type: 2}
 --- !u!1 &9194182487285784847
 GameObject:
   m_ObjectHideFlags: 0
