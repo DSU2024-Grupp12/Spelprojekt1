@@ -16,21 +16,23 @@ MonoBehaviour:
     typewriterSpeed: 0.05
     timeBetweenSentences: 1
     timeBetweenLines: 1
+    endOfDialogueLingerTime: 0
     timeBetweenQueuedDialogue: 1
-  priority: 0
-  queueable: 0
+  priority: 10
+  queueable: 1
   probability: 1
-  onFinishMessage: 
+  onFinishMessage: LongRangeScannerRepaired
   conversationVariations:
   - lines:
     - speaker: Ship Computer
       portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - "Long-range scanner is now operational. Recalculating the coordinates\u2026"
-      - We are currently located in Red Sphere Gate, a nebula notorious for deceiving
-        those who enter and leading pilots astray. Several ships have disappeared
-        within this area, never to be seen again, and it is therefore widely referred
-        to as the Graveyard Gate.
+      - 'We are currently located in Red Sphere Gate, a nebula notorious for deceiving
+        those who enter and leading pilots astray. '
+      - Several ships have disappeared within this area, never to be seen again,
+        and it is therefore widely referred to...
+      - ' ...as the Graveyard Gate.'
     - speaker: Arlo Lynx
       portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
@@ -39,8 +41,9 @@ MonoBehaviour:
       portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - "Scanner detects a nearby gravitational force. You might want to take a look
-        at that. I\u2019m also picking up a faint signal from deeper within the nebula,
-        but I\u2019m unable to identify it."
+        at that. I\u2019m also picking up a faint signal from deeper within the nebula..."
+      - "I\u2019m also picking up a faint signal from deeper within the nebula, but
+        I\u2019m unable to identify it."
     - speaker: Arlo Lynx
       portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:

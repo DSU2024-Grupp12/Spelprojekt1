@@ -54,19 +54,19 @@ public class Minimap : MonoBehaviour
                     if (marker.useProxy) {
                         if (!marker.currentProxy) marker.InstatiateProxy();
                         marker.currentProxy.position = GetProxyPosition(toMarker.normalized);
-                        marker.Deactivate();
                     }
                 }
             }
             else if (toMarker.magnitude > radius * outsideScreenProxyDistance) {
                 if (marker.useProxy) {
                     if (!marker.currentProxy) marker.InstatiateProxy();
-                    marker.currentProxy.position = GetProxyPosition(toMarker.normalized);
-                    marker.Deactivate();
+                    if (marker.currentProxy) marker.currentProxy.position = GetProxyPosition(toMarker.normalized);
+                    marker.Hide();
                 }
             }
             else {
-                marker.Activate();
+                if (marker.active) marker.Unhide();
+                else marker.Hide();
                 marker.DestroyProxy();
             }
             if (toMarker.magnitude < marker.disableDistance) marker.Disable();

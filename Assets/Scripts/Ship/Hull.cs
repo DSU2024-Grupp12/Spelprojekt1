@@ -9,6 +9,8 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
 
     [SerializeField, Tooltip("The total amount of kinetic energy the hull can absorb before breaking.\n(Min 0)")]
     private Upgradeable strength;
+    [SerializeField]
+    private float startingStrength;
 
     private float currentStrength;
     public bool hullDestroyed { get; private set; }
@@ -16,6 +18,7 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
     private float invincibilityWindow = 0.2f;
     private float endOfInvincibility;
 
+    [HideInInspector]
     public bool inCloud;
 
     [SerializeField, Tooltip("The minimum amount of kinetic energy required before any damage is dealt.\n(Min 0)")]
@@ -31,9 +34,12 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
 
     private bool hullInitialized;
 
-    void Start() {
+    void Awake() {
         endOfInvincibility = Time.time;
-        currentStrength = strength;
+        if (startingStrength <= 0) {
+            currentStrength = strength;
+        }
+        else currentStrength = startingStrength;
     }
 
     private void Update() {

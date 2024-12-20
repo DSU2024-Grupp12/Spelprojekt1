@@ -5398,6 +5398,7 @@ MonoBehaviour:
     matrix: {fileID: 45005349452178148}
     attributeID: hullStrength
     highGood: 1
+  startingStrength: 700
   inCloud: 0
   threshold:
     baseValue: 100
@@ -5473,7 +5474,19 @@ MonoBehaviour:
         m_Calls: []
     OnTakeDamageEnemy:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3315100848030350885}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: ea5f2cbc189db5445a56dd577cef914b, type: 2}
+            m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnTakeDamageDebris:
       m_PersistentCalls:
         m_Calls:
@@ -5506,7 +5519,19 @@ MonoBehaviour:
         m_Calls: []
     OnTakeDamageEnemySignificant:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3315100848030350885}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: ea5f2cbc189db5445a56dd577cef914b, type: 2}
+            m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnTakeDamageDebrisSignificant:
       m_PersistentCalls:
         m_Calls:
@@ -5563,7 +5588,19 @@ MonoBehaviour:
           m_CallState: 2
     OnReachLowHullStrength:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3315100848030350885}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 2547ef98ef9a222419af27b089ba5978, type: 2}
+            m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &6340787955948192973
 MonoBehaviour:
   m_ObjectHideFlags: 0

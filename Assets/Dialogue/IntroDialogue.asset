@@ -16,11 +16,12 @@ MonoBehaviour:
     typewriterSpeed: 0.05
     timeBetweenSentences: 1
     timeBetweenLines: 1
+    endOfDialogueLingerTime: 0
     timeBetweenQueuedDialogue: 1
   priority: 0
   queueable: 0
   probability: 1
-  onFinishMessage: 
+  onFinishMessage: IntroDialogueFinished
   conversationVariations:
   - lines:
     - speaker: Arlo Lynx
@@ -56,7 +57,7 @@ MonoBehaviour:
       portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - Scanner detects abnormal gravitational readings emanating from the structure.
-        Scanner also detects a nearby shipyard with repair capabilities.
+      - Scanner also detects a nearby shipyard with repair capabilities.
     - speaker: Arlo Lynx
       portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:

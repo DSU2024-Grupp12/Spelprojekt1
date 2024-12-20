@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,7 +38,7 @@ public class DialogueManager : MonoBehaviour
 
     private bool processingDialogue;
 
-    private void Start() {
+    private void Awake() {
         queuedDialogues = new SortedList<int, Dialogue>();
     }
 
@@ -62,7 +63,7 @@ public class DialogueManager : MonoBehaviour
 
         while (queuedDialogues.Count > 0) {
             StartDialogue();
-            Dialogue highestPriority = queuedDialogues[queuedDialogues.Count - 1];
+            Dialogue highestPriority = queuedDialogues.Last().Value;
             queuedDialogues.RemoveAt(queuedDialogues.Count - 1);
             speedSettings = highestPriority.speedSettings;
             yield return ProcessConversation(highestPriority.conversation);

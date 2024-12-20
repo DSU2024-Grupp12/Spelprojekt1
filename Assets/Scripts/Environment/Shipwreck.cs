@@ -15,7 +15,7 @@ public class Shipwreck : MonoBehaviour, IInteractable
 
     private void Start() {
         Unhighlight();
-        sprite.transform.Rotate(0, 0, Random.Range(0f, 360f));
+        if (sprite) sprite.transform.Rotate(0, 0, Random.Range(0f, 360f));
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

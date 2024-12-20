@@ -27,9 +27,12 @@ public class Shipyard : MonoBehaviour, IInteractable
     [SerializeField]
     private UpgradeModule[] availableUpgradeModules;
 
+    public UnityEvent ShipyardUsed;
+
     private Transform player;
 
     private bool shipyardUpgradeUsed;
+    private bool shipyardLockedSpawner;
 
     UpgradeModule module1;
     UpgradeModule module2;
@@ -51,7 +54,10 @@ public class Shipyard : MonoBehaviour, IInteractable
         }
         Unhighlight();
         MenuManager.Instance.OpenMenu(shipyardMenuID, BuildMenuInfo());
-        EnemySpawner.LockEnemySpawning();
+        if (!EnemySpawner.locked) {
+            EnemySpawner.LockEnemySpawning();
+            shipyardLockedSpawner = true;
+        }
         if (player) {
             IInteractable.LockPlayer(player.GetComponent<Rigidbody2D>());
         }
@@ -119,6 +125,7 @@ public class Shipyard : MonoBehaviour, IInteractable
             if (playerHold.Pay(module.greenResourceCost, module.purpleResourceCost)) {
                 match.AttachModule(module);
                 shipyardUpgradeUsed = true;
+                ShipyardUsed?.Invoke();
                 MenuManager.Instance.ReturnToGameplay();
             }
             else {
@@ -132,6 +139,7 @@ public class Shipyard : MonoBehaviour, IInteractable
             Hull playerHull = player.GetComponent<Hull>();
             if (playerHull.RepairHull(repairAmount)) {
                 shipyardUpgradeUsed = true;
+                ShipyardUsed?.Invoke();
                 MenuManager.Instance.ReturnToGameplay();
             }
             else {
@@ -143,6 +151,7 @@ public class Shipyard : MonoBehaviour, IInteractable
     private void ShipyardMenuClosed() {
         Highlight();
         MenuManager.OnReturnToGameplay -= ShipyardMenuClosed;
-        EnemySpawner.UnlockEnemySpawning();
+        if (shipyardLockedSpawner) EnemySpawner.UnlockEnemySpawning();
+        shipyardLockedSpawner = false;
     }
 }

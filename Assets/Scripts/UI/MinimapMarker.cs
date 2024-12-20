@@ -25,26 +25,40 @@ public class MinimapMarker : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private void Awake() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (!active) spriteRenderer.enabled = false;
+    }
+
     private void Start() {
         if (!Minimap.Exists) {
             Destroy(gameObject);
             return;
         }
-
         Minimap.AddMarker(this);
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (!active) spriteRenderer.enabled = false;
     }
 
     private void OnDestroy() {
         Minimap.RemoveMarker(this);
     }
 
-    public void Activate() {
+    public void Hide() {
+        spriteRenderer.enabled = false;
+    }
+
+    public void Unhide() {
         spriteRenderer.enabled = true;
     }
+
+    public void Activate() {
+        active = true;
+        spriteRenderer.enabled = true;
+        if (currentProxy) currentProxy.GetComponent<SpriteRenderer>().enabled = true;
+    }
     public void Deactivate() {
+        active = false;
         spriteRenderer.enabled = false;
+        if (currentProxy) currentProxy.GetComponent<SpriteRenderer>().enabled = false;
     }
     public void Disable() {
         disabled = true;
@@ -58,6 +72,7 @@ public class MinimapMarker : MonoBehaviour
             proxy.sprite = seperateProxySprite ? proxySprite ?? spriteRenderer.sprite : spriteRenderer.sprite;
             proxy.color = seperateProxySprite ? proxyColor : spriteRenderer.color;
             currentProxy = proxy.transform;
+            currentProxy.GetComponent<SpriteRenderer>().enabled = active;
         }
     }
 

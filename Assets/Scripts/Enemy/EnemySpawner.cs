@@ -21,7 +21,10 @@ public class EnemySpawner : MonoBehaviour
 
     private float timeUntilNextWave;
     public static bool InWave { get; private set; }
-    private static bool locked;
+    public static bool locked;
+
+    [SerializeField]
+    private float minSpawnRadius, maxSpawnRadius;
 
     private float halfDiagonal = 15f;
     private Unity.Mathematics.Random random;
@@ -94,8 +97,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy(EnemyPilot enemyType) {
         Vector2 position = random.GetNextPolarCoordinate(
-            halfDiagonal + 10,
-            halfDiagonal + 30,
+            halfDiagonal + minSpawnRadius,
+            halfDiagonal + maxSpawnRadius,
             mainCamera.transform.position
         );
 
