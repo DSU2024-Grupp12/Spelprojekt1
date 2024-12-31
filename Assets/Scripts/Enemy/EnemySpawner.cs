@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
 
     private float timeUntilNextWave;
     public static bool InWave { get; private set; }
-    public static bool locked;
+    private static Dictionary<string, bool> locks;
 
     [SerializeField]
     private float minSpawnRadius, maxSpawnRadius;
@@ -43,6 +44,8 @@ public class EnemySpawner : MonoBehaviour
 
         random = new((uint)Random.Range(0, int.MaxValue));
 
+        locks = new();
+
         if (mainCamera) {
             float camHalfHeight = mainCamera.orthographicSize;
             float camHalfWidth = camHalfHeight * mainCamera.aspect;
@@ -52,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (locked) {
+        if (locks.Count > 0) {
             if (!remainingTimeSet) {
                 remainingTimeWhenLocked = timeUntilNextWave - Time.time;
                 remainingTimeSet = true;
@@ -66,17 +69,17 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public IEnumerator ProcessWave() {
-        InWave = true;
-
         EnemyWave[] validWaves = waves.Where(w => w.dontSpawnUntilTimeHasPassed < Time.time - startOfScene).ToArray();
         if (validWaves.Length > 0) {
+            InWave = true;
             enemySpawnEvents.OnWaveStarted?.Invoke();
 
             EnemyWave randomWave = validWaves[Random.Range(0, validWaves.Length)];
             foreach (EnemyGroup group in randomWave.enemyGroups) {
                 for (int i = 0; i < group.number; i++) {
-                    bool maxEnemiesPresent = FindObjectsOfType<EnemyPilot>().Length >= randomWave.maxEnemiesAtOnce;
-                    yield return new WaitUntil(() => !maxEnemiesPresent);
+                    while (FindObjectsOfType<EnemyPilot>().Length >= randomWave.maxEnemiesAtOnce) {
+                        yield return null;
+                    }
                     SpawnEnemy(group.enemyType);
                     yield return new WaitForSeconds(1f);
                 }
@@ -88,11 +91,11 @@ public class EnemySpawner : MonoBehaviour
             timeUntilNextWave = Time.time + randomWave.recoveryTime + timeBetweenWaves;
 
             enemySpawnEvents.OnWaveFinished?.Invoke();
+            InWave = false;
         }
         else {
             timeUntilNextWave = Time.time + timeBetweenWaves;
         }
-        InWave = false;
     }
 
     public void SpawnEnemy(EnemyPilot enemyType) {
@@ -106,12 +109,12 @@ public class EnemySpawner : MonoBehaviour
         enemyPilot.target = defaultTarget;
     }
 
-    public static void LockEnemySpawning() {
-        locked = true;
+    public static void LockEnemySpawning(string lockName) {
+        locks.TryAdd(lockName, true);
     }
 
-    public static void UnlockEnemySpawning() {
-        locked = false;
+    public static void UnlockEnemySpawning(string lockName) {
+        locks.Remove(lockName);
         remainingTimeSet = false;
     }
 }
