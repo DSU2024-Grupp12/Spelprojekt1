@@ -16,41 +16,52 @@ MonoBehaviour:
     typewriterSpeed: 0.05
     timeBetweenSentences: 1
     timeBetweenLines: 1
+    endOfDialogueLingerTime: 0
     timeBetweenQueuedDialogue: 1
   priority: 0
   queueable: 0
-  probability: 0.174
+  probability: 0.224
+  onFinishMessage: 
   conversationVariations:
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - Is that all you've got?
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - You'll pay for that!
   - lines:
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - They don't seem very friendly.
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - You don't say? I thought the missiles were just their way of greeting us.
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - I need a hand here!
     - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
       - Would you like me to play some calming music to ease your stress?
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - You're absolutely useless sometimes.
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - You're going to regret that!
   - lines:
     - speaker: Arlo Lynx
+      portrait: {fileID: 1163087858, guid: 0eee8c011935a2144b259e7443fbed5f, type: 3}
       sentences:
       - Whoa!
