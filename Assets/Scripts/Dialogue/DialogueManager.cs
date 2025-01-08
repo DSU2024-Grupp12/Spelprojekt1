@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     private SpeedSettings speedSettings;
+    private bool skippable;
 
     [SerializeField]
     private int maxConversationsInQueue;
@@ -34,6 +36,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     private bool processingDialogue;
+    private bool skipToEndOfLine;
 
     private void Awake() {
         queuedDialogues = new SortedList<int, Dialogue>();
@@ -81,7 +84,7 @@ public class DialogueManager : MonoBehaviour
 
         while (lines.Count > 0) {
             yield return ProcessLine(lines.Dequeue());
-            yield return new WaitForSecondsRealtime(speedSettings.timeBetweenLines);
+            yield return new WaitForRealSecondsOrSkip(speedSettings.timeBetweenLines, () => skipToEndOfLine);
         }
     }
 
@@ -95,22 +98,24 @@ public class DialogueManager : MonoBehaviour
         }
 
         while (sentences.Count > 0) {
-            yield return ProcessSentences(sentences.Dequeue());
-            yield return new WaitForSecondsRealtime(speedSettings.timeBetweenSentences);
+            yield return TypeSentence(sentences.Dequeue());
+            yield return new WaitForRealSecondsOrSkip(speedSettings.timeBetweenLines, () => skipToEndOfLine);
         }
     }
 
-    public IEnumerator ProcessSentences(string sentence) {
-        yield return TypeSentence(sentence);
-    }
-
     private IEnumerator TypeSentence(string sentence) {
+        skipToEndOfLine = false;
+        Debug.Log(skipToEndOfLine);
         dialogueField.text = "";
-        foreach (char c in sentence) {
+        foreach (char c in sentence.TakeWhile(_ => !skipToEndOfLine)) {
             dialogueField.text += c;
             if (c != ' ') Typewriter?.Invoke();
             yield return new WaitForSecondsRealtime(speedSettings.typewriterSpeed);
         }
+        if (skipToEndOfLine) {
+            dialogueField.text = sentence;
+        }
+        skipToEndOfLine = false;
     }
 
     public void EndDialogue() {
@@ -121,5 +126,27 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue() {
         inDialogue = true;
+    }
+
+    public void SkipToEndOfLine() {
+        if (processingDialogue && skippable) skipToEndOfLine = true;
+    }
+
+    public void SetSkippable(bool value) {
+        skippable = value;
+    }
+
+    private class WaitForRealSecondsOrSkip : CustomYieldInstruction
+    {
+        private readonly float breakTime;
+        private readonly Func<bool> shouldSkip;
+
+        public WaitForRealSecondsOrSkip(float time, Func<bool> skipPredicate) {
+            breakTime = Time.realtimeSinceStartup + time;
+            shouldSkip = skipPredicate;
+        }
+
+        /// <inheritdoc />
+        public override bool keepWaiting => Time.realtimeSinceStartup < breakTime && !shouldSkip();
     }
 }

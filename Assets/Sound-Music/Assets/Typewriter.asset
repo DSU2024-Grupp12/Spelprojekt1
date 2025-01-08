@@ -15,8 +15,6 @@ MonoBehaviour:
   name: Typewriter
   clips:
   - {fileID: 8300000, guid: c34f990a144ff6f4192a3a83c782d3ca, type: 3}
-  - {fileID: 8300000, guid: 43e9e22ff6a51da4abd165332895a909, type: 3}
-  - {fileID: 8300000, guid: b1cc02bb35b4d9a4fb914a61d35cbbc6, type: 3}
   loopedOneShotClip: {fileID: 0}
   output: {fileID: -4857717253486240446, guid: 658560f9c5943494689659d284c7893e, type: 2}
   playOnAwake: 0
