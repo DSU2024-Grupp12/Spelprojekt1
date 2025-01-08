@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class StaticEnemySpawnerReference : MonoBehaviour
 {
-    public void LockEnemySpawning() {
-        EnemySpawner.LockEnemySpawning();
+    public void LockEnemySpawning(string lockName) {
+        EnemySpawner.LockEnemySpawning(lockName);
     }
 
-    public void UnlockEnemySpawning() {
-        EnemySpawner.UnlockEnemySpawning();
+    public void UnlockEnemySpawning(string lockName) {
+        EnemySpawner.UnlockEnemySpawning(lockName);
     }
 }

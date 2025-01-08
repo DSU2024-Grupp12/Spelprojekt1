@@ -54,10 +54,7 @@ public class Shipyard : MonoBehaviour, IInteractable
         }
         Unhighlight();
         MenuManager.Instance.OpenMenu(shipyardMenuID, BuildMenuInfo());
-        if (!EnemySpawner.locked) {
-            EnemySpawner.LockEnemySpawning();
-            shipyardLockedSpawner = true;
-        }
+        EnemySpawner.LockEnemySpawning("shipyard");
         if (player) {
             IInteractable.LockPlayer(player.GetComponent<Rigidbody2D>());
         }
@@ -154,7 +151,6 @@ public class Shipyard : MonoBehaviour, IInteractable
     private void ShipyardMenuClosed() {
         Highlight();
         MenuManager.OnReturnToGameplay -= ShipyardMenuClosed;
-        if (shipyardLockedSpawner) EnemySpawner.UnlockEnemySpawning();
-        shipyardLockedSpawner = false;
+        EnemySpawner.UnlockEnemySpawning("shipyard");
     }
 }
