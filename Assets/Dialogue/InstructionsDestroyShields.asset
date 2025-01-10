@@ -18,8 +18,9 @@ MonoBehaviour:
     timeBetweenLines: 1
     endOfDialogueLingerTime: 0
     timeBetweenQueuedDialogue: 1
-  priority: 0
-  queueable: 0
+  priority: 10000
+  interrupt: 1
+  queueable: 1
   probability: 1
   onFinishMessage: 
   conversationVariations:

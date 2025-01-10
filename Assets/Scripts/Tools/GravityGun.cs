@@ -31,6 +31,9 @@ public class GravityGun : Tool
     public UnityEvent GravityGunPickUp;
     public UnityEvent GravityGunDrop;
     public UnityEvent GravityGunShoot;
+    public UnityEvent GravityGunLost;
+
+    private bool holdingObject;
 
     void Start() {
         SetBeamLength(0);
@@ -50,6 +53,11 @@ public class GravityGun : Tool
             indicator.Clear();
         }
         else {
+            if (holdingObject) {
+                holdingObject = false;
+                GravityGunLost?.Invoke();
+            }
+
             spriteRenderer.enabled = false;
             container.Stop();
             container.Clear();
@@ -116,6 +124,7 @@ public class GravityGun : Tool
             pickedUpBody = body;
             container.transform.localScale = pickedUpBody.transform.localScale;
             GravityGunPickUp?.Invoke();
+            holdingObject = true;
         }
     }
 
@@ -134,6 +143,7 @@ public class GravityGun : Tool
         }
         pickedUpBody = null;
         GravityGunDrop?.Invoke();
+        holdingObject = false;
     }
 
     private void SetColliderDimensions() {
