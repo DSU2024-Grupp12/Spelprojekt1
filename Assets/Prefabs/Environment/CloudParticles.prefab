@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6228345524489006989}
   - component: {fileID: 915409778052954071}
   - component: {fileID: 9096206376164592652}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4984,7 +4984,7 @@ GameObject:
   - component: {fileID: 8708067359113420406}
   - component: {fileID: 6798170567439127310}
   - component: {fileID: 8221069716067742625}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: CloudParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5086,7 +5086,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1583273535911473622}
   - component: {fileID: 7384115000356403446}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5151,7 +5151,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1340682903, guid: 68fa2409e77577d4d8ef71ac0bbb0597, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
