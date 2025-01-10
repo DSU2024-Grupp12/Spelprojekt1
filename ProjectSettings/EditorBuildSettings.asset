@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Intro.unity
     guid: 00804886a77eee14eb03db752e8df9c9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level_1.unity
     guid: 1a0455129512dfb41a217cd8c24a1b01
   - enabled: 0
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SebastianTest1.unity
     guid: d9d7b6e000513a9428194a040b7eda25
+  - enabled: 1
+    path: Assets/Scenes/Level_1_Revised.unity
+    guid: eb888ba243134a24f968b36c9a9d17a5
   m_configObjects: {}
