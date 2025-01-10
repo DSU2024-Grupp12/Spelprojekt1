@@ -22,6 +22,9 @@ public class EnemyPilot : MonoBehaviour
         maxFireDistance,
         fireRate;
 
+    private float startTime;
+    private const float deathTime = 45f;
+
     private float actualFireRate;
 
     private float nextFireTime;
@@ -34,11 +37,15 @@ public class EnemyPilot : MonoBehaviour
         if (actualFireRate > 0) {
             nextFireTime = Time.time + fireRate;
         }
+        startTime = Time.time;
     }
 
     void Update() {
         if (target) {
             FireMissile();
+        }
+        if (Time.time >= startTime + deathTime) {
+            ship.Explode();
         }
     }
 
@@ -49,11 +56,9 @@ public class EnemyPilot : MonoBehaviour
             actualFireRate = 0;
             return;
         }
-        else {
-            ship.stopping = false;
-            actualFireRate = fireRate;
-        }
-        
+        ship.stopping = false;
+        actualFireRate = fireRate;
+
         Vector2 shipToTarget = target.transform.position - transform.position;
         float distanceToTarget = shipToTarget.magnitude;
         Vector2 directionToTarget = shipToTarget.normalized;
@@ -89,6 +94,8 @@ public class EnemyPilot : MonoBehaviour
             ship.stopping = true;
         }
 
+        bool thrustersOn = ship.accelerating || ship.turningClockwise || ship.turningCounterClockwise;
+
         if (shipBody.velocity.magnitude < 0.1f) {
             ship.stopping = false;
         }
@@ -113,5 +120,24 @@ public class EnemyPilot : MonoBehaviour
             cannonIndex++;
             cannonIndex %= cannons.Length;
         }
+    }
+
+    // explode if ship is inside collider for too long
+    private float stuckTimer;
+    private const float stuckLimit = 10f;
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (OnStuckableLayer(other.gameObject.layer)) stuckTimer = 0f;
+    }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        if (OnStuckableLayer(other.gameObject.layer)) {
+            stuckTimer += Time.fixedDeltaTime;
+            if (stuckTimer >= stuckLimit) ship.Explode();
+        }
+    }
+
+    private static bool OnStuckableLayer(int layer) {
+        return layer is 13 or 7;
     }
 }

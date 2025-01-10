@@ -6,6 +6,7 @@ public class Dialogue : ScriptableObject
     public SpeedSettings speedSettings;
 
     public int priority;
+    public bool interrupt;
     public bool queueable;
 
     [Range(0, 1)]

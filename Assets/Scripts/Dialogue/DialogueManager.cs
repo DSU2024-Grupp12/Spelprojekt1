@@ -37,6 +37,7 @@ public class DialogueManager : MonoBehaviour
 
     private bool processingDialogue;
     private bool skipToEndOfLine;
+    private bool interrupt;
 
     private void Awake() {
         queuedDialogues = new SortedList<int, Dialogue>();
@@ -49,6 +50,15 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void QueueDialogue(Dialogue dialogue) {
+        if (dialogue.interrupt) {
+            interrupt = true;
+            if (queuedDialogues.Count > 0 && queuedDialogues.Last().Value.interrupt) {
+                queuedDialogues.RemoveAt(queuedDialogues.Count - 1);
+            }
+            queuedDialogues.Add(int.MaxValue, dialogue);
+            return;
+        }
+
         if (queuedDialogues.Count == maxConversationsInQueue) return;
         // queue queueable dialogue or if there are no dialogues in queue, queue unqueueable dialogue
         if (dialogue.queueable || (queuedDialogues.Count == 0 && !processingDialogue)) {
@@ -62,15 +72,16 @@ public class DialogueManager : MonoBehaviour
         processingDialogue = true;
 
         while (queuedDialogues.Count > 0) {
+            interrupt = false;
             StartDialogue();
             Dialogue highestPriority = queuedDialogues.Last().Value;
             queuedDialogues.RemoveAt(queuedDialogues.Count - 1);
             speedSettings = highestPriority.speedSettings;
             yield return ProcessConversation(highestPriority.conversation);
             OnDialogueFinished?.Invoke(highestPriority.onFinishMessage);
-            yield return new WaitForSecondsRealtime(speedSettings.endOfDialogueLingerTime);
+            yield return new WaitForSecondsRealtime(interrupt ? 0f : speedSettings.endOfDialogueLingerTime);
             EndDialogue();
-            yield return new WaitForSecondsRealtime(speedSettings.timeBetweenQueuedDialogue);
+            yield return new WaitForSecondsRealtime(interrupt ? 0f : speedSettings.timeBetweenQueuedDialogue);
         }
 
         processingDialogue = false;
@@ -82,9 +93,11 @@ public class DialogueManager : MonoBehaviour
             lines.Enqueue(line);
         }
 
-        while (lines.Count > 0) {
+        while (lines.Count > 0 && !interrupt) {
             yield return ProcessLine(lines.Dequeue());
-            yield return new WaitForRealSecondsOrSkip(speedSettings.timeBetweenLines, () => skipToEndOfLine);
+            if (!interrupt) {
+                yield return new WaitForRealSecondsOrSkip(speedSettings.timeBetweenLines, () => skipToEndOfLine);
+            }
         }
     }
 
@@ -97,20 +110,22 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
 
-        while (sentences.Count > 0) {
+        while (sentences.Count > 0 && !interrupt) {
             yield return TypeSentence(sentences.Dequeue());
-            yield return new WaitForRealSecondsOrSkip(speedSettings.timeBetweenLines, () => skipToEndOfLine);
+            if (!interrupt) {
+                yield return new WaitForRealSecondsOrSkip(speedSettings.timeBetweenLines, () => skipToEndOfLine);
+            }
         }
     }
 
     private IEnumerator TypeSentence(string sentence) {
         skipToEndOfLine = false;
-        Debug.Log(skipToEndOfLine);
         dialogueField.text = "";
         foreach (char c in sentence.TakeWhile(_ => !skipToEndOfLine)) {
             dialogueField.text += c;
             if (c != ' ') Typewriter?.Invoke();
-            yield return new WaitForSecondsRealtime(speedSettings.typewriterSpeed);
+            yield return new WaitForRealSecondsOrSkip(speedSettings.typewriterSpeed, () => interrupt);
+            if (interrupt) break;
         }
         if (skipToEndOfLine) {
             dialogueField.text = sentence;

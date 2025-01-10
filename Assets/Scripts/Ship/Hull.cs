@@ -52,11 +52,16 @@ public class Hull : MonoBehaviour, IUIValueProvider<float>
 
         endOfInvincibility = Time.time + invincibilityWindow;
 
-        // other.otherRigidbody returns the wrong rigidBody for some reason so we manually get it instead
         Rigidbody2D otherBody = other.gameObject.GetComponent<Rigidbody2D>();
 
-        float pseudoKineticEnergy = 0.5f * otherBody.mass * other.relativeVelocity.magnitude;
-        TakeDamage(pseudoKineticEnergy, other.gameObject.layer);
+        if (otherBody.bodyType == RigidbodyType2D.Dynamic) {
+            float pseudoKineticEnergy = 0.5f * otherBody.mass * other.relativeVelocity.magnitude;
+            TakeDamage(pseudoKineticEnergy, other.gameObject.layer);
+        }
+        else {
+            // if the colliding rigidbody is not dynamic then it has no mass, so we estimate damage taken based on our mass
+            TakeDamage(other.relativeVelocity.magnitude * other.otherRigidbody.mass * 0.1f, other.gameObject.layer);
+        }
     }
 
     /// <summary>
