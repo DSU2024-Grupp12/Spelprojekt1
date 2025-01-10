@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4ab502aba62c747bb0a177c14eb8f8, type: 3}
+  m_Name: FuseboxDialogue
+  m_EditorClassIdentifier: 
+  speedSettings:
+    typewriterSpeed: 0.05
+    timeBetweenSentences: 1
+    timeBetweenLines: 1
+    endOfDialogueLingerTime: 0
+    timeBetweenQueuedDialogue: 1
+  priority: 0
+  queueable: 0
+  probability: 1
+  onFinishMessage: 
+  conversationVariations:
+  - lines:
+    - speaker: Ship Computer
+      portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
+      sentences:
+      - Scanning object...
+      - The shields are powered by fuseboxes scattered around the area. Locate and
+        destroy them.

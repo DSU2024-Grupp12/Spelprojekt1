@@ -40,8 +40,8 @@ MonoBehaviour:
     - speaker: Ship Computer
       portrait: {fileID: -43466137, guid: b5e8eaab40813ec4bbb689655dafb51d, type: 3}
       sentences:
-      - "Scanner detects a nearby gravitational force. You might want to take a look
-        at that. I\u2019m also picking up a faint signal from deeper within the nebula..."
+      - Scanner detects a nearby gravitational force. You might want to take a look
+        at that.
       - "I\u2019m also picking up a faint signal from deeper within the nebula, but
         I\u2019m unable to identify it."
     - speaker: Arlo Lynx
