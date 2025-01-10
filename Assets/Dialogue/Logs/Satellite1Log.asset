@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac1b20d442ff7648b77548f991130b4, type: 3}
+  m_Name: Satellite1Log
+  m_EditorClassIdentifier: 
+  wreckType: Satellite
+  entryContent: "Scanning satellite\u2026\r\n\r\nThis appears to be one of Heliosphere
+    Tech\u2019s satellites. It hasn\u2019t been in use for a long time, which makes
+    sense, considering Hera\u2019s disappearance. \n\nHera was the clan behind Heliosphere
+    Tech, an advanced technology company even in its time. The sun symbol, representing
+    their goddess and protector, can be found on all Heliosphere Tech constructions.\n"
