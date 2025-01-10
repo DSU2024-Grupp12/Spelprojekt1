@@ -14719,6 +14719,7 @@ MonoBehaviour:
     matrix: {fileID: 0}
     attributeID: 
     highGood: 1
+  startingStrength: 0
   inCloud: 0
   threshold:
     baseValue: 50
@@ -14747,18 +14748,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4428433365385173114}
-        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
-        m_MethodName: QueueDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: ac3fd130034e8d24181bfa42b1ca0930, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
