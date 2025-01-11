@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac1b20d442ff7648b77548f991130b4, type: 3}
+  m_Name: Ship1Log
+  m_EditorClassIdentifier: 
+  wreckType: Shipwreck
+  entryContent: "Scanning ship\u2026\r\n\r\nThis is an Alcedo 24. It doesn't appear
+    to be a particularly old construction\u2014perhaps another victim of the gravitational
+    force that brought us here. Several parts are missing, probably stolen. \n\nBe
+    careful, Lynx.\n"

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac1b20d442ff7648b77548f991130b4, type: 3}
+  m_Name: Satellite2Log
+  m_EditorClassIdentifier: 
+  wreckType: Satellite
+  entryContent: "Scanning satellite\u2026\r\n\r\nThis satellite once belonged to
+    the renowned Hera clan. The Heliosphere Tech satellites, identified by their
+    sun symbols, used to orbit Hera\u2019s mothership. \n\nBut it seems this one
+    ended up here\u2014just like us\u2014drawn by the gravitational force. Hera\u2019s
+    satellites ceased functioning when the clan mysteriously disappeared.\n"
