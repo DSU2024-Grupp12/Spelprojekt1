@@ -136,11 +136,12 @@ public class Shipyard : MonoBehaviour, IInteractable
             Hull playerHull = player.GetComponent<Hull>();
             if (!playerHull.AtFullStrength()) {
                 if (playerHull.GetComponent<CargoHold>().Pay(repairCost, 0)) {
+                    playerHull.RepairHull(repairAmount);
                     shipyardUpgradeUsed = true;
                     ShipyardUsed?.Invoke();
                     MenuManager.Instance.ReturnToGameplay();
                 }
-                Popup.Display("Not enough resources to repair ship", 1f);
+                else Popup.Display("Not enough resources to repair ship", 1f);
             }
             else {
                 Popup.Display("Ship does not need repair.", 1f);
