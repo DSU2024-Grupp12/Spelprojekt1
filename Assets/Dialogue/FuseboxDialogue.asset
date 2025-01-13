@@ -19,9 +19,10 @@ MonoBehaviour:
     endOfDialogueLingerTime: 0
     timeBetweenQueuedDialogue: 1
   priority: 0
+  interrupt: 0
   queueable: 0
   probability: 1
-  onFinishMessage: 
+  onFinishMessage: PortalDiscovered
   conversationVariations:
   - lines:
     - speaker: Ship Computer
