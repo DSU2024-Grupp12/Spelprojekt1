@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec9837ef8f74c44ba610d7f90e2a6db, type: 3}
+  m_Name: ShieldKrock
+  m_EditorClassIdentifier: 
+  name: ShieldKrock
+  clips:
+  - {fileID: 8300000, guid: 1f9e8297c8dbd0d418cd81b90ac09a9f, type: 3}
+  - {fileID: 8300000, guid: 16fb1c947fe414340a1041d24a488796, type: 3}
+  loopedOneShotClip: {fileID: 0}
+  output: {fileID: -4857717253486240446, guid: 658560f9c5943494689659d284c7893e, type: 2}
+  playOnAwake: 0
+  loop: 0
+  priority: 128
+  volume: 1
+  pitch: 1
+  randomPitch: 1
+  minPitchVariation: 0.95
+  maxPitchVariation: 1.05

@@ -14805,6 +14805,21 @@ MonoBehaviour:
           m_StringArgument: GravityGunLoop
           m_BoolArgument: 0
         m_CallState: 2
+  GravityGunFailed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 238395041533763969}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Deny
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &238395041533763969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14820,6 +14835,7 @@ MonoBehaviour:
   assets:
   - {fileID: 11400000, guid: 86ef54a7f7412f8408428f157795157e, type: 2}
   - {fileID: 11400000, guid: 9680e73783c7df944b2314cbfc27eec6, type: 2}
+  - {fileID: 11400000, guid: 07fab1c98c2df634e916b4e971845434, type: 2}
 --- !u!1 &9194182487285784847
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,6 +32,7 @@ public class GravityGun : Tool
     public UnityEvent GravityGunDrop;
     public UnityEvent GravityGunShoot;
     public UnityEvent GravityGunLost;
+    public UnityEvent GravityGunFailed;
 
     private bool holdingObject;
 
@@ -101,6 +102,9 @@ public class GravityGun : Tool
         if (!pickedUpBody) {
             if (ValidBodyInRange(out Rigidbody2D toPickUp)) {
                 PickUp(toPickUp);
+            }
+            else if (toPickUp) {
+                GravityGunFailed?.Invoke();
             }
         }
         else {

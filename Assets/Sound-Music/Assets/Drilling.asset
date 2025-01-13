@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Drilling
   clips:
-  - {fileID: 8300000, guid: b2e5f8ff5719ab9459ec685d9b966432, type: 3}
+  - {fileID: 8300000, guid: e4397c7d09880804f90b112565724018, type: 3}
   loopedOneShotClip: {fileID: 0}
   output: {fileID: -4857717253486240446, guid: 658560f9c5943494689659d284c7893e, type: 2}
   playOnAwake: 0

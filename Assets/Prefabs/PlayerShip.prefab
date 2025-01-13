@@ -5583,7 +5583,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Liten Krock
+            m_StringArgument: ShieldKrock
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 3377094416118959403}
@@ -5611,6 +5611,18 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7085579952060942491}
+          m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+          m_MethodName: PlayOneShot
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Warning
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &6340787955948192973
@@ -5673,6 +5685,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b130d3c131a7df4baf5d41dca278706, type: 2}
   - {fileID: 11400000, guid: e151ed0eab7f02c4398974fb11c714d0, type: 2}
   - {fileID: 11400000, guid: ce12752d0059229428b6ec2102a3d7c8, type: 2}
+  - {fileID: 11400000, guid: c7d882e8e9150fd45ac4f1bf8349d5b2, type: 2}
+  - {fileID: 11400000, guid: 87a3f4829451b4441912a9511abc19f9, type: 2}
 --- !u!50 &2843089317992928371
 Rigidbody2D:
   serializedVersion: 4
@@ -5822,7 +5836,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.34
+  m_Radius: 1.2
 --- !u!1 &3683418663752188193
 GameObject:
   m_ObjectHideFlags: 0
