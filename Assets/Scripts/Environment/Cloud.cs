@@ -29,7 +29,6 @@ public class Cloud : MonoBehaviour
                 continue;
             }
             if (Time.time >= currentlyClouding[col]) {
-                Debug.Log("Take damage");
                 Hull hull = col.GetComponent<Hull>();
                 if (hull.TakeDamage(damage, gameObject.layer)) {
                     // if the hull explodes from the damage we remove it from the dictionary

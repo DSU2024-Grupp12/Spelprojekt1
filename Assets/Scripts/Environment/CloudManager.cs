@@ -23,7 +23,7 @@ public class CloudManager : MonoBehaviour
     }
 
     private void Start() {
-        clouds = FindObjectsByType<Cloud>(FindObjectsSortMode.None);
+        clouds = FindObjectsOfType<Cloud>();
     }
 
     private void Update() {

@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class DialogueManager : MonoBehaviour
 
     public UnityEvent<string> OnDialogueFinished;
 
-    private SortedList<int, Dialogue> queuedDialogues;
+    private SortedList<float, Dialogue> queuedDialogues;
 
     private bool inDialogue {
         set {
@@ -40,7 +41,7 @@ public class DialogueManager : MonoBehaviour
     private bool interrupt;
 
     private void Awake() {
-        queuedDialogues = new SortedList<int, Dialogue>();
+        queuedDialogues = new SortedList<float, Dialogue>();
     }
 
     private void Update() {
@@ -63,7 +64,10 @@ public class DialogueManager : MonoBehaviour
         // queue queueable dialogue or if there are no dialogues in queue, queue unqueueable dialogue
         if (dialogue.queueable || (queuedDialogues.Count == 0 && !processingDialogue)) {
             if (new System.Random().NextDouble() <= dialogue.probability) {
-                queuedDialogues.Add(dialogue.priority, dialogue);
+                if (queuedDialogues.ContainsKey(dialogue.priority)) {
+                    queuedDialogues.Add(dialogue.priority - Random.Range(0f, .5f), dialogue);
+                }
+                else queuedDialogues.Add(dialogue.priority, dialogue);
             }
         }
     }

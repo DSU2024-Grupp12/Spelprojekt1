@@ -99,7 +99,6 @@ public class Missile : MonoBehaviour, IBeamable
         foreach (Hull hull in FindObjectsOfType<Hull>()) {
             float distance = ((Vector2)hull.transform.position - (Vector2)transform.position).magnitude;
             if (distance <= explosionRadius) {
-                // Debug.Log(explosionPower);
                 hull.TakeDamage(explosionPower, gameObject.layer);
             }
         }
