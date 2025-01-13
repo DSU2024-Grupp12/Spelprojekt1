@@ -1005,6 +1005,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5974201955431210983}
     - target: {fileID: 4396434593154404732, guid: 89c3738900d807f4abed9e53edd7655d, type: 3}
+      propertyPath: hideWhenFull
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396434593154404732, guid: 89c3738900d807f4abed9e53edd7655d, type: 3}
       propertyPath: shieldOrHull
       value: boosters
       objectReference: {fileID: 0}
