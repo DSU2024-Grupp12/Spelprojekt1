@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Ship))]
 public class EnemyPilot : MonoBehaviour
@@ -134,6 +135,12 @@ public class EnemyPilot : MonoBehaviour
         if (OnStuckableLayer(other.gameObject.layer)) {
             stuckTimer += Time.fixedDeltaTime;
             if (stuckTimer >= stuckLimit) ship.Explode();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerShip")) {
+            startTime = Time.time;
         }
     }
 

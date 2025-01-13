@@ -22,7 +22,7 @@ MonoBehaviour:
   interrupt: 1
   queueable: 1
   probability: 1
-  onFinishMessage: 
+  onFinishMessage: ShipyardDiscovered
   conversationVariations:
   - lines:
     - speaker: Arlo Lynx
